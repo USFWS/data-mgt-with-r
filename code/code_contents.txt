@@ -1,0 +1,26 @@
+Directory Contents
+-------------------
+
+functions (dir)
+	A folder containing functions used in a project. These are generally generalized functions that could be reused in other projects.
+	
+01_import_format.R
+	An R script that imports, formats and processes raw data for analysis. This script often produces derived data that are saved to the ..\data\derived_data folder.
+
+02_analysis_step_1.R
+	An R script that analyzing derived data. [Include a description of the steps of the analysis here]
+
+03_analysis_step_2.R
+	An R script that analyzing data. [Include a desciption of the steps of the analysis here]
+
+04_plots.R
+	An R script that plots the data [Include a description of what is plotted here]
+
+AIM_logo.png
+	A png image of the Alaska I&M logo that is used by the rmarkdown report template (biometric_report_template.Rmd)
+
+biometric_report_template.Rmd
+	A template Rmarkdown report produced from a biometric request. 
+
+header.tex
+	The header file used for formatting the Rmarkdown report template (biometric_report_template.Rmd)

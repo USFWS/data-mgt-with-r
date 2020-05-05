@@ -1,0 +1,10 @@
+Directory Contents
+-------------------
+data (dir)
+	Data that are being used (not produced) by this project.
+
+publications (dir)
+	Publications that are being used (not produced) by this project.
+
+reports (dir)
+	Reports from other studies that are being used by this project.
