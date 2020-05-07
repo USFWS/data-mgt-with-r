@@ -1,5 +1,5 @@
 ---
-title: "Course: A Code-Based Data Workflow Using R"
+title: "Draft Title: A Code-Based Data Workflow Using R"
 output: 
   bookdown::pdf_document2:
     toc: false
@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-This webinar provides a brief introduction into using R to develop a code-based data workflow for a ecological survey. Participants will learn about the advantages of using a scripting language like R for moving data along the data life cycle. We will walk through an example of using R to manage scientific data.
+This webinar provides a brief introduction into using R to develop a code-based workflow for ecological survey data. Participants will learn about the advantages of using a scripting language like R for moving data along the data life cycle. We will walk through an example of using R to manage scientific data.
 
 
 # Webinar Information
@@ -32,6 +32,8 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
     + Documented
     + Reproducible
     + Replicable
+    + More efficient
+    + Less error-prone
 4. Describe the typical steps:
     + Develop scripts using packaged functions
     + Wrap scripts in custom functions
@@ -42,6 +44,7 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
 # *(Questions)*
 
 - What is the take-home message from the webinar? You can (and should) use R entirely for your data workflow? 
+- How do we want to collaborate on this? Through GitHub? If so, how? Separate branches or forked?
 - Do we want to use the SppDistMonProj package as the example? What other examples do we have?
 - Should we attempt to include any class participation? If so, what format?
 - Should we focus on the tidyverse?
