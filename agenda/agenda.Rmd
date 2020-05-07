@@ -44,11 +44,33 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
 # *(Questions)*
 
 - What is the take-home message from the webinar? You can (and should) use R entirely for your data workflow? 
+    - Demonstate how R can be used for the data life cycle process
+    - A good clear demo of this.
+    - Show the endpoint first. The pie in the sky.
+        - Example: SppDistMonProj, mobile aucistic recorder package
+            - **look for other example**
+            - **meet on Wed to discuss**
+        
 - How do we want to collaborate on this? Through GitHub? If so, how? Separate branches or forked?
+    - **GitHub is a good option**
+    - **McCrea will work off master branch, Adam will fork**
+    - **Keep work distinct in the repo**
+
 - Do we want to use the SppDistMonProj package as the example? What other examples do we have?
+
 - Should we attempt to include any class participation? If so, what format?
+    - **Probably not enough time.**
+    
 - Should we focus on the tidyverse?
+    - **Doesn't really apply**
+
+- Version control?
+    - **repo is available for the webinar, we can then mention GitHub and version control**
+
 - Rmarkdown for generating our presentation slides? Flipbook is pretty cool for incrementally describing code.
+    - **rmarkdown**
+    - **Send template to Adam**
+    - **McCrea will send project file dir template to Adam**
 
 
 # *(Topics Ideas)*
@@ -57,6 +79,8 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
 
 1. Explore your data
     - Import
+        - **Add Adam to the SppDistMonProj AGOL**
+        - **Adam will look into accessing Survey123 data using R**
     - Dealing with missing values
     - Summarize data (glimpse and skim)
 2. Tame your data
@@ -66,4 +90,6 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
     - Tame variable names
     - Rename variables to convention (janitor package)
 3. Tidy your data
+4. Archiving
+    - **Brent Frakes: writing products to ServCat**
 
