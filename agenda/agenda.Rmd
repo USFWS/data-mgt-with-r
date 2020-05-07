@@ -1,0 +1,66 @@
+---
+title: "Course: A Code-Based Data Workflow Using R"
+output: 
+  bookdown::pdf_document2:
+    toc: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+This webinar provides a brief introduction into using R to develop a code-based data workflow for a ecological survey. Participants will learn about the advantages of using a scripting language like R for moving data along the data life cycle. We will walk through an example of using R to manage scientific data.
+
+
+# Webinar Information
+
+Presenters: [McCrea Cobb](mailto:mccrea_cobb@fws.gov) and [Adam Smith](mailto:d_smith@fws.gov)
+
+When:
+
+Location:
+
+Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with-r)
+
+
+# Outline
+
+1. Quick review of the data life cycle steps
+2. Overview 
+3. Advantages of a code-based data workflow
+    + Documented
+    + Reproducible
+    + Replicable
+4. Describe the typical steps:
+    + Develop scripts using packaged functions
+    + Wrap scripts in custom functions
+    + Develop a package to house, document, and reuse custom functions
+5. Run through an example
+
+
+# *(Questions)*
+
+- What is the take-home message from the webinar? You can (and should) use R entirely for your data workflow? 
+- Do we want to use the SppDistMonProj package as the example? What other examples do we have?
+- Should we attempt to include any class participation? If so, what format?
+- Should we focus on the tidyverse?
+- Rmarkdown for generating our presentation slides? Flipbook is pretty cool for incrementally describing code.
+
+
+# *(Topics Ideas)*
+
+**The list below is taken from https://learn.datacamp.com/courses/working-with-data-in-the-tidyverse**:
+
+1. Explore your data
+    - Import
+    - Dealing with missing values
+    - Summarize data (glimpse and skim)
+2. Tame your data
+    - Cast column types
+    - Recode values
+    - Select variables
+    - Tame variable names
+    - Rename variables to convention (janitor package)
+3. Tidy your data
+
