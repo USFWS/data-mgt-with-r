@@ -41,46 +41,12 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
 5. Run through an example
 
 
-# *(Questions)*
-
-- What is the take-home message from the webinar? You can (and should) use R entirely for your data workflow? 
-    - Demonstate how R can be used for the data life cycle process
-    - A good clear demo of this.
-    - Show the endpoint first. The pie in the sky.
-        - Example: SppDistMonProj, mobile aucistic recorder package
-            - **look for other example**
-            - **meet on Wed to discuss**
-        
-- How do we want to collaborate on this? Through GitHub? If so, how? Separate branches or forked?
-    - **GitHub is a good option**
-    - **McCrea will work off master branch, Adam will fork**
-    - **Keep work distinct in the repo**
-
-- Do we want to use the SppDistMonProj package as the example? What other examples do we have?
-
-- Should we attempt to include any class participation? If so, what format?
-    - **Probably not enough time.**
-    
-- Should we focus on the tidyverse?
-    - **Doesn't really apply**
-
-- Version control?
-    - **repo is available for the webinar, we can then mention GitHub and version control**
-
-- Rmarkdown for generating our presentation slides? Flipbook is pretty cool for incrementally describing code.
-    - **rmarkdown**
-    - **Send template to Adam**
-    - **McCrea will send project file dir template to Adam**
-
-
 # *(Topics Ideas)*
 
 **The list below is taken from https://learn.datacamp.com/courses/working-with-data-in-the-tidyverse**:
 
 1. Explore your data
     - Import
-        - **Add Adam to the SppDistMonProj AGOL**
-        - **Adam will look into accessing Survey123 data using R**
     - Dealing with missing values
     - Summarize data (glimpse and skim)
 2. Tame your data
@@ -91,5 +57,24 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
     - Rename variables to convention (janitor package)
 3. Tidy your data
 4. Archiving
-    - **Brent Frakes: writing products to ServCat**
 
+# Resources
+
+**Resources for Teaching R**  
+
+- [DataCamp's tidyverse course](https://learn.datacamp.com/courses/working-with-data-in-the-tidyverse)
+- [learnr package](https://rstudio.github.io/learnr/)
+- [RStudio teaching resources](https://education.rstudio.com/teach/materials/)
+- [Data Wrangling, Exploration and Analysis with R "STAT 545"](https://stat545.com/)
+
+**R Resources**
+
+- [R cheatsheets](https://rstudio.com/resources/cheatsheets/)
+
+**Version Control**
+- [Happy Git with R](https://happygitwithr.com/)
+
+
+**Other**
+
+- [How to share your data with a statistian](https://github.com/jtleek/datasharing)
