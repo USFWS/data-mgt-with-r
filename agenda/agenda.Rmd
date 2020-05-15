@@ -73,30 +73,14 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
         + Reporting
             + RMarkdown
                 + Bat reporting for mobile aucistics
+            + Dashboards
+                + COVID 19 example
             + Shiny apps
                 + collarviewer
                 + power analysis for butterfly surveys
     + **Archiving** (*McCrea*)
         + Saving results to ServCat or some other data repository
 5. An example R project / Live demo (*Both*)
-
-
-# *(Topics Ideas)*
-
-**The list below is taken from https://learn.datacamp.com/courses/working-with-data-in-the-tidyverse**:
-
-1. Explore your data
-    - Import
-    - Dealing with missing values
-    - Exploratory data analysis (glimpse and skim)
-2. Tame your data
-    - Cast column types
-    - Recode values
-    - Select variables
-    - Tame variable names
-    - Rename variables to convention (janitor package)
-3. Tidy your data
-4. Archiving
 
 
 # Resources (Links)
