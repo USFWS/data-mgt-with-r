@@ -1,7 +1,0 @@
-Directory Contents
--------------------
-
-presentations (dir)
-	Presentations from the project. 
-
-

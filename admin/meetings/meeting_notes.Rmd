@@ -49,19 +49,50 @@ knitr::opts_chunk$set(echo = TRUE)
 - Adam: look into accessing Survey123 data using R
 
 
+\newpage
+
 # 5/13/2020 Call
 
 ## Agenda
 
 ### Make a decision on the project example(s)
+- We will use the SppDistMonProj for the large example. 
+- We will use other examples for individual steps. 
+    - Adam has some examples.
 
+### Adding the archiving step in R: save report to ServCat:
+
+- While nice, this is a lower priority.
+- McCrea will continue to look into this step
+- For this presentation, it would be a simple demo, not a generalizable script.
+- We might want to consider archiving to other repos, such as ScienceBase or GitHub.
+- ServCat API: https://ecos.fws.gov/ServCatServices/servcat/v4/documentation/servcat-api.html#/Reference_Profile
 
 ### Discuss how to divide the materials
 
+- Adam will cover the process and evaluate (data import, EDA, data profiling)
+    - He has existing examples from another course and will share it.
+- McCrea: Reporting (sharing). Intro? Archiving
 
 ### Decide on how to present the materials
 
+- Start with general review of DM cycle
+- Discuss the disadvantages of the traditional manual data workflow.
+- Sequentially walk through the data life cycle steps (data workflow) using R to show the advantage of a script-based workflow.
 
 ## Action Items
 
+- None
 
+
+\newpage
+
+# 5/15/2020
+
+## Agenda
+
+### Review the materials that we intend to cover, and approach to delivering the materials
+
+### Continue discussion on how to divide the presentations of material
+
+## Action Items

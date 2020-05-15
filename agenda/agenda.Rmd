@@ -19,21 +19,45 @@ Presenters: [McCrea Cobb](mailto:mccrea_cobb@fws.gov) and [Adam Smith](mailto:d_
 
 When:
 
-Location:
+Location: [Webinar link]()
 
 Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with-r)
 
 
 # Outline
 
-1. Quick review of the data life cycle steps
-2. Overview 
-3. Advantages of a code-based data workflow
-    + Documented
-    + Reproducible
-    + Replicable
-    + More efficient
-    + Less error-prone
+1. Data life cycle review
+2. The manual data workflow
+    + Example
+    + Limitations
+3. The code-based data workflow
+    + Advantages
+        + Documented
+        + Reproducible
+        + Replicable
+        + More efficient
+        + Less error-prone
+4. A data workflow with R
+    + Planning an RStudio project
+        + Make an R project self contained and portable
+            + File directory structure
+            + Relative paths
+        + Dependency management
+            + packrat
+        + Standardize file naming convention
+        + Organizing R files (Numeric preface in the names of ordered scripts)
+        + Recommended RStudio settings
+            + E.g., Uncheck "restore .RData into workspace at startup"
+        + Version control
+            + Storing versions
+            + Collaboration
+    + Acquiring data
+        + local and remote
+    + Scripting best practices
+        + code commenting
+    + Documenting data and scripts with R
+        + rOxygen
+        + R documentation file
 4. Describe the typical steps:
     + Develop scripts using packaged functions
     + Wrap scripts in custom functions
@@ -48,7 +72,7 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
 1. Explore your data
     - Import
     - Dealing with missing values
-    - Summarize data (glimpse and skim)
+    - Exploratory data analysis (glimpse and skim)
 2. Tame your data
     - Cast column types
     - Recode values
@@ -58,7 +82,8 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
 3. Tidy your data
 4. Archiving
 
-# Resources
+
+# Resources (Links)
 
 **Resources for Teaching R**  
 
@@ -67,14 +92,46 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
 - [RStudio teaching resources](https://education.rstudio.com/teach/materials/)
 - [Data Wrangling, Exploration and Analysis with R "STAT 545"](https://stat545.com/)
 
+
 **R Resources**
 
+- [Why learn R](https://datacarpentry.org/R-ecology-lesson/00-before-we-start.html#r_code_is_great_for_reproducibility)
+- [What they forgot to teach you about R](https://rstats.wtf/)
 - [R cheatsheets](https://rstudio.com/resources/cheatsheets/)
+- [Project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
 
-**Version Control**
+
+**R Packages**
+
+- [Packaging your reproducible analysis](https://thomasleeper.com/2016/11/analysis-as-package/)
+- [R packages](http://r-pkgs.had.co.nz/)
+- [Packaging data analytical work reproducibly using R (and friends)](https://peerj.com/preprints/3192.pdf)
+
+
+**Project management**
+
+- [Stop working directory insanity!](https://gist.github.com/jennybc/362f52446fe1ebc4c49f)
+- [A minimal project tree in R](https://talesofr.wordpress.com/2017/12/12/a-minimal-project-tree-in-r/)
+- [Organizing the project directory](https://nicercode.github.io/blog/2013-05-17-organising-my-project/)
+- [Designing projects](https://nicercode.github.io/blog/2013-04-05-projects/)
+- [Project management with RStudio](https://swcarpentry.github.io/r-novice-gapminder/02-project-intro/)
+- [File structure for data management](https://r-dir.com/blog/2013/11/folder-structure-for-data-analysis.html)
+- [Organizing files for data analysis](https://github.com/AndersenLab/IBiS-Bootcamp/wiki/Organizing-files-for-data-analysis)
+- [A meaningful file structure for R projects](https://www.r-bloggers.com/a-meaningful-file-structure-for-r-projects/)
+
+
+**General Coding Best Practices**
+
+- [What's in a name? The concepts and language of replication and reproducibility](https://thomasleeper.com/2015/05/open-science-language/)
+
+
+**Version Control**  
+
 - [Happy Git with R](https://happygitwithr.com/)
 
 
 **Other**
 
-- [How to share your data with a statistian](https://github.com/jtleek/datasharing)
+- [How to share your data with a statistician](https://github.com/jtleek/datasharing)
+- [Tools for reproducible research](http://kbroman.org/Tools4RR/assets/lectures/06_org_eda_withnotes.pdf)
+- [Reproducibility vs. replicability: a brief history of a confused terminology](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5778115/)

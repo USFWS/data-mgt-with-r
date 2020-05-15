@@ -1,0 +1,45 @@
+---
+title: "Presentation Template"
+subtitle: "A subtitle"  
+author: "Your Name"
+date: '`r sys.Date()`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      beforeInit: "macros.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE}
+library(xaringanthemer)
+solarized_light(
+  code_font_family = "Fira Code",
+  code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css"
+)
+```
+
+
+background-image: url(images/an-image.jpg)
+
+
+---
+# Introduction
+
+]
+
+???
+- Here's some notes
+
+
+---
+background-image: url(images/an-image.gif)
+background-size: contain
+
