@@ -38,12 +38,13 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
         + More efficient
         + Less error-prone
 4. A data workflow with R
-    + **Planning** an RStudio project
+    + **Planning** an RStudio project (*McCrea*)
         + Make an R project self contained and portable
             + File directory structure
             + Relative paths
         + Dependency management
             + packrat
+            + containers (docker)
         + Standardize file naming convention
         + Organizing R files (Numeric preface in the names of ordered scripts)
         + Recommended RStudio settings
@@ -51,20 +52,33 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
         + Version control
             + Storing versions
             + Collaboration
-    + **Acquiring** data
-        + local and remote
-    + Scripting best practices
-        + code commenting
-    + **Documenting** data and scripts with R
+    + **Documenting** data and scripts with R (*Adam*)
         + rOxygen 
         + R documentation file
-    + **Processing**
-    + **Sharing**
+        + Code commenting
+    + **Acquiring** data (*Adam*)
+        + local and remote
+        + querying data
+            + AGOL
+            + iNaturalist
+            + PRIMR web services
+            + SQL query: IRIS warehouse
+    + **Processing and Analyzing** (*Adam*)
+        + Getting data into R
+        + QC
+        + Tidying data
+        + Visualizing
+        + EDA
+    + **Sharing** (*McCrea*)
         + Reporting
-            + RMarkdown, shiny??
-    + **Archiving**
+            + RMarkdown
+                + Bat reporting for mobile aucistics
+            + Shiny apps
+                + collarviewer
+                + power analysis for butterfly surveys
+    + **Archiving** (*McCrea*)
         + Saving results to ServCat or some other data repository
-5. An example project
+5. An example R project / Live demo (*Both*)
 
 
 # *(Topics Ideas)*
