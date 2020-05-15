@@ -38,7 +38,7 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
         + More efficient
         + Less error-prone
 4. A data workflow with R
-    + Planning an RStudio project
+    + **Planning** an RStudio project
         + Make an R project self contained and portable
             + File directory structure
             + Relative paths
@@ -51,18 +51,20 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
         + Version control
             + Storing versions
             + Collaboration
-    + Acquiring data
+    + **Acquiring** data
         + local and remote
     + Scripting best practices
         + code commenting
-    + Documenting data and scripts with R
-        + rOxygen
+    + **Documenting** data and scripts with R
+        + rOxygen 
         + R documentation file
-4. Describe the typical steps:
-    + Develop scripts using packaged functions
-    + Wrap scripts in custom functions
-    + Develop a package to house, document, and reuse custom functions
-5. Run through an example
+    + **Processing**
+    + **Sharing**
+        + Reporting
+            + RMarkdown, shiny??
+    + **Archiving**
+        + Saving results to ServCat or some other data repository
+5. An example project
 
 
 # *(Topics Ideas)*
