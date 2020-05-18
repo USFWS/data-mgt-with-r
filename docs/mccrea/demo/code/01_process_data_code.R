@@ -1,0 +1,150 @@
+
+
+
+## ------------- ##
+## Load packages ##
+## ------------- ##
+
+
+
+library(unmarked)
+library(raster)
+
+
+
+
+## ------------------------ ##
+## Read raw data file names ##
+## ------------------------ ##
+
+
+
+## observation data file names
+(o.files <- list.files("../data/raw", pattern = "occurrence", full.names = TRUE))
+## site data file names
+(s.files <- list.files("../data/raw", pattern = "sample_site", full.names = TRUE))
+
+
+
+(nofiles <- length(o.files))
+
+## create data object for survey years using for loop
+years <- rep(NA, nfiles)
+for(i in 1:nfiles){
+    ind = gregexpr("_", o.files[i])[[1]][2]
+    years[i] <- as.numeric(substr(o.files[i], ind+1, ind+4))
+}
+years
+
+## create data object for survey years using custom function and sapply function
+extract.years <- function(filename){
+    ind = gregexpr("_", filename)[[1]][2]
+    substr(filename, ind + 1, ind + 4)
+}
+(years <- as.numeric(sapply(o.files, extract.years)))
+
+(nsfiles <- length(s.files))
+
+
+
+
+## --------------------------------- ##
+## Create unmarkedFrame data objects ##
+## --------------------------------- ##
+
+
+
+
+## Notes:
+## - requires observation data in matrix format
+## - also takes site- and observation-level covariate data
+
+## Create observation data matrix for unmarked package
+occdf <- read.csv(o.files[1])[,c("Site.ID", "Survey.occasion", "Date",
+                               "Visibility", "Observed.species.occurrence", "Observer.name")]
+colnames(occdf) <- c("id", "occasion", "date", "visibility", "y", "observer")
+occdf$occasion <- as.factor(occdf$occasion)
+occdf$id <- as.factor(occdf$id)
+ymat <- as.matrix(table(occdf[occdf$y=="yes", c("id","occasion")]))
+attributes(ymat)$class <- "matrix"
+str(ymat)
+ymat
+
+## Create site covariate data.frame for unmarked package
+occ.sites <- as.numeric(rownames(ymat))
+sitedf <- read.csv(s.files[1])
+sitecovs <- data.frame(habcov =  sitedf$habcov[match(occ.sites, sitedf$id)])
+str(sitecovs)
+sitecovs
+
+## Create occasion covariate data.frame for unmarked package
+viscov <- ymat
+viscov[] <- ""
+for(i in 1:nrow(occdf)){
+    viscov[match(occdf$id[i], rownames(viscov)),
+           match(occdf$occasion[i], colnames(viscov))] <- as.character(occdf$visibility[i])
+}
+viscov <- as.data.frame(viscov)
+str(viscov)
+viscov
+
+## Create unmarkedFrameOccu data object for unmarked package
+unmarked.data <- unmarkedFrameOccu(y = ymat,
+                                   siteCovs = sitecovs,
+                                   obsCovs = list(viscov = viscov))
+str(unmarked.data)
+unmarked.data
+
+
+## ---------------------------- ##
+## Need to create unmarked data ##
+## object for each year...      ##
+## ---------------------------- ##
+
+
+
+## Again, using a custom function and an apply function
+
+process.data <- function(occfn, sitefn, year){
+    require(unmarked)
+    ## Create observation data matrix for unmarked package
+    occdf = read.csv(occfn)[,c("Site.ID", "Survey.occasion", "Date",
+                                   "Visibility", "Observed.species.occurrence", "Observer.name")]
+    colnames(occdf) = c("id", "occasion", "date", "visibility", "y", "observer")
+    occdf$occasion = as.factor(occdf$occasion)
+    occdf$id = as.factor(occdf$id)
+    ymat = as.matrix(table(occdf[occdf$y=="yes", c("id","occasion")]))
+    attributes(ymat)$class = "matrix"
+    ## Create site covariate data.frame for unmarked package
+    occ.sites = as.numeric(rownames(ymat))
+    sitedf = read.csv(sitefn)
+    sitecovs = data.frame(habcov =  sitedf$habcov[match(occ.sites, sitedf$id)])
+    ## Create occasion covariate data.frame for unmarked package
+    viscov = ymat
+    viscov[] = ""
+    for(i in 1:nrow(occdf)){
+        viscov[match(occdf$id[i], rownames(viscov)),
+             match(occdf$occasion[i], colnames(viscov))] = as.character(occdf$visibility[i])
+    }
+    viscov = as.data.frame(viscov)
+    ## Create unmarkedFrameOccu data object for unmarked package
+    unmarked.data = unmarkedFrameOccu(y=ymat,
+                                       siteCovs=sitecovs,
+                                       obsCovs=list(viscov=viscov))
+    ## Return list of year-specific data objects
+    return(list(year = year, unmarked.data = unmarked.data, occdf = occdf, sitedf = sitedf, viscov = viscov))
+}
+
+## Compile year-specific data objects into a list
+data.list <- mapply(process.data, occfn = o.files, sitefn = s.files, year = years, SIMPLIFY = FALSE)
+str(data.list, max.level=1)
+str(data.list, max.level=2)
+
+#save(data.list, file = paste0("../data/final/species_occurrence_data_", max(years), ".gzip"))
+
+
+
+
+
+
+
