@@ -15,7 +15,7 @@ This webinar provides a brief introduction into using R to develop a code-based 
 
 # Webinar Information
 
-Presenters: [McCrea Cobb](mailto:mccrea_cobb@fws.gov) and [Adam Smith](mailto:d_smith@fws.gov)
+Presenters: [McCrea Cobb](mailto:mccrea_cobb@fws.gov) and [Adam Smith](mailto:adam_d_smith@fws.gov)
 
 When:
 
