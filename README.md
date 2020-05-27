@@ -12,8 +12,7 @@ June 24, 2020 (3:00-4:30 EST)
 ## Location  
 [Webinar link]()
 
-
-# Resources (Links)
+## Resources (Links)
 
 **Introduction to R**
 
