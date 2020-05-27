@@ -80,9 +80,9 @@ June 24, 2020 (3:00-4:30 EST)
 ## Archiving (*McCrea, 10 min*)
    + Saving results to ServCat or some other data repository
 
-## 3. An example R project / Live demo (*10 min*)
+## An example R project / Live demo (*10 min*)
 
-## 4. Questions (*10 min*)
+## Questions (*10 min*)
 
 
 # Resources (Links)
