@@ -12,8 +12,6 @@ June 24, 2020 (3:00-4:30 EST)
 ## Location  
 [Webinar link]()
 
-## Additional resources
-[GitHub repository](https://github.com/USFWS/data-mgt-with-r)
 
 # Resources (Links)
 
