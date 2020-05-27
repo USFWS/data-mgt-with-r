@@ -4,7 +4,7 @@
     <title>R tools for a code-based data workflow</title>
     <meta charset="utf-8" />
     <meta name="author" content="McCrea Cobb and Adam Smith" />
-    <meta name="date" content="2020-05-26" />
+    <meta name="date" content="2020-05-27" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -18,6 +18,7 @@
 
 background-image: url(images/draw-owl_kosher.jpg)
 background-size: contain
+class: hide-logo
 
 
 ---
@@ -36,6 +37,7 @@ class: center, middle
 
 
 ---
+
 # A data life cycle
 
 
@@ -44,7 +46,26 @@ class: center, middle
 
 
 ---
+background-image: url(images/workflow.gif)
+background-size: contain
+class: hide-logo
+
+
+???
+- The ideal data workflow - seamless.
+
+
+---
+background-image: url(images/criteria_grouped3.png)
+background-size: contain
+class: hide-logo
+
+
+---
 # Manual versus scripted data workflow
+
+![]("images/)
+
 
 
 ???
@@ -61,7 +82,29 @@ class: center, middle
     + More efficient
     + Less error-prone
     
-    
+
+---
+background-image: url(images/Rlogo.svg)
+class: hide-logo
+
+
+???
+- Why use R?
+  - Free for everybody
+  - Relatively easy to learn (compared to other programming languages)
+  - Popular
+  - Powerful
+  - Flexible
+    - statistical analyses
+    - graphics
+    - reporting
+  - Active community of users
+    - stackoverflow
+    - package development
+    - GitHub integration
+  - Nice free integrated development environment (RStudio)
+  
+
 ---
 class: center, middle
 # Planning
@@ -325,6 +368,33 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
+<style>
+.logo {
+  background-image: url(images/fws-logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 55px;
+  height: 64px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
 
 <script>
 slideshow._releaseMath = function(el) {

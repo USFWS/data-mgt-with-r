@@ -5,13 +5,15 @@ date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: xaringan-themer.css
+    css: "xaringan-themer.css"
     nature:
       beforeInit: "macros.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
     seal: false
+    includes:
+      after_body: insert-logo.html
 ---
 
 ```{r setup, include=FALSE}
@@ -29,6 +31,7 @@ solarized_light(
 
 background-image: url(images/draw-owl_kosher.jpg)
 background-size: contain
+class: hide-logo
 
 
 ---
@@ -47,6 +50,7 @@ class: center, middle
 
 
 ---
+
 # A data life cycle
 
 
@@ -55,7 +59,26 @@ class: center, middle
 
 
 ---
+background-image: url(images/workflow.gif)
+background-size: contain
+class: hide-logo
+
+
+???
+- The ideal data workflow - seamless.
+
+
+---
+background-image: url(images/criteria_grouped3.png)
+background-size: contain
+class: hide-logo
+
+
+---
 # Manual versus scripted data workflow
+
+![]("images/)
+
 
 
 ???
@@ -72,7 +95,29 @@ class: center, middle
     + More efficient
     + Less error-prone
     
-    
+
+---
+background-image: url(images/Rlogo.svg)
+class: hide-logo
+
+
+???
+- Why use R?
+  - Free for everybody
+  - Relatively easy to learn (compared to other programming languages)
+  - Popular
+  - Powerful
+  - Flexible
+    - statistical analyses
+    - graphics
+    - reporting
+  - Active community of users
+    - stackoverflow
+    - package development
+    - GitHub integration
+  - Nice free integrated development environment (RStudio)
+  
+
 ---
 class: center, middle
 # Planning
