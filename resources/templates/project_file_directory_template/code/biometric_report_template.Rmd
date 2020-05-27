@@ -1,0 +1,103 @@
+---
+title: '[Biometric Report Template]'
+author: '[Name of biometrician]'
+date: '[YYYY-MM-DD]'
+output:
+  word_document:
+    toc: yes
+  pdf_document:
+    latex_engine: xelatex
+    number_sections: yes
+    toc: yes
+  html_document:
+    df_print: paged
+    toc: yes
+subtitle: |
+  | Inventory and Monitoring Program
+  | Region 7 (Alaska)
+tags:
+- template
+- biometrics
+abstract: |
+  This is a template for producing markdown reports of biometric projects
+  by the Alaska I&M Program.
+---
+
+\newpage
+
+# Backgound
+
+## Principal Investigator
+[First and Last Names]
+
+## Association
+[Refuge, Program, Office]
+
+## Email Address
+[you@fws.gov]
+
+## Type of Request
+[Data Analysis, Study Design]  
+
+## Project Objective
+[A few sentences specifying the objectives (survey and management) of the work]
+
+## Project Description
+[A short paragraph that provides some background on the project and its needs]
+
+## PRIMR Number
+[Survey ID from the PRIMR database]
+
+```{r setup, echo=FALSE, cache=FALSE}
+
+## Read in all the R scripts that are used to generate the report. E.g.:
+# setwd("file_path")
+# read_chunk("/file_directory/file_name.R")
+# read_chunk("/file_directory/file_name.R")
+```
+
+\newpage
+
+# [1st Section Title]
+
+[text]
+
+## [Subsection Title]
+
+[text]
+
+### [Sub-subsection]
+
+[text]
+
+\newpage
+
+# [2nd Section Title]
+
+[text]
+
+## [Subsection Title]
+
+[text]
+
+### [Sub-subsection Title]
+
+[text]
+
+\newpage
+
+# Appendix
+
+## R Session Info
+```{r session info, echo=FALSE}
+sessionInfo()
+```
+
+<!-- # [R script 1] -->
+<!--  ```{r foo1.R, eval = FALSE} -->
+<!--  ``` -->
+
+<!-- # [R script 2] -->
+<!--  ```{r foo2.R, eval = FALSE} -->
+<!--  ``` -->
+

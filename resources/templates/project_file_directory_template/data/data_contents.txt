@@ -1,0 +1,9 @@
+Directory Contents
+-------------------
+
+derived_data (dir)
+	Data that have undergone thorough quality assurance and screening as well as complete
+	documentation.
+
+raw_data (dir)
+	Data that have not been subjected to either quality control or documentation procedures.

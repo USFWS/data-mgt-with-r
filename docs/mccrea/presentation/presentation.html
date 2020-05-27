@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>R tools for a code-based data workflow</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="McCrea Cobb and Adam Smith" />
+    <meta name="date" content="2020-05-26" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+background-image: url(images/draw-owl_kosher.jpg)
+background-size: contain
+
+
+---
+class: center, middle
+# Introduction
+
+
+???
+- What we will cover
+
+- What we won't cover
+    - Intro to R, how to get your data into R, etc
+    - There are many free online courses available
+        - DataCamp
+        - NCTC courses
+
+
+---
+# A data life cycle
+
+
+???
+- Here's some notes
+
+
+---
+# Manual versus scripted data workflow
+
+
+???
+- Here's some notes
+
++ The manual data workflow
+  + Example
+  + Limitations
++ The code-based data workflow
+  + Advantages
+    + Documented
+    + Reproducible
+    + Replicable
+    + More efficient
+    + Less error-prone
+    
+    
+---
+class: center, middle
+# Planning
+
+
+???
+- Add the logo for Planning
+
+
+---
+# File directory structure template
+
+- admin/
+- code/
+  - functions/
+- data/
+  - derived_data/
+  - raw_data/
+- incoming/
+- metadata/
+- output/
+  - figures/
+  - raw_analysis/
+  - tables/
+- products/
+- resources/
+  - data/
+  - publications/
+  - reports/
+
+
+???
+- There are packages that produce a standardized directory structure
+    - Examples: 
+        - SppDistMonProj:: dir_create()
+
+
+---
+# Standards
+
+
+.center[![:scale 200%](images/standards.png)]
+
+
+???
+- Develop standards within your team
+- Advantage
+  - ease of coding 
+  - ease of interpretability
+  - ease of reading
+
+---
+# File naming
+
+Within your team, decide on a standardized file naming convention.
+
+
+???
+
+---
+# Style guide
+
+styler package
+
+???
+- Google style guide
+- Hadley Wickham's style guide
+
+
+---
+# Project portability
+
+### Isolated
+### Portable
+### Reproducible
+(image of packrat)
+
+???
+
+- Isolated: 
+  - Installing a new or updated package for one project won’t break your other projects, and vice versa. That’s because packrat gives each project its own private package library.
+- Portable: 
+  - Easily transport your projects from one computer to another, even across different platforms. Packrat makes it easy to install the packages your project depends on.
+- Reproducible:
+  - Packrat records the exact package versions you depend on, and ensures those exact versions are the ones that get installed wherever you go.
+
+- Available tools:
+  - packrat
+  - rocker
+    - Docker is a program that allows to manipulate (launch and stop) multiple operating systems (called containers) on your machine (your machine will be called the host).
+    - you can use older versions of a package for a specific task, while still keeping the package on your machine up-to-date.
+
+
+---
+# Organizing R files
+
+
+???
+- Here's some notes
+
+
+---
+# Project documentation
+
+(image of commented header)
+(image of Roxygen header)
+
+???
+- This is the metadata for your scripts
+
+- In the simplest case, add a commented header to your R scripts
+- For reusable functions, consider inserting an Roxygen header (Ctl-Alt-Shift-R)
+    - one less step when bundling your functions into a package.
+
+
+---
+# Version control
+
+
+???
+- Here's some notes
+
+
+---
+class: center, middle
+
+# Sharing
+
+
+???
+
+
+---
+# RMarkdown
+
+???
+- RMarkdown
+  - Types of output
+    - html
+    - pdf
+    - dashboards
+    - websites
+  - Examples
+    - Bat reporting for mobile aucistics
+    - COVID 19 example
+  
+
+---
+# Shiny
+
+Web applications using Shiny
+
+
+???
+- Shiny apps
+    - Examples
+      - collarviewer
+      - power analysis for butterfly surveys
+
+
+---
+# Archiving
+
+
+???
+- Saving results to ServCat or some other data repository
+
+
+---
+class: center, middle
+
+# Demo
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

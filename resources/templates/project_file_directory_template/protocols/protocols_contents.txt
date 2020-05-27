@@ -1,0 +1,31 @@
+Directory Contents
+-------------------
+
+data_sheets (dir)
+	Data sheets and templates for data entry.
+
+Instructions for Protocol Template_Ver2.0_508Compliant (.doc)
+	This document provides instructions for using the template 
+	(version 2.0) for drafting survey protocols used in the National 
+	Wildlife Refuge System (NWRS). Survey protocols are written to 
+	guide inventory and monitoring (I&M) of NWRS resources to completion, 
+	provide reliable and relevant survey results for decision making, and 
+	document practices for consistent implementation over time, by multiple 
+	parties (701 FWS 2, FWS 2013a). Guidance on the definitions, contents 
+	and format of inventory and monitoring protocols can also be found in 
+	How to Develop a Survey Protocol: A Handbook (Survey Protocol Handbook; 
+	FWS 2013a). NWRS survey protocols address eight basic elements that guide 
+	survey implementation (FWS 2013a: 4), and three other sections for 
+	presenting guidance, Appendices, Standard Operating Procedures (SOPs) 
+	and Supplemental Materials (SMs). This template is arranged in the 
+	same order as described in the Survey Protocol Handbook. Labels and 
+	case of two headings were modified from those in the handbook.
+	https://ecos.fws.gov/ServCat/Reference/Profile/105152
+
+Protocol Template_Ver2.0_508Compliant (.doctx)
+	Use this template to produce a properly formatted and 
+	508 compliant survey protocol. The template was developed 
+	for drafting inventory and monitoring guidance that meets 
+	National Wildlife Refuge System (NWRS) policy and standard. 
+	https://ecos.fws.gov/ServCat/Reference/Profile/105152
+

@@ -1,0 +1,12 @@
+Directory Contents
+-------------------
+figures (dir)
+	Figures generated from data analysis.
+
+raw_analysis (dir)
+	Other files associated with data analysis, including model results. Typically
+	.gzip or .Rdata files produced from R.
+
+tables (dir)
+	
+	Tables generated from data analysis.

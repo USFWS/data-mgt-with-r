@@ -1,0 +1,18 @@
+Directory Contents
+-------------------
+conceptual_model (dir)
+	A conceptual model of the system of interest, used to generate management and survey objectives. 
+
+posters (dir)
+	Scientific posters produced by the project.
+
+presentations (dir)
+	Presentations of data and results from the project. 
+
+publications (dir)
+	Peer-reviewed journal publications produced by the project.
+
+reports (dir)
+	Annual and final reports produced by the project.
+
+

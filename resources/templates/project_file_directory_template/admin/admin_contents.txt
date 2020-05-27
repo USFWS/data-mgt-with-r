@@ -1,0 +1,20 @@
+Directory Contents
+-------------------
+
+contracts (dir)
+	Contracts for work needed to complete the project.
+
+meetings (dir)
+	Notes from meetings and other correspondances (emails, etc) related to the project.
+
+proposals (dir)
+	Study proposals
+
+purchasing (dir)
+	Records of purchases
+
+training (dir)
+	Materials needed for trainings
+
+travel (dir)
+	Material and records related to travel associated with the project, including annual schedules of field activities.

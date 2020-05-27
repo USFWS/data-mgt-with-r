@@ -1,89 +1,108 @@
 ---
-title: "Draft Title: A Code-Based Data Workflow Using R"
+title: "R tools for a code-based data workflow"
 output: 
   bookdown::pdf_document2:
-    toc: false
+    toc: true
+    number_sections: false
+
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-This webinar provides a brief introduction into using R to develop a code-based workflow for ecological survey data. Participants will learn about the advantages of using a scripting language like R for moving data along the data life cycle. We will walk through an example of using R to manage scientific data.
-
-
 # Webinar Information
 
-Presenters: [McCrea Cobb](mailto:mccrea_cobb@fws.gov) and [Adam Smith](mailto:d_smith@fws.gov)
+## Description  
+After a brief review of the advantages of a code-based workflow for ecological survey data, we introduce participants to some useful tools available via the R programming language for moving data along the data life cycle. We suggest some accessible tools in R for each step of the life cycle, and conclude with a walk through of how the functionality available in R can increase the reliability, efficiency, and transparency of scientific data management.
 
-When:
+## Presenters    
+- [McCrea Cobb](mailto:mccrea_cobb@fws.gov) and [Adam Smith](mailto:d_smith@fws.gov)
 
-Location: [Webinar link]()
+## When
+June 24, 2020 (3:00-4:30 EST)
 
-Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with-r)
+## Location  
+[Webinar link]()
+
+## Additional resources
+[GitHub repository](https://github.com/USFWS/data-mgt-with-r)
 
 
 # Outline
 
-1. Data life cycle review
-2. The manual data workflow
-    + Example
-    + Limitations
-3. The code-based data workflow
-    + Advantages
+## Introduction (*McCrea, 5 min*)
+  + Data life cycle review 
+  + Manual versus code-based workflow
+    + The manual data workflow
+      + Example
+      + Limitations
+    + The code-based data workflow
+      + Advantages
         + Documented
         + Reproducible
         + Replicable
         + More efficient
         + Less error-prone
-4. A data workflow with R
-    + **Planning** an RStudio project (*McCrea*)
-        + Make an R project self contained and portable
-            + File directory structure
-            + Relative paths
-        + Dependency management
-            + packrat
-            + containers (docker)
-        + Standardize file naming convention
-        + Organizing R files (Numeric preface in the names of ordered scripts)
-        + Recommended RStudio settings
-            + E.g., Uncheck "restore .RData into workspace at startup"
-        + Version control
-            + Storing versions
-            + Collaboration
-    + **Documenting** data and scripts with R (*Adam*)
-        + rOxygen 
-        + R documentation file
-        + Code commenting
-    + **Acquiring** data (*Adam*)
-        + local and remote
-        + querying data
-            + AGOL
-            + iNaturalist
-            + PRIMR web services
-            + SQL query: IRIS warehouse
-    + **Processing and Analyzing** (*Adam*)
-        + Getting data into R
-        + QC
-        + Tidying data
-        + Visualizing
-        + EDA
-    + **Sharing** (*McCrea*)
-        + Reporting
-            + RMarkdown
-                + Bat reporting for mobile aucistics
-            + Dashboards
-                + COVID 19 example
-            + Shiny apps
-                + collarviewer
-                + power analysis for butterfly surveys
-    + **Archiving** (*McCrea*)
-        + Saving results to ServCat or some other data repository
-5. An example R project / Live demo (*Both*)
+        
+## Planning (*McCrea, 10 min*)
+  + Make an R project self contained and portable
+    + File directory structure
+    + Relative paths
+  + Dependency management
+    + packrat
+    + containers (docker)
+   + Standardize file naming convention
+  + Organizing R files (Numeric preface in the names of ordered scripts)
+  + Recommended RStudio settings
+     + E.g., Uncheck "restore .RData into workspace at startup"
+  + Version control
+     + Storing versions
+     + Collaboration
+     
+## Documenting (*Adam, 10? min*)
+  + rOxygen 
+  + R documentation file
+  + Code commenting
+  
+## Acquiring (*Adam, 10? min*)
+  + local and remote
+  + querying data
+    + AGOL
+    + iNaturalist
+    + PRIMR web services
+    + SQL query: IRIS warehouse
+    
+## Processing and Analyzing (*Adam, 10? min*)
+   + Getting data into R
+  + QC
+  + Tidying data
+  + Visualizing
+   + EDA
+   
+## Sharing (*McCrea, 10 min*)
+  + Reporting
+    + RMarkdown
+       + Bat reporting for mobile aucistics
+     + Dashboards
+      + COVID 19 example
+    + Shiny apps
+       + collarviewer
+       + power analysis for butterfly surveys
+       
+## Archiving (*McCrea, 10 min*)
+   + Saving results to ServCat or some other data repository
+
+## 3. An example R project / Live demo (*10 min*)
+
+## 4. Questions (*10 min*)
 
 
 # Resources (Links)
+
+**Introduction to R**
+
+- [An Introduction to R book](https://intro2r.com/)
 
 **Resources for Teaching R**  
 
@@ -118,6 +137,13 @@ Additional resources: [GitHub repository](https://github.com/USFWS/data-mgt-with
 - [File structure for data management](https://r-dir.com/blog/2013/11/folder-structure-for-data-analysis.html)
 - [Organizing files for data analysis](https://github.com/AndersenLab/IBiS-Bootcamp/wiki/Organizing-files-for-data-analysis)
 - [A meaningful file structure for R projects](https://www.r-bloggers.com/a-meaningful-file-structure-for-r-projects/)
+- [An introduction to Docker for R users](https://colinfay.me/docker-r-reproducibility/)
+
+
+**Project Directory Templates**
+- [MakeProject package](https://cran.r-project.org/web/packages/makeProject/index.html)
+- [rrtools package](https://github.com/benmarwick/rrtools)
+- [prodigenr package](https://cran.r-project.org/web/packages/prodigenr/readme/README.html)
 
 
 **General Coding Best Practices**
