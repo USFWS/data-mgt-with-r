@@ -18,71 +18,23 @@ June 24, 2020 (3:00-4:30 EST)
 
 # Outline
 
-## Introduction (*McCrea, 5 min*)
-  + Data life cycle review 
-  + Manual versus code-based workflow
-    + The manual data workflow
-      + Example
-      + Limitations
-    + The code-based data workflow
-      + Advantages
-        + Documented
-        + Reproducible
-        + Replicable
-        + More efficient
-        + Less error-prone
-        
-## Planning (*McCrea, 10 min*)
-  + Make an R project self contained and portable
-    + File directory structure
-    + Relative paths
-  + Dependency management
-    + packrat
-    + containers (docker)
-   + Standardize file naming convention
-  + Organizing R files (Numeric preface in the names of ordered scripts)
-  + Recommended RStudio settings
-     + E.g., Uncheck "restore .RData into workspace at startup"
-  + Version control
-     + Storing versions
-     + Collaboration
-     
-## Documenting (*Adam, 10? min*)
-  + rOxygen 
-  + R documentation file
-  + Code commenting
+## Introduction 
+
+## Planning 
+
+## Documenting
   
-## Acquiring (*Adam, 10? min*)
-  + local and remote
-  + querying data
-    + AGOL
-    + iNaturalist
-    + PRIMR web services
-    + SQL query: IRIS warehouse
-    
-## Processing and Analyzing (*Adam, 10? min*)
-   + Getting data into R
-  + QC
-  + Tidying data
-  + Visualizing
-   + EDA
-   
-## Sharing (*McCrea, 10 min*)
-  + Reporting
-    + RMarkdown
-       + Bat reporting for mobile aucistics
-     + Dashboards
-      + COVID 19 example
-    + Shiny apps
-       + collarviewer
-       + power analysis for butterfly surveys
-       
-## Archiving (*McCrea, 10 min*)
-   + Saving results to ServCat or some other data repository
+## Acquiring 
 
-## An example R project / Live demo (*10 min*)
+## Processing and Analyzing 
 
-## Questions (*10 min*)
+## Sharing 
+ 
+## Archiving 
+
+## An example R project / Live demo 
+
+## Questions 
 
 
 # Resources (Links)
