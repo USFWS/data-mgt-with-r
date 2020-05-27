@@ -15,28 +15,6 @@ June 24, 2020 (3:00-4:30 EST)
 ## Additional resources
 [GitHub repository](https://github.com/USFWS/data-mgt-with-r)
 
-
-# Outline
-
-## Introduction 
-
-## Planning 
-
-## Documenting
-  
-## Acquiring 
-
-## Processing and Analyzing 
-
-## Sharing 
- 
-## Archiving 
-
-## An example R project / Live demo 
-
-## Questions 
-
-
 # Resources (Links)
 
 **Introduction to R**
