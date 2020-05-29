@@ -5,7 +5,7 @@ date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: "xaringan-themer.css"
+    css: ["xaringan-themer.css", "my-theme.css"]
     nature:
       beforeInit: "macros.js"
       highlightStyle: github
@@ -13,11 +13,12 @@ output:
       countIncrementalSlides: false
     seal: false
     includes:
-      after_body: insert-logo.html
+      after_body: usfws-logo.html
 ---
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
+library(icon)
 ```
 
 ```{r xaringan-themer, include=FALSE}
@@ -29,33 +30,88 @@ solarized_light(
 ```
 
 
-background-image: url(images/draw-owl_kosher.jpg)
+background-image: url(images/an-image.jpg)
 background-size: contain
-class: hide-logo
+class: hide-logo, center, middle, inverse
 
+# R Tools for a Code-based Data Workflow
+
+.pull-left[
+`McCrea Cobb`  
+`r icon::fa("envelope")` mccrea_cobb@fws.gov  
+`r icon::fa("phone")` 907-786-3403  
+`r icon::fa("github")` mccrea.cobb  
+]
+
+.pull-right[
+`Adam D. Smith`  
+`r icon::fa("envelope")` adam_d_smith@fws.gov  
+`r icon::fa("phone")` 706-425-2197  
+`r icon::fa("github")` adamdsmith  
+]
 
 ---
-class: center, middle
-# Introduction
+
+# Outline
+
+.pull-left[
+1. Review the data life cycle and data workflow
+]
+
+---
+
+# Outline
+
+.pull-left[
+1. Review the data life cycle and data workflow
+
+2. Presenting tools in R that allow one to efficiently and effectively 
+]
+
+---
+
+# Outline
+
+.pull-left[
+1. Review the data life cycle and data workflow
+
+2. Presenting tools in R that allow one to efficiently and effectively 
+
+3. Demonstrate an example of data workflow using some of the tools in R
+]
 
 
 ???
 - What we will cover
+  - Introduce some tools in R that can be used for a data workflow. 
+  - We take a scientific data focus, but the tools that we introduce can be used for all types of data.
 
-- What we won't cover
-    - Intro to R, how to get your data into R, etc
-    - There are many free online courses available
-        - DataCamp
-        - NCTC courses
+- Disclaimer: What we won't cover
+  - This is not an "Intro to R", how to get your data into R, etc
+    - There are many free online courses that cover these materials
+      - DataCamp
+      - NCTC courses
+- Take home message: It is possible to use a scripting languaging like R to complete your data workflow that follows the data life cycle. Doing this is more efficient and less error prone than a manual data workflow commonly used.
 
 
 ---
 
-# A data life cycle
+# Data life cycle
+
+.center[![:scale 100%](images/life_cycles.png)]
 
 
 ???
 - Here's some notes
+
+
+---
+background-image: url(images/data_life_cycle.png)
+background-size: contain
+class: hide-logo
+
+
+???
 
 
 ---
@@ -77,7 +133,7 @@ class: hide-logo
 ---
 # Manual versus scripted data workflow
 
-![]("images/)
+![](images/)
 
 
 
@@ -130,23 +186,44 @@ class: center, middle
 ---
 # File directory structure template
 
-- admin/
-- code/
-  - functions/
-- data/
-  - derived_data/
-  - raw_data/
-- incoming/
-- metadata/
-- output/
-  - figures/
-  - raw_analysis/
-  - tables/
-- products/
-- resources/
-  - data/
-  - publications/
-  - reports/
+.pull-left[
+
+- Choose a standard file directory for your R projects
+
+- Provides consistent relative directory paths for your scripts.
+
+- There are R packages that provide functions that create a file directory.
+    - `MakeProject::MakeProject()`
+    - `rrtools::use_analysis()`
+    - `refugetools::dir_create()`
+
+  
+]
+
+.pull-right[
+
+An example file directory:
+```{}
+project_name/
+  admin/
+  code/
+    functions/
+  data/
+    derived_data/
+    raw_data/
+  incoming/
+  metadata/
+  output/
+    figures/
+    raw_analysis/
+    tables/
+  products/
+  resources/
+    data/
+    publications/
+    reports/
+```
+]
 
 
 ???
@@ -156,10 +233,22 @@ class: center, middle
 
 
 ---
-# Standards
+# Standards: style guide
+
+.pull-left[
+[why do we need standards]
+
+[what are some of the R standards]
+
+[Tools to maintain standards (e.g., `Styler` package)]
+
+Run through an example
+
+]
 
 
-.center[![:scale 200%](images/standards.png)]
+.pull-right[
+![:scale 100%](images/standards.png)]
 
 
 ???
@@ -169,18 +258,6 @@ class: center, middle
   - ease of interpretability
   - ease of reading
 
----
-# File naming
-
-Within your team, decide on a standardized file naming convention.
-
-
-???
-
----
-# Style guide
-
-styler package
 
 ???
 - Google style guide
@@ -188,12 +265,32 @@ styler package
 
 
 ---
+# Standards: file naming
+
+Within your team, decide on a standardized file naming convention.
+
+.center[![:scale 80%](images/file_names.PNG)]
+
+
+???
+
+
+---
 # Project portability
 
+
+
+.left-column[
+<br>
+![:scale 85%](images/packrat.png)
+]
+
+.right-column[
+![](images/package-hell.png)
 ### Isolated
 ### Portable
 ### Reproducible
-(image of packrat)
+]
 
 ???
 
@@ -234,7 +331,20 @@ styler package
 
 
 ---
+
 # Version control
+
+.pull-left[
+[Some text about version control]
+
+]
+
+.pull-right[
+.center[![:scale 50%](images/github.svg)]
+.center[![:scale 50%](images/github-logo.png)]
+
+
+]
 
 
 ???
@@ -251,7 +361,10 @@ class: center, middle
 
 
 ---
-# RMarkdown
+background-image: url(images/rmarkdown.png)
+background-size: contain
+class: hide-logo
+
 
 ???
 - RMarkdown
@@ -266,9 +379,9 @@ class: center, middle
   
 
 ---
-# Shiny
-
-Web applications using Shiny
+background-image: url(images/shiny.png)
+background-size: contain
+class: hide-logo
 
 
 ???
@@ -290,3 +403,12 @@ Web applications using Shiny
 class: center, middle
 
 # Demo
+
+
+???
+
+
+---
+class: center, middle
+
+# Questions

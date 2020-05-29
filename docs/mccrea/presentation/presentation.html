@@ -4,8 +4,10 @@
     <title>R tools for a code-based data workflow</title>
     <meta charset="utf-8" />
     <meta name="author" content="McCrea Cobb and Adam Smith" />
-    <meta name="date" content="2020-05-27" />
+    <meta name="date" content="2020-05-28" />
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="my-theme.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -16,33 +18,88 @@
 
 
 
-background-image: url(images/draw-owl_kosher.jpg)
+background-image: url(images/an-image.jpg)
 background-size: contain
-class: hide-logo
+class: hide-logo, center, middle, inverse
 
+# R Tools for a Code-based Data Workflow
+
+.pull-left[
+`McCrea Cobb`  
+<i class="fas  fa-envelope "></i> mccrea_cobb@fws.gov  
+<i class="fas  fa-phone "></i> 907-786-3403  
+<i class="fab  fa-github "></i> mccrea.cobb  
+]
+
+.pull-right[
+`Adam D. Smith`  
+<i class="fas  fa-envelope "></i> adam_d_smith@fws.gov  
+<i class="fas  fa-phone "></i> 706-425-2197  
+<i class="fab  fa-github "></i> adamdsmith  
+]
 
 ---
-class: center, middle
-# Introduction
+
+# Outline
+
+.pull-left[
+1. Review the data life cycle and data workflow
+]
+
+---
+
+# Outline
+
+.pull-left[
+1. Review the data life cycle and data workflow
+
+2. Presenting tools in R that allow one to efficiently and effectively 
+]
+
+---
+
+# Outline
+
+.pull-left[
+1. Review the data life cycle and data workflow
+
+2. Presenting tools in R that allow one to efficiently and effectively 
+
+3. Demonstrate an example of data workflow using some of the tools in R
+]
 
 
 ???
 - What we will cover
+  - Introduce some tools in R that can be used for a data workflow. 
+  - We take a scientific data focus, but the tools that we introduce can be used for all types of data.
 
-- What we won't cover
-    - Intro to R, how to get your data into R, etc
-    - There are many free online courses available
-        - DataCamp
-        - NCTC courses
+- Disclaimer: What we won't cover
+  - This is not an "Intro to R", how to get your data into R, etc
+    - There are many free online courses that cover these materials
+      - DataCamp
+      - NCTC courses
+- Take home message: It is possible to use a scripting languaging like R to complete your data workflow that follows the data life cycle. Doing this is more efficient and less error prone than a manual data workflow commonly used.
 
 
 ---
 
-# A data life cycle
+# Data life cycle
+
+.center[![:scale 100%](images/life_cycles.png)]
 
 
 ???
 - Here's some notes
+
+
+---
+background-image: url(images/data_life_cycle.png)
+background-size: contain
+class: hide-logo
+
+
+???
 
 
 ---
@@ -64,7 +121,7 @@ class: hide-logo
 ---
 # Manual versus scripted data workflow
 
-![]("images/)
+![](images/)
 
 
 
@@ -117,23 +174,44 @@ class: center, middle
 ---
 # File directory structure template
 
-- admin/
-- code/
-  - functions/
-- data/
-  - derived_data/
-  - raw_data/
-- incoming/
-- metadata/
-- output/
-  - figures/
-  - raw_analysis/
-  - tables/
-- products/
-- resources/
-  - data/
-  - publications/
-  - reports/
+.pull-left[
+
+- Choose a standard file directory for your R projects
+
+- Provides consistent relative directory paths for your scripts.
+
+- There are R packages that provide functions that create a file directory.
+    - `MakeProject::MakeProject()`
+    - `rrtools::use_analysis()`
+    - `refugetools::dir_create()`
+
+  
+]
+
+.pull-right[
+
+An example file directory:
+```{}
+project_name/
+  admin/
+  code/
+    functions/
+  data/
+    derived_data/
+    raw_data/
+  incoming/
+  metadata/
+  output/
+    figures/
+    raw_analysis/
+    tables/
+  products/
+  resources/
+    data/
+    publications/
+    reports/
+```
+]
 
 
 ???
@@ -143,10 +221,22 @@ class: center, middle
 
 
 ---
-# Standards
+# Standards: style guide
+
+.pull-left[
+[why do we need standards]
+
+[what are some of the R standards]
+
+[Tools to maintain standards (e.g., `Styler` package)]
+
+Run through an example
+
+]
 
 
-.center[![:scale 200%](images/standards.png)]
+.pull-right[
+![:scale 100%](images/standards.png)]
 
 
 ???
@@ -156,18 +246,6 @@ class: center, middle
   - ease of interpretability
   - ease of reading
 
----
-# File naming
-
-Within your team, decide on a standardized file naming convention.
-
-
-???
-
----
-# Style guide
-
-styler package
 
 ???
 - Google style guide
@@ -175,12 +253,32 @@ styler package
 
 
 ---
+# Standards: file naming
+
+Within your team, decide on a standardized file naming convention.
+
+.center[![:scale 80%](images/file_names.PNG)]
+
+
+???
+
+
+---
 # Project portability
 
+
+
+.left-column[
+&lt;br&gt;
+![:scale 85%](images/packrat.png)
+]
+
+.right-column[
+![](images/package-hell.png)
 ### Isolated
 ### Portable
 ### Reproducible
-(image of packrat)
+]
 
 ???
 
@@ -221,7 +319,20 @@ styler package
 
 
 ---
+
 # Version control
+
+.pull-left[
+[Some text about version control]
+
+]
+
+.pull-right[
+.center[![:scale 50%](images/github.svg)]
+.center[![:scale 50%](images/github-logo.png)]
+
+
+]
 
 
 ???
@@ -238,7 +349,10 @@ class: center, middle
 
 
 ---
-# RMarkdown
+background-image: url(images/rmarkdown.png)
+background-size: contain
+class: hide-logo
+
 
 ???
 - RMarkdown
@@ -253,9 +367,9 @@ class: center, middle
   
 
 ---
-# Shiny
-
-Web applications using Shiny
+background-image: url(images/shiny.png)
+background-size: contain
+class: hide-logo
 
 
 ???
@@ -277,6 +391,15 @@ Web applications using Shiny
 class: center, middle
 
 # Demo
+
+
+???
+
+
+---
+class: center, middle
+
+# Questions
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -374,10 +497,10 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   background-size: contain;
   background-repeat: no-repeat;
   position: absolute;
-  top: 1em;
-  right: 1em;
-  width: 55px;
-  height: 64px;
+  bottom: 0.5em;
+  left: 0.5em;
+  width: 100px;
+  height: 60px;
   z-index: 0;
 }
 </style>
