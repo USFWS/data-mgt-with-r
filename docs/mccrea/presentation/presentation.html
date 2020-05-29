@@ -4,7 +4,7 @@
     <title>R tools for a code-based data workflow</title>
     <meta charset="utf-8" />
     <meta name="author" content="McCrea Cobb and Adam Smith" />
-    <meta name="date" content="2020-05-28" />
+    <meta name="date" content="2020-05-29" />
     <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="my-theme.css" type="text/css" />
@@ -18,11 +18,12 @@
 
 
 
+
 background-image: url(images/an-image.jpg)
 background-size: contain
 class: hide-logo, center, middle, inverse
 
-# R Tools for a Code-based Data Workflow
+# ![:scale 9%](images/Rlogo.svg) Tools for a Code-based Data Workflow
 
 .pull-left[
 `McCrea Cobb`  
@@ -39,34 +40,38 @@ class: hide-logo, center, middle, inverse
 ]
 
 ---
+class: inverse, center, middle, hide-logo
 
 # Outline
-
-.pull-left[
-1. Review the data life cycle and data workflow
-]
 
 ---
+class: inverse, center, middle, hide-logo
 
 # Outline
 
-.pull-left[
-1. Review the data life cycle and data workflow
+**Review the data life cycle and data workflow**
 
-2. Presenting tools in R that allow one to efficiently and effectively 
-]
 
 ---
+class: inverse, center, middle, hide-logo
 
 # Outline
 
-.pull-left[
-1. Review the data life cycle and data workflow
+Review the data life cycle and data workflow
 
-2. Presenting tools in R that allow one to efficiently and effectively 
+**Present some tools in R for efficiently and effectively working with data along the life cycle**
 
-3. Demonstrate an example of data workflow using some of the tools in R
-]
+
+---
+class: inverse, center, middle, hide-logo
+
+# Outline
+
+Review the data life cycle and data workflow
+
+Present some tools in R for efficiently and effectively working with data along the life cycle
+
+**Demonstrate a data workflow in R using an example project**
 
 
 ???
@@ -163,9 +168,11 @@ class: hide-logo
   
 
 ---
-class: center, middle
+class: center, middle, inverse
+
 # Planning
 
+![](images/life_cycles-planning.png)
 
 ???
 - Add the logo for Planning
@@ -191,7 +198,8 @@ class: center, middle
 .pull-right[
 
 An example file directory:
-```{}
+
+```r
 project_name/
   admin/
   code/
@@ -266,7 +274,7 @@ Within your team, decide on a standardized file naming convention.
 ---
 # Project portability
 
-
+![:scale 75%](images/package-hell.png)
 
 .left-column[
 &lt;br&gt;
@@ -274,10 +282,11 @@ Within your team, decide on a standardized file naming convention.
 ]
 
 .right-column[
-![](images/package-hell.png)
-### Isolated
-### Portable
-### Reproducible
+Isolated
+
+Portable
+
+Reproducible
 ]
 
 ???
@@ -305,7 +314,7 @@ Within your team, decide on a standardized file naming convention.
 
 
 ---
-# Project documentation
+# Documenting R object
 
 (image of commented header)
 (image of Roxygen header)
@@ -316,6 +325,42 @@ Within your team, decide on a standardized file naming convention.
 - In the simplest case, add a commented header to your R scripts
 - For reusable functions, consider inserting an Roxygen header (Ctl-Alt-Shift-R)
     - one less step when bundling your functions into a package.
+
+
+---
+# Roxygen comments
+
+- Metadata for functions
+  - Describes the purpose of the function, parameter values (`@params`), what is returned (`@return`), and how to use it (`@example`)
+
+
+.small[
+
+```r
+#' Calculate estimated proportion of sites at which a species occurs
+#'
+#' @param topmod object of class \code{unmarkedFitOccu} for single-species 
+#' occupancy model
+#' @param stat statistic (\code{mean} or \code{median}) used to 
+#' summarize posterior distribution
+#' @param n number of sites surveyed
+#'
+#' @return vector containing posterior mean or median and upper and lower 95% 
+#' confidence limits
+#'
+#' @export
+#'
+#' @example calc.pao(topmod, stat = "mean", n = 30)
+
+calc.pao &lt;- function(topmod, stat = "mode", n){
+    re = unmarked::ranef(topmod)
+    EBUP = unmarked::bup(re, stat = stat)
+    CI = confint(re, level = 0.95)
+    PAO = c(Estimate = sum(EBUP), colSums(CI))
+    PAO / n
+}
+```
+]
 
 
 ---
@@ -340,7 +385,25 @@ Within your team, decide on a standardized file naming convention.
 
 
 ---
-class: center, middle
+class: center, middle, inverse, hide-logo
+
+# Documenting
+
+
+---
+class: center, middle, inverse, hide-logo
+
+# Acquiring
+
+
+---
+class: center, middle, inverse, hide-logo
+
+# Processing and Analyzing
+
+
+---
+class: center, middle, inverse, hide-logo
 
 # Sharing
 
@@ -349,9 +412,17 @@ class: center, middle
 
 
 ---
-background-image: url(images/rmarkdown.png)
-background-size: contain
-class: hide-logo
+# ![:scale 10%](images/rmarkdown_logo.png) Reports
+
+
+.pull-left[
+[Dynamic reports]  
+[Interactive reports]
+]
+
+.pull-right[
+![](images/rmarkdown.png)
+]
 
 
 ???
@@ -364,12 +435,16 @@ class: hide-logo
   - Examples
     - Bat reporting for mobile aucistics
     - COVID 19 example
+
   
+---
+# Presentations 
+
+![](images/rmarkdown_presentation.png)
+
 
 ---
-background-image: url(images/shiny.png)
-background-size: contain
-class: hide-logo
+# ![:scale 10%](images/shiny.png) Web applications 
 
 
 ???
@@ -380,6 +455,8 @@ class: hide-logo
 
 
 ---
+class: center, middle, inverse, hide-logo
+
 # Archiving
 
 
@@ -388,7 +465,7 @@ class: hide-logo
 
 
 ---
-class: center, middle
+class: center, middle, inverse, hide-logo
 
 # Demo
 
@@ -397,7 +474,7 @@ class: center, middle
 
 
 ---
-class: center, middle
+class: center, middle, inverse, hide-logo
 
 # Questions
     </textarea>

@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 After a brief review of the advantages of a code-based workflow for ecological survey data, we introduce participants to some useful tools available via the R programming language for moving data along the data life cycle. We suggest some accessible tools in R for each step of the life cycle, and conclude with a walk through of how the functionality available in R can increase the reliability, efficiency, and transparency of scientific data management.
 
 ## Presenters    
-- [McCrea Cobb](mailto:mccrea_cobb@fws.gov) and [Adam Smith](mailto:d_smith@fws.gov)
+- [McCrea Cobb](mailto:mccrea_cobb@fws.gov) (Refuge Inventory and Monitoring Program, Alaska) and [Adam Smith](mailto:d_smith@fws.gov) (Refuge Inventory and Monitoring Program, Legacy FWS Region )
 
 ## When
 June 24, 2020 (3:00-4:30 EST)
@@ -93,9 +93,9 @@ June 24, 2020 (3:00-4:30 EST)
 ## Archiving (*McCrea, 10 min*)
    + Saving results to ServCat or some other data repository
 
-## 3. An example R project / Live demo (*10 min*)
+## An example R project / Live demo (*10 min*)
 
-## 4. Questions (*10 min*)
+## Questions (*10 min*)
 
 
 # Resources (Links)

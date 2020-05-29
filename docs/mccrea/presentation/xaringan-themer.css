@@ -35,26 +35,29 @@
   --code-font-is-google: 0;
   --base-font-size: 20px;
   --text-font-size: 1rem;
-  --code-font-size: 0.9rem;
+  --code-font-size: 0.75rem;
   --code-inline-font-size: 1em;
   --header-h1-font-size: 2.75rem;
   --header-h2-font-size: 2.25rem;
   --header-h3-font-size: 1.75rem;
 
   /* Colors */
-  --text-color: #657b83;
-  --header-color: #dc322f;
-  --background-color: #fdf6e3;
-  --link-color: #b58900;
-  --text-bold-color: #d33682;
-  --code-highlight-color: #268bd240;
-  --inverse-text-color: #fdf6e3;
-  --inverse-background-color: #002b36;
-  --inverse-header-color: #fdf6e3;
-  --title-slide-background-color: #002b36;
-  --title-slide-text-color: #fdf6e3;
-  --header-background-color: #dc322f;
-  --header-background-text-color: #fdf6e3;
+  --text-color: #18273F;
+  --header-color: #23395b;
+  --background-color: #E9EBEE;
+  --link-color: #23395b;
+  --text-bold-color: #23395b;
+  --code-highlight-color: rgba(255,255,0,0.5);
+  --inverse-text-color: #E9EBEE;
+  --inverse-background-color: #23395b;
+  --inverse-header-color: #E9EBEE;
+  --title-slide-background-color: #23395b;
+  --title-slide-text-color: #E9EBEE;
+  --header-background-color: #23395b;
+  --header-background-text-color: #E9EBEE;
+  --base: #23395b;
+  --white: #E9EBEE;
+  --black: #18273F;
 }
 
 html {
@@ -95,10 +98,10 @@ h1, h2, h3 {
 }
 .remark-inline-code {
   font-size: var(--code-inline-font-size);
-  color: #6c71c4;
+  color: #23395b;
 }
 .remark-slide-number {
-  color: #93a1a1;
+  color: #23395b;
   opacity: 1;
   font-size: 0.9em;
 }
@@ -140,10 +143,10 @@ a, a > code {
   float: left;
 }
 .left-column h2, .left-column h3 {
-  color: #93a1a1;
+  color: #23395b99;
 }
 .left-column h2:last-of-type, .left-column h3:last-child {
-  color: #586e75;
+  color: #23395b;
 }
 .right-column {
   width: 75%;
@@ -165,22 +168,22 @@ img, video, iframe {
   max-width: 100%;
 }
 blockquote {
-  border-left: solid 5px #cb4b16;
+  border-left: solid 5px #23395b80;
   padding-left: 1em;
 }
 .remark-slide table {
   margin: auto;
-  border-top: 1px solid #839496;
-  border-bottom: 1px solid #839496;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
 }
 .remark-slide table thead th {
-  border-bottom: 1px solid #839496;
+  border-bottom: 1px solid #ddd;
 }
 th, td {
   padding: 5px;
 }
 .remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) {
-  background: #eee8d5;
+  background: #D3D7DE;
 }
 table.dataTable tbody {
   background-color: var(--background-color);
@@ -190,7 +193,7 @@ table.dataTable.display tbody tr.odd {
   background-color: var(--background-color);
 }
 table.dataTable.display tbody tr.even {
-  background-color: #eee8d5;
+  background-color: #D3D7DE;
 }
 table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.5);
@@ -230,4 +233,22 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   }
 }
 
+.base {
+  color: var(--base);
+}
+.bg-base {
+  background-color: var(--base);
+}
+.white {
+  color: var(--white);
+}
+.bg-white {
+  background-color: var(--white);
+}
+.black {
+  color: var(--black);
+}
+.bg-black {
+  background-color: var(--black);
+}
 
