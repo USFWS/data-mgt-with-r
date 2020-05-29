@@ -62,7 +62,7 @@ class: inverse, center, middle, hide-logo
 
 # Outline
 
-**Review the data life cycle and data workflow**
+*Review the data life cycle and data workflow*
 
 
 ---
@@ -72,7 +72,7 @@ class: inverse, center, middle, hide-logo
 
 Review the data life cycle and data workflow
 
-**Present some tools in R for efficiently and effectively working with data along the life cycle**
+*Present some tools in R for efficiently and effectively working with data along the life cycle*
 
 
 ---
@@ -84,7 +84,7 @@ Review the data life cycle and data workflow
 
 Present some tools in R for efficiently and effectively working with data along the life cycle
 
-**Demonstrate a data workflow in R using an example project**
+*Demonstrate a data workflow in R using an example project*
 
 
 ???
@@ -102,7 +102,7 @@ Present some tools in R for efficiently and effectively working with data along 
 
 ---
 
-# Data life cycle
+# Project and data life cycles
 
 .center[![:scale 100%](images/life_cycles.png)]
 
@@ -134,13 +134,6 @@ class: hide-logo
 background-image: url(images/criteria_grouped3.png)
 background-size: contain
 class: hide-logo
-
-
----
-# Manual versus scripted data workflow
-
-![](images/)
-
 
 
 ???
@@ -214,9 +207,9 @@ An example file directory:
 ```{r, eval=FALSE}
 project_name/
   admin/
-  code/
+  code/ #<<
     functions/
-  data/
+  data/ #<<
     derived_data/
     raw_data/
   incoming/
@@ -227,7 +220,7 @@ project_name/
     tables/
   products/
   resources/
-    data/
+    data/ #<<
     publications/
     reports/
 ```
@@ -244,13 +237,28 @@ project_name/
 # Standards: style guide
 
 .pull-left[
-[why do we need standards]
+Decide on a standard
+  - indenting, spacing, 
+- Resources
+    - Google style guide
+    - 
 
-[what are some of the R standards]
+Tools
+- `Styler` R package
 
-[Tools to maintain standards (e.g., `Styler` package)]
+## Walk through a simple example of style_file()
+```{r, eval=FALSE}
+# Before
+one= 'one string'
+two= "one string in a 'string'"
+a %>%
+  b %>%
+  c
 
-Run through an example
+library(styler)
+
+style_file
+```
 
 ]
 
@@ -326,6 +334,33 @@ Reproducible
 
 
 ---
+
+# Version control
+
+.pull-left[
+[Some text about version control]
+
+]
+
+.pull-right[
+.center[![:scale 50%](images/github.svg)]
+.center[![:scale 50%](images/github-logo.png)]
+
+
+]
+
+
+???
+- Here's some notes
+
+
+---
+class: center, middle, inverse, hide-logo
+
+# Documenting
+
+
+---
 # Documenting R object
 
 (image of commented header)
@@ -372,33 +407,6 @@ calc.pao <- function(topmod, stat = "mode", n){
 }
 ```
 ]
-
-
----
-
-# Version control
-
-.pull-left[
-[Some text about version control]
-
-]
-
-.pull-right[
-.center[![:scale 50%](images/github.svg)]
-.center[![:scale 50%](images/github-logo.png)]
-
-
-]
-
-
-???
-- Here's some notes
-
-
----
-class: center, middle, inverse, hide-logo
-
-# Documenting
 
 
 ---

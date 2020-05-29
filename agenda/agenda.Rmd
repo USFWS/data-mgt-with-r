@@ -60,12 +60,12 @@ June 24, 2020 (3:00-4:30 EST)
      + Storing versions
      + Collaboration
      
-## Documenting (*Adam, 10? min*)
+## Documenting (*Adam, 10 min*)
   + rOxygen 
   + R documentation file
   + Code commenting
   
-## Acquiring (*Adam, 10? min*)
+## Acquiring (*Adam, 5 min*)
   + local and remote
   + querying data
     + AGOL
@@ -73,7 +73,7 @@ June 24, 2020 (3:00-4:30 EST)
     + PRIMR web services
     + SQL query: IRIS warehouse
     
-## Processing and Analyzing (*Adam, 10? min*)
+## Processing and Analyzing (*Adam, 15 min*)
    + Getting data into R
   + QC
   + Tidying data
@@ -119,6 +119,8 @@ June 24, 2020 (3:00-4:30 EST)
 - [R cheatsheets](https://rstudio.com/resources/cheatsheets/)
 - [Project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
 
+**Style Guides**
+- [DataNovia R style guide](https://www.datanovia.com/en/blog/r-coding-style-best-practices/)
 
 **R Packages**
 
@@ -141,6 +143,7 @@ June 24, 2020 (3:00-4:30 EST)
 
 
 **Project Directory Templates**
+
 - [MakeProject package](https://cran.r-project.org/web/packages/makeProject/index.html)
 - [rrtools package](https://github.com/benmarwick/rrtools)
 - [prodigenr package](https://cran.r-project.org/web/packages/prodigenr/readme/README.html)
