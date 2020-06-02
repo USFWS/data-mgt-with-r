@@ -103,6 +103,7 @@ June 24, 2020 (3:00-4:30 EST)
 **Introduction to R**
 
 - [An Introduction to R book](https://intro2r.com/)
+- [R for Excel Users](https://rstudio-conf-2020.github.io/r-for-excel/)
 
 **Resources for Teaching R**  
 
@@ -119,8 +120,11 @@ June 24, 2020 (3:00-4:30 EST)
 - [R cheatsheets](https://rstudio.com/resources/cheatsheets/)
 - [Project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
 
+
 **Style Guides**
+- [Tidyverse style guide](https://style.tidyverse.org/)
 - [DataNovia R style guide](https://www.datanovia.com/en/blog/r-coding-style-best-practices/)
+
 
 **R Packages**
 
@@ -152,7 +156,9 @@ June 24, 2020 (3:00-4:30 EST)
 **General Coding Best Practices**
 
 - [What's in a name? The concepts and language of replication and reproducibility](https://thomasleeper.com/2015/05/open-science-language/)
-
+- [Best practices for scientific computing](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745)
+- [Good enough practices in scientific computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
+- [Ten simple rules for documenting scientific software](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006561)
 
 **Version Control**  
 
