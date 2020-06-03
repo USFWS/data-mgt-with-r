@@ -4,7 +4,7 @@
     <title>R tools for a code-based data workflow</title>
     <meta charset="utf-8" />
     <meta name="author" content="McCrea Cobb and Adam Smith" />
-    <meta name="date" content="2020-05-29" />
+    <meta name="date" content="2020-06-02" />
     <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="my-theme.css" type="text/css" />
@@ -108,16 +108,6 @@ class: hide-logo
 
 
 ---
-background-image: url(images/workflow.gif)
-background-size: contain
-class: hide-logo
-
-
-???
-- The ideal data workflow - seamless.
-
-
----
 background-image: url(images/criteria_grouped3.png)
 background-size: contain
 class: hide-logo
@@ -137,6 +127,16 @@ class: hide-logo
     + More efficient
     + Less error-prone
     
+
+---
+background-image: url(images/workflow.gif)
+background-size: contain
+class: hide-logo
+
+
+???
+- The ideal data workflow - seamless.
+
 
 ---
 background-image: url(images/Rlogo.svg)
@@ -161,6 +161,10 @@ class: hide-logo
   
 
 ---
+background-image: url(images/.svg)
+class: hide-logo
+
+---
 class: center, middle, inverse
 
 # Planning
@@ -172,24 +176,23 @@ class: center, middle, inverse
 
 
 ---
-# File directory structure template
+# ![:scale 10%](images/standardized_circle_text.png) Organizing an ![:scale 8%](images/Rlogo.svg) project 
+
+### 1. Chose a  standardized file directory structure
 
 .pull-left[
-
-- Choose a standard file directory for your R projects
-
 - Provides consistent relative directory paths for your scripts.
 
-- There are R packages that provide functions that create a file directory.
-    - `MakeProject::MakeProject()`
-    - `rrtools::use_analysis()`
-    - `refugetools::dir_create()`
+- R packages provide functions to create a standard file directory
+    - [`MakeProject::MakeProject()`](https://cran.r-project.org/web/packages/makeProject/index.html)
+    - [`rrtools::use_analysis()`](https://www.rdocumentation.org/packages/rrtools/versions/0.1.0)
+    - [`refugetools::create.dir()`](https://github.com/USFWS/refugetools)
+    - [`prodigenr::setup_project()`](https://cran.r-project.org/web/packages/prodigenr/readme/README.html)
 
   
 ]
 
 .pull-right[
-
 An example file directory:
 
 ```r
@@ -222,61 +225,116 @@ project_name/
 
 
 ---
-# Standards: style guide
+# ![:scale 10%](images/standardized_circle_text.png) Organizing an ![:scale 8%](images/Rlogo.svg) project 
+
+### 2. Decide on a standardized file naming convention
 
 .pull-left[
-Decide on a standard
-  - indenting, spacing, 
-- Resources
-    - Google style guide
-    - 
+- Call files what they are
+- Keep names short
+- Avoid spaces
+- If dates are used, use YYYYMMDD
+- Decide on a standard
+    - e.g., ****camelCase, snake_case, PascelCase, kebab-case***
+]
 
-Tools
-- `Styler` R package
+.pull-right[
+![](images/naming-conventions.png)
+]
+
+Allow you to programmatically filter files:
+
+```r
+# Exclude files with 2016 or 2017 in their names
+f &lt;- list.files(path = "./filepath", 
+*               pattern = "[^2016|2017].csv$")
+
+# Load these files
+dat &lt;- lapply(f, read.csv)
+```
+
+???
+
+
+---
+# ![:scale 10%](images/standardized_circle_text.png) Organizing an ![:scale 8%](images/Rlogo.svg) project 
+
+### 2. Consult a style guide
+
+"Good coding style is like correct punctuation: you can manage without it, butitsuremakesthingseasiertoread"  -[Hadley Wickham](https://style.tidyverse.org/index.html)
+
+.pull-left[
+- Strive for consistent and meaningful names
+- Review existing style guides:
+  - [tidyverse style guide](https://style.tidyverse.org/)
+  - [Advanced R style guide](http://adv-r.had.co.nz/Style.html)
+  - [Google's R style guide](https://google.github.io/styleguide/Rguide.html)
+- Helpful R packages:
+  - `styler` 
+  - `lintr`
+]
+
+.pull-right[
+
+```r
+# R code readability
+
+if(readability()) {
+  be_happy()
+} else {
+  rewrite_code()
+}
+```
+]
+
+???
+
+- Strive for consistent and meaningful names
+  - file names
+  - syntax
+    - object names, spacing, long lines, assignments, comments
+  - functions
+    - naming, return()
+    
+- Google style guide
+- Hadley Wickham's style guide
+
+Two R packages support this style guide:
+
+styler allows you to interactively restyle selected text, files, or entire projects. It includes an RStudio add-in, the easiest way to re-style existing code.
+
+lintr performs automated checks to confirm that you conform to the style guide.
+
+
+---
+# [`styler` package](https://github.com/r-lib/styler)
+
+Can be used to format R code to a specific style. 
+
+Flexible for user to specific their own style.
 
 
 ```r
 # Before
-one= 'one string'
-two= "one string in a 'string'"
-a %&gt;%
-  b %&gt;%
-  c
-
-library(styler)
-
-style_file
+some_data =data_frame(small= 2 ,
+                      medium =4,#comment without space
+                      large=6   
+)
 ```
 
-]
 
+```r
+# After style_text(...)
 
-.pull-right[
-![:scale 100%](images/standards.png)]
-
-
-???
-- Develop standards within your team
-- Advantage
-  - ease of coding 
-  - ease of interpretability
-  - ease of reading
-
+some_data &lt;- data_frame(
+  small = 2,
+  medium = 4, # comment without space
+  large = 6
+)
+```
 
 ???
-- Google style guide
-- Hadley Wickham's style guide
-
-
----
-# Standards: file naming
-
-Within your team, decide on a standardized file naming convention.
-
-.center[![:scale 80%](images/file_names.PNG)]
-
-
-???
+- 
 
 
 ---

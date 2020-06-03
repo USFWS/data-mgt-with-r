@@ -104,6 +104,7 @@ June 24, 2020 (3:00-4:30 EST)
 
 - [An Introduction to R book](https://intro2r.com/)
 
+
 **Resources for Teaching R**  
 
 - [DataCamp's tidyverse course](https://learn.datacamp.com/courses/working-with-data-in-the-tidyverse)
@@ -118,9 +119,11 @@ June 24, 2020 (3:00-4:30 EST)
 - [What they forgot to teach you about R](https://rstats.wtf/)
 - [R cheatsheets](https://rstudio.com/resources/cheatsheets/)
 - [Project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
+- [R Programming for Research e-book](https://geanders.github.io/RProgrammingForResearch/reproducible-research-2.html)
 
 **Style Guides**
 - [DataNovia R style guide](https://www.datanovia.com/en/blog/r-coding-style-best-practices/)
+
 
 **R Packages**
 
