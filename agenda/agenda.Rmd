@@ -159,6 +159,8 @@ June 24, 2020 (3:00-4:30 EST)
 - [Best practices for scientific computing](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745)
 - [Good enough practices in scientific computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
 - [Ten simple rules for documenting scientific software](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006561)
+- [Art of README](https://github.com/noffle/art-of-readme#bonus-exemplars) - see examples and checklist
+- [Introduction to `roxygen2` vignette](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
 
 **Version Control**  
 
