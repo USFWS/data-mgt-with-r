@@ -1,0 +1,17 @@
+/* new font size classes */
+.largest { font-size: 2.488em; }
+.larger { font-size: 2.074em; }
+.large { font-size: 1.44em;}
+.small { font-size: 0.833em; }
+.smaller { font-size: 0.694em; }
+.smallest{ font-size: 0.579em; }
+
+/* spaced para style */
+.spaced {
+    line-height: 150%;
+}
+
+/* despaced para style */
+.despaced {
+    line-height: 75%;
+}

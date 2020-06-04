@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>R tools for a code-based data workflow</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Adam D. Smith" />
+    <meta name="date" content="2020-06-04" />
+    <link href="libs/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="my-theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+background-image: url(images/an-image.jpg)
+background-size: contain
+class: hide-logo, center, middle, inverse
+
+# ![:scale 9%](images/Rlogo.svg) Tools for a Code-based Data Workflow
+
+.pull-left[
+`McCrea Cobb`  
+<i class="fas  fa-envelope "></i> mccrea_cobb@fws.gov  
+<i class="fas  fa-phone "></i> 907-786-3403  
+<i class="fab  fa-github "></i> mccrea.cobb  
+]
+
+.pull-right[
+`Adam D. Smith`  
+<i class="fas  fa-envelope "></i> adam_d_smith@fws.gov  
+<i class="fas  fa-phone "></i> 706-425-2197  
+<i class="fab  fa-github "></i> adamdsmith  
+]
+
+---
+class: inverse, center, middle, hide-logo
+
+# Documenting
+
+???
+
+Before we dig into data acquisition, processing, and analysis, we need to have 
+"THE TALK". Yep, we need to talk about documentation. 
+
+---
+
+# Why document our code?
+
+???
+
+Why should we document our code? There are plenty of good reasons to document our code, but we'll focus on one --- reproducibility. It's one of criteria McCrea mentioned that we should strive for in the data management life cycle. Namely, at the very least, given the same set of data and a road map for data manipulation and analysis, we should be able to arrive at the same analytical or graphical result. The arguments about whether our methodology was the "correct" methodology are independent of this. At the very least we should be able to start from the same results. That's reproducibility. McCrea and I are asserting that reproducibility it much easier in a code-based workflow. Documentation helps turn the "computer-speak" of code into human readable format. Those humans will often be your colleagues, but are more than likely to be you, some time into the future. And good documentation discourages the self-loathing that often accompanies the experience or reading your code 6 months after you started it...
+
+--
+
+.pull-left[
+.large[**Reproducibility**]
+
+Make it reproducible for:
+- colleagues
+- future **you**!
+]
+
+.pull-right[
+.left[[![:scale 50%](images/xkcd-future_self.png)](https://m.xkcd.com/1421/)]
+]
+
+---
+
+# Documenting basics
+
+- [Wilson et al. 2014](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745) *Best practices for scientific computing*
+
+- [Wison et al. 2017](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510) *Good enough practices in scientific computing*
+
+- [Lee 2018](https://doi.org/10.1371/journal.pcbi.1006561) *Ten simple rules for documenting scientific software*
+
+???
+
+Most of the documentation "basics" we cover are described well in these three sources, which I leave here for posterity. These are worthy reads once you start down the slippery slope of a code-based workflow. 
+---
+class: despaced
+
+# Documenting basics
+
+.pull-left[
+&lt;br&gt;
+- Comment code as you go
+
+- Write self-documenting code
+
+- Make dependencies explicit
+
+- Write modular code
+
+- Include a project README
+
+- Record working environment
+
+- Version control
+]
+
+.pull-right[.center[[![:scale 70%](images/documentation.jpg)](http://geek-and-poke.com/geekandpoke/2010/12/31/coders-new-years-resolution.html)]]
+
+???
+
+I'm just going to hit you with all of these at once, as well take each in turn. There's nothing R-specific about these basics. They'll apply equally to your forays into Python, C++, Matlab, or any other coding program. As we take them in turn, however, we'll see a brief example or two of how these basics "look" in R.
+
+---
+
+# Comment code as you write it
+
+- "Lab notebook" for code
+
+- Write for people, not computers
+
+- Bare minimum form of documentation
+
+---
+
+## Comment code as you write it
+
+- In ![:scale 3%](images/Rlogo.svg), comment marker is number sign/hash (`#`)
+
+- &lt;ins&gt;Barest minimum&lt;/ins&gt;: brief explanatory description at top of file
+
+.large[
+
+```r
+# This code retrieves historical METAR weather from NOAA 
+# buoys; see http://www.ndbc.noaa.gov/. This function 
+# wraps rnoaa::buoy() to allow multiple year queries
+```
+]
+
+---
+
+# Comment code as you write it
+
+- Better: comment **succintly** throughout code
+
+- Note your intentions, not mechanics: **"why"** not "what" nor "how"
+
+.center[[![:scale 65%](images/abstrusegoose-bridge.png)](https://abstrusegoose.com/432)]
+
+---
+
+# Comment code as you write it
+
+**NOT HELPFUL**
+
+
+```r
+# Import data
+df &lt;- rio::import("survey_data.xlsx")
+
+# Define new variable
+df &lt;- mutate(df, above_water = above / (above + below))
+```
+
+--
+
+**BETTER**
+
+
+```r
+# Import manatee aerial survey data
+df &lt;- rio::import("survey_data.xlsx")
+
+# Calculate proportion of manatees above water surface at each location
+df &lt;- mutate(df, above_water = above / (above + below))
+```
+
+---
+
+# Write self-documenting code 
+
+- Name objects informatively
+
+.pull-left[
+
+**NOT HELPFUL**
+
+
+```r
+# Data object naming
+df &lt;- rio::import("birds.csv")
+df2 &lt;- rio::import("veg.csv")
+
+# Variable naming
+r &lt;- 100
+a &lt;- pi * r ^ 2
+
+# Function naming
+my_fun &lt;- function(r) {pi * r ^ 2}
+```
+
+]
+
+--
+
+.pull-right[
+
+**BETTER**
+
+
+```r
+# Data object naming
+bird_counts &lt;- rio::import("birds.csv")
+veg_data &lt;- rio::import("veg.csv")
+
+# Variable naming
+survey_radius &lt;- 100
+survey_area &lt;- pi * survey_radius ^ 2
+
+# Function naming
+calc_circle_area &lt;- function(radius) {pi * radius ^ 2}
+```
+
+]
+
+---
+
+# Write self-documenting code
+
+- Follow (or at least read) a style guide
+
+.center[[![:scale 65%](images/xkcd-code_quality.png)](https://xkcd.com/1513/)]
+
+---
+
+# Make dependencies explicit
+
+### Two types of dependencies
+
+- Package dependencies of code
+  - Load required packages at beginning of script
+
+--
+
+- Function dependencies (package source)
+  - Identify the package source of used functions
+
+---
+
+# Make package dependencies explicit
+
+
+&lt;code class ='r hljs remark-code'&gt;# General pattern&lt;br&gt;library(&lt;span style='background-color:#CBB5FF'&gt;package&lt;/span&gt;)&lt;br&gt;&lt;br&gt;# Example&lt;br&gt;library(&lt;span style='background-color:#CBB5FF'&gt;dplyr&lt;/span&gt;)&lt;/code&gt;
+
+---
+
+# Make function source package explicit
+
+- Avoids conflicts when multiple packages share function names 
+
+
+&lt;code class ='r hljs remark-code'&gt;# General pattern&lt;br&gt;&lt;span style='background-color:#CBB5FF'&gt;package&lt;/span&gt;::&lt;span style='background-color:#FFDFD1'&gt;function&lt;/span&gt;()&lt;br&gt;&lt;br&gt;# Examples&lt;br&gt;&lt;span style='background-color:#CBB5FF'&gt;rio&lt;/span&gt;::&lt;span style='background-color:#FFDFD1'&gt;import&lt;/span&gt;()&lt;br&gt;&lt;span style='background-color:#CBB5FF'&gt;dplyr&lt;/span&gt;::&lt;span style='background-color:#FFDFD1'&gt;mutate&lt;/span&gt;()&lt;/code&gt;
+
+---
+
+# Modularize your code
+
+- Separate scripts for separate tasks
+
+- Turn repeated code tasks into functions
+
+- Load functionality
+  - `source("your_script.R)`
+
+---
+
+# Modularize your code
+
+- Makes automated documentation tools handy/available
+
+- `roxygen2` package
+
+  - specialized comments (`#'`) translated into documentation
+
+  - [introductory vignette](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
+
+- Human readable documentation for free!
+  
+---
+
+# `roxygen2` example
+
+.center[![:scale 80%](images/get_buoy_roxygen.png)]
+
+---
+count: false
+
+# `roxygen2` example
+
+.center[![:scale 80%](images/get_buoy_man.png)]
+
+---
+
+# Include a README file
+
+- Brief introduction to a project before accessing the code
+
+--
+
+### General Structure
+
+1. What your code is/does (with context)
+2. Demonstrate how to use your code (install, configure, find help)
+3. What your code looks like in action (examples)
+4. Other relevant details (license, acknowledgments, working environment)
+
+--
+
+### Handy templates available (e.g., [`usethis::use_readme_rmd`](https://usethis.r-lib.org/reference/use_readme_rmd.html))
+
+---
+
+# Record working environment
+
+- Version info for ![:scale 3%](images/Rlogo.svg), the OS, and packages
+
+- `sessionInfo()` or `devtools::session_info()`
+
+???
+
+McCrea will mention a couple of ways to wrap all your dependencies up into a single
+package prior to sharing to help avoid issues with dealing with different 
+operating systems and R package versions
+
+---
+
+# Put documentation under version control
+
+- Stays "synced" with code as it changes
+
+- Modularize and take advantage of automated documentation tools
+
+???
+
+The same benefits of putting your code under version control (with Git/Github for example)
+apply to the documentation. When code and the documentation change substantially, you
+retain a record of all past versions. And if you smartly decide to modularize your code, 
+and store the documentation alongside your code using comments and roxygen, you
+can take advantage of the automated documentation tools R offers
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"navigation": {
+"scroll": true
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/usfws_refuges_logos.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 0.5em;
+  left: 0.5em;
+  width: 100px;
+  height: 60px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
