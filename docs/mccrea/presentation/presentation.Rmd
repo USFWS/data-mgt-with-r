@@ -57,6 +57,7 @@ class: inverse, center, middle, hide-logo
 
 # Outline
 
+
 ---
 class: inverse, center, middle, hide-logo
 
@@ -140,6 +141,21 @@ class: hide-logo
     + More efficient
     + Less error-prone
     
+
+---
+background-image: url(images/traditional_workflow.png)
+background-size: 90%
+class: hide-logo
+
+# Traditional data workflow
+
+---
+background-image: url(images/r_workflow.png)
+background-size: 90%
+class: hide-logo
+
+# ![:scale 9%](images/Rlogo.svg) data workflow
+
 
 ---
 background-image: url(images/workflow.gif)
@@ -381,20 +397,10 @@ Reproducible
 
 
 ---
-# Organizing R files
-
-
-???
-- Here's some notes
-
-
----
-
-# Version control
+# Version control 
 
 .pull-left[
-[Some text about version control]
-
+Consider how you will control versions **before** starting an R projects.
 ]
 
 .pull-right[
@@ -405,8 +411,18 @@ Reproducible
 ]
 
 
+---
+
+<video controls autoplay width="800" height="500" controls>
+  <source src="images/clone_repo.mp4" type="video/mp4">
+</video>
+
 ???
-- Here's some notes
+- Version control is.. 
+- You should consider how you will be managing the version history of your work during the planning stage.
+- Git is a popular version control software and GitHub is a companion website.
+  - Allows for collaboration as well.
+- GitHub is popular with R users because it interfaces with package development
 
 
 ---
@@ -512,13 +528,28 @@ class: center, middle, inverse, hide-logo
 
   
 ---
-# Presentations 
+# ![:scale 7%](images/rmarkdown_logo.png) Presentations 
 
-![](images/rmarkdown_presentation.png)
+???
 
 
 ---
-# ![:scale 10%](images/shiny.png) Web applications 
+background-image: url(images/rmarkdown_presentation.png)
+background-size: contain
+class: hide-logo
+
+
+???
+
+
+---
+# ![:scale 7%](images/shiny.png) Web applications 
+
+
+---
+background-image: url(images/collar_viewer.png)
+background-size: contain
+class: hide-logo
 
 
 ???

@@ -4,7 +4,7 @@
     <title>R tools for a code-based data workflow</title>
     <meta charset="utf-8" />
     <meta name="author" content="McCrea Cobb and Adam Smith" />
-    <meta name="date" content="2020-06-02" />
+    <meta name="date" content="2020-06-03" />
     <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="my-theme.css" type="text/css" />
@@ -43,6 +43,7 @@ class: hide-logo, center, middle, inverse
 class: inverse, center, middle, hide-logo
 
 # Outline
+
 
 ---
 class: inverse, center, middle, hide-logo
@@ -127,6 +128,21 @@ class: hide-logo
     + More efficient
     + Less error-prone
     
+
+---
+background-image: url(images/traditional_workflow.png)
+background-size: 90%
+class: hide-logo
+
+# Traditional data workflow
+
+---
+background-image: url(images/r_workflow.png)
+background-size: 90%
+class: hide-logo
+
+# ![:scale 9%](images/Rlogo.svg) data workflow
+
 
 ---
 background-image: url(images/workflow.gif)
@@ -372,20 +388,10 @@ Reproducible
 
 
 ---
-# Organizing R files
-
-
-???
-- Here's some notes
-
-
----
-
-# Version control
+# Version control 
 
 .pull-left[
-[Some text about version control]
-
+Consider how you will control versions **before** starting an R projects.
 ]
 
 .pull-right[
@@ -396,8 +402,18 @@ Reproducible
 ]
 
 
+---
+
+&lt;video controls autoplay width="800" height="500" controls&gt;
+  &lt;source src="images/clone_repo.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
 ???
-- Here's some notes
+- Version control is.. 
+- You should consider how you will be managing the version history of your work during the planning stage.
+- Git is a popular version control software and GitHub is a companion website.
+  - Allows for collaboration as well.
+- GitHub is popular with R users because it interfaces with package development
 
 
 ---
@@ -504,13 +520,28 @@ class: center, middle, inverse, hide-logo
 
   
 ---
-# Presentations 
+# ![:scale 7%](images/rmarkdown_logo.png) Presentations 
 
-![](images/rmarkdown_presentation.png)
+???
 
 
 ---
-# ![:scale 10%](images/shiny.png) Web applications 
+background-image: url(images/rmarkdown_presentation.png)
+background-size: contain
+class: hide-logo
+
+
+???
+
+
+---
+# ![:scale 7%](images/shiny.png) Web applications 
+
+
+---
+background-image: url(images/collar_viewer.png)
+background-size: contain
+class: hide-logo
 
 
 ???
@@ -661,6 +692,21 @@ document
     el.innerHTML += '<div class="logo"></div>';
   });
 </script>
+
+<style>
+.github {
+  background-image: url(https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0em;
+  right: 0em;
+  width: 100px;
+  height: 100px;
+  z-index: 0;
+  
+}
+</style>
 
 <script>
 slideshow._releaseMath = function(el) {
