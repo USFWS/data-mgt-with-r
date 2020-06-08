@@ -36,7 +36,6 @@ mono_light(
 background-image: url(images/an-image.jpg)
 background-size: contain
 class: hide-logo, center, middle, inverse
-
 # ![:scale 9%](images/Rlogo.svg) Tools for a Code-based Data Workflow
 
 .pull-left[
@@ -59,13 +58,11 @@ class: hide-logo, center, middle, inverse
 
 ---
 class: inverse, center, middle, hide-logo
-
 # Outline
 
 
 ---
 class: inverse, center, middle, hide-logo
-
 # Outline
 
 *Review the data life cycle and data workflow*
@@ -73,7 +70,6 @@ class: inverse, center, middle, hide-logo
 
 ---
 class: inverse, center, middle, hide-logo
-
 # Outline
 
 Review the data life cycle and data workflow
@@ -83,7 +79,6 @@ Review the data life cycle and data workflow
 
 ---
 class: inverse, center, middle, hide-logo
-
 # Outline
 
 Review the data life cycle and data workflow
@@ -107,7 +102,14 @@ Present some tools in R for efficiently and effectively working with data along 
 
 
 ---
+background-image: url(images/draw_owl-kosher.jpg)
+background-size: contain
+class: hide-logo
 
+???
+
+
+---
 # Project and data life cycles
 
 .center[![:scale 80%](images/life_cycles.png)]
@@ -118,8 +120,8 @@ Present some tools in R for efficiently and effectively working with data along 
 
 
 ---
-background-image: url(images/data_life_cycle.png)
-background-size: contain
+background-image: url(images/life_cycles-data.png)
+background-size: 90%
 class: hide-logo
 
 
@@ -129,7 +131,7 @@ class: hide-logo
 
 ---
 background-image: url(images/criteria_grouped3.png)
-background-size: contain
+background-size: 70%
 class: hide-logo
 
 
@@ -152,7 +154,6 @@ class: hide-logo
 background-image: url(images/traditional_workflow_1.png)
 background-size: 90%
 class: hide-logo
-
 # Traditional data workflow
 
 
@@ -163,7 +164,6 @@ class: hide-logo
 background-image: url(images/traditional_workflow_2.png)
 background-size: 90%
 class: hide-logo
-
 # Traditional data workflow
 
 
@@ -174,7 +174,6 @@ class: hide-logo
 background-image: url(images/traditional_workflow_3.png)
 background-size: 90%
 class: hide-logo
-
 # Traditional data workflow
 
 
@@ -185,15 +184,16 @@ class: hide-logo
 background-image: url(images/traditional_workflow_4.png)
 background-size: 90%
 class: hide-logo
-
 # Traditional data workflow
+
+
+???
 
 
 ---
 background-image: url(images/traditional_workflow_5.png)
 background-size: 90%
 class: hide-logo
-
 # Traditional data workflow
 
 
@@ -204,12 +204,15 @@ class: hide-logo
 background-image: url(images/traditional_workflow_6.png)
 background-size: 90%
 class: hide-logo
-
 # Traditional data workflow `r icon::fa("frown-open")`
 
 
 ???
-???
+Disadvantages  
+- Not reproducible
+- They are seperate from the code that you used to create your analysis and figures.
+- They are time-consuming to create and difficult to maintain.
+
 ---
 background-image: url(images/workflow.gif)
 background-size: contain
@@ -217,15 +220,16 @@ class: hide-logo
 
 
 ???
-- The ideal data workflow - seamless.
+- What we need is a seamless workflow like this, where the data go from acquiring to process (and archiving).
+- Your code should be the soruce of your products (report, etc). Based on your code. 
 
 
 ---
 background-image: url(images/r_workflow_1.png)
 background-size: 90%
 class: hide-logo
+# ![:scale 7%](images/Rlogo.svg) data workflow 
 
-# ![:scale 6%](images/Rlogo.svg) data workflow 
 
 ???
 
@@ -234,8 +238,8 @@ class: hide-logo
 background-image: url(images/r_workflow_2.png)
 background-size: 90%
 class: hide-logo
+# ![:scale 7%](images/Rlogo.svg) data workflow `r icon::fa("smile")`
 
-# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("smile")`
 
 ???
 
@@ -244,8 +248,8 @@ class: hide-logo
 background-image: url(images/r_workflow_3.png)
 background-size: 90%
 class: hide-logo
+# ![:scale 7%](images/Rlogo.svg) data workflow `r icon::fa("grin")`
 
-# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin")`
 
 ???
 
@@ -254,8 +258,8 @@ class: hide-logo
 background-image: url(images/r_workflow_4.png)
 background-size: 90%
 class: hide-logo
+# ![:scale 7%](images/Rlogo.svg) data workflow `r icon::fa("grin")`
 
-# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin")`
 
 ???
 
@@ -264,8 +268,8 @@ class: hide-logo
 background-image: url(images/r_workflow_5.png) 
 background-size: 90%
 class: hide-logo
+# ![:scale 7%](images/Rlogo.svg) data workflow `r icon::fa("grin-beam")`
 
-# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin-beam")`
 
 ???
 
@@ -274,8 +278,8 @@ class: hide-logo
 background-image: url(images/r_workflow_6.png)
 background-size: 90%
 class: hide-logo
+# ![:scale 7%](images/Rlogo.svg) data workflow `r icon::fa("grin-beam")`
 
-# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin-beam")`
 
 ???
 
@@ -284,8 +288,8 @@ class: hide-logo
 background-image: url(images/r_workflow_7.png)
 background-size: 90%
 class: hide-logo
+# ![:scale 7%](images/Rlogo.svg) data workflow `r icon::fa("grin-squint")`
 
-# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin-squint")`
 
 ???
 
@@ -293,8 +297,8 @@ class: hide-logo
 background-image: url(images/r_workflow_8.png)
 background-size: 90%
 class: hide-logo
+# ![:scale 7%](images/Rlogo.svg) data workflow `r icon::fa("grin-squint")`
 
-# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin-squint")`
 
 ???
 
@@ -302,8 +306,8 @@ class: hide-logo
 background-image: url(images/r_workflow_9.png)
 background-size: 90%
 class: hide-logo
+# ![:scale 7%](images/Rlogo.svg) data workflow `r icon::fa("grin-stars")`
 
-# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin-stars")`
 
 ???
 
@@ -311,8 +315,8 @@ class: hide-logo
 background-image: url(images/r_workflow_10.png)
 background-size: 90%
 class: hide-logo
+# ![:scale 7%](images/Rlogo.svg) data workflow `r icon::fa("grin-stars")`
 
-# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin-stars")`
 
 ???
 
@@ -340,24 +344,19 @@ class: hide-logo
   
 
 ---
-background-image: url(images/.svg)
-class: hide-logo
-
----
 class: center, middle, inverse
-
 # Planning
 
-![](images/life_cycles-planning.png)
+![](images/life_cycles-data_planning.png)
+
 
 ???
-- Add the logo for Planning
 
 
 ---
-# ![:scale 10%](images/standardized_circle_text.png) Organizing an ![:scale 8%](images/Rlogo.svg) project 
+# Organizing an ![:scale 7%](images/Rlogo.svg) project 
 
-### 1. Chose a  standardized file directory structure
+### `r icon::fa("sitemap")` Chose a  standardized file directory structure
 
 .pull-left[
 - Provides consistent relative directory paths for your scripts.
@@ -403,9 +402,9 @@ project_name/
 
 
 ---
-# ![:scale 10%](images/standardized_circle_text.png) Organizing an ![:scale 8%](images/Rlogo.svg) project 
+# Organizing an ![:scale 7%](images/Rlogo.svg) project 
 
-### 2. Decide on a standardized file naming convention
+### `r icon::fa("file-signature")` Decide on a standardized file naming convention
 
 .pull-left[
 - Call files what they are
@@ -414,13 +413,14 @@ project_name/
 - If dates are used, use YYYYMMDD
 - Decide on a standard
     - e.g., ****camelCase, snake_case, PascelCase, kebab-case***
+
+Allows you to programmatically filter files:
 ]
 
 .pull-right[
 ![](images/naming-conventions.png)
 ]
 
-Allow you to programmatically filter files:
 ```{r, eval=FALSE}
 # Exclude files with 2016 or 2017 in their names
 f <- list.files(path = "./filepath", 
@@ -436,7 +436,7 @@ dat <- lapply(f, read.csv)
 ---
 # ![:scale 10%](images/standardized_circle_text.png) Organizing an ![:scale 8%](images/Rlogo.svg) project 
 
-### 2. Consult a style guide
+### Consult a style guide
 
 "Good coding style is like correct punctuation: you can manage without it, butitsuremakesthingseasiertoread"  -[Hadley Wickham](https://style.tidyverse.org/index.html)
 
@@ -513,16 +513,15 @@ some_data <- data_frame(
 
 
 ---
-# Project portability
-
-![:scale 75%](images/package-hell.png)
+# `r icon::fa("people-carry")` Project portability
 
 .left-column[
-<br>
-![:scale 85%](images/packrat.png)
+![:scale 50%](images/packrat_logo.png)
 ]
 
 .right-column[
+![:scale 100%](images/package-hell.png)
+
 Isolated
 
 Portable
@@ -547,18 +546,38 @@ Reproducible
 
 
 ---
-# Version control 
+# ![:scale 8%](images/packrat_logo.png)
+
+
+???
+
+
+---
+# `r icon::fa("code-branch")` Version control 
 
 .pull-left[
-Consider how you will control versions **before** starting an R projects.
+Consider how you will control versions **during the planning step**.
+
+References
+- Resources to learn git [(link)](https://try.github.io/)
+- Using git from RStudio [(link)](https://nceas.github.io/oss-lessons/version-control/4-getting-started-with-git-in-RStudio.html)
 ]
+
+.pull-right[
+![](images/git_logo.png)
+]
+
+---
+# `r icon::fa("code-branch")` Version control 
+
 
 .pull-right[
 .center[![:scale 50%](images/github.svg)]
 .center[![:scale 50%](images/github-logo.png)]
-
-
 ]
+
+
+???
 
 
 ---
@@ -577,9 +596,9 @@ Consider how you will control versions **before** starting an R projects.
 
 ---
 class: center, middle, inverse, hide-logo
-
 # Documenting
 
+![](images/life_cycles-data_documenting.png)
 
 ---
 # Documenting R object
@@ -632,40 +651,39 @@ calc.pao <- function(topmod, stat = "mode", n){
 
 ---
 class: center, middle, inverse, hide-logo
-
 # Acquiring
+
+![](images/life_cycles-data_acquiring.png)
+
+
+???
 
 
 ---
 class: center, middle, inverse, hide-logo
-
 # Processing and Analyzing
 
 
+![](images/life_cycles-data_process_analyzing.png)
+
+
+???
+
+
 ---
 class: center, middle, inverse, hide-logo
+# Sharing and Archiving
 
-# Sharing
-
-
-???
-
-
----
-# ![:scale 10%](images/rmarkdown_logo.png) Reports
-
-
-.pull-left[
-[Dynamic reports]  
-[Interactive reports]
-]
-
-.pull-right[
-![](images/rmarkdown.png)
-]
+![](images/life_cycles-data_share-archiving.png)
 
 
 ???
+???
+
+Unlike cumbersome word processing applications, text written in Markdown can be easily shared between computers, mobile phones, and people. It’s quickly becoming the writing standard for academics, scientists, writers, and many more. Websites like GitHub and reddit use Markdown to style their comments.
+
+Formatting text in Markdown has a very gentle learning curve. It doesn’t do anything fancy like change the font size, color, or type. All you have control over is the display of the text—stuff like making things bold, creating headers, and organizing lists.
+
 - RMarkdown
   - Types of output
     - html
@@ -675,25 +693,58 @@ class: center, middle, inverse, hide-logo
   - Examples
     - Bat reporting for mobile aucistics
     - COVID 19 example
+    
 
-  
 ---
-# ![:scale 7%](images/rmarkdown_logo.png) Presentations 
+# ![:scale 5%](images/rmarkdown_logo.png) Rmarkdown
+You can generate reports directly from RStudio!
+
+.left-column[
+**Allows for:**
+- Code to be directly inserted into document
+
+- Multiple outputs
+
+- Easy to use
+
+- Increased reproducibility
+
+- Fewer sources of errors
+
+]
+
+.right-column[
+.center[![:scale 100%](images/rmarkdown_workflow2.png)]
+]
+
 
 ???
 
 
 ---
-background-image: url(images/rmarkdown_presentation.png)
-background-size: contain
-class: hide-logo
+# ![:scale 5%](images/rmarkdown_logo.png) Example
 
 
 ???
+Here's an example of how to generate an Rmarkdown document
 
 
 ---
-# ![:scale 7%](images/shiny.png) Web applications 
+# ![:scale 5%](images/xaringan_logo.png) Presentations 
+
+.center[![:scale 80%](images/rmarkdown_presentation.png)]
+
+???
+As mentioned earlier, Rmarkdown documents can be rendered into multiple different formats.
+You can create presentations, such as this one!
+
+
+---
+# ![:scale 5%](images/shiny.png) Web applications 
+
+
+???
+You can also generate interactive content from R, such as websites and dashboards. The Shiny package allows for these, which can also be imbedded into Rmarkdown outputs.
 
 
 ---
@@ -710,25 +761,23 @@ class: hide-logo
 
 
 ---
-class: center, middle, inverse, hide-logo
-
-# Archiving
+# `r icon::fa("file-archive")` Archiving 
 
 
 ???
-- Saving results to ServCat or some other data repository
+- You can include code to save your data and products in a remote secure repository.
+- For example, instead of manually opening ServCat and saving your reports to as a product in a ServCat record, it is possible to use R code to save results to ServCat. 
+- This is an active area of development.
+- I encourage you to reach out to your data managers and ServCat managers to look into this more.
+
+---
+class: center, middle, inverse, hide-logo
+# Demo <br> `r icon::fa("walking")` `r icon::fa("desktop")` 
+
+
+???
 
 
 ---
 class: center, middle, inverse, hide-logo
-
-# Demo
-
-
-???
-
-
----
-class: center, middle, inverse, hide-logo
-
 # Questions
