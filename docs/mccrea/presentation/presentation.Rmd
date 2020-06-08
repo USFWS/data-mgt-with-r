@@ -11,6 +11,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+      ratio: "16:9"
     seal: false
     includes:
       after_body: usfws-logo.html
@@ -51,6 +52,10 @@ class: hide-logo, center, middle, inverse
 `r icon::fa("phone")` 706-425-2197  
 `r icon::fa("github")` adamdsmith  
 ]
+
+<br>
+
+`r icon::fa("github")` usfws.github.io/data-mgt-with-r/
 
 ---
 class: inverse, center, middle, hide-logo
@@ -105,7 +110,7 @@ Present some tools in R for efficiently and effectively working with data along 
 
 # Project and data life cycles
 
-.center[![:scale 100%](images/life_cycles.png)]
+.center[![:scale 80%](images/life_cycles.png)]
 
 
 ???
@@ -119,6 +124,7 @@ class: hide-logo
 
 
 ???
+- There are many versions of the data life cycle
 
 
 ---
@@ -128,7 +134,7 @@ class: hide-logo
 
 
 ???
-- Here's some notes
+- Here are some criteria that can be used to evaluate your data workflow
 
 + The manual data workflow
   + Example
@@ -143,20 +149,67 @@ class: hide-logo
     
 
 ---
-background-image: url(images/traditional_workflow.png)
+background-image: url(images/traditional_workflow_1.png)
 background-size: 90%
 class: hide-logo
 
 # Traditional data workflow
 
+
+???
+
+
 ---
-background-image: url(images/r_workflow.png)
+background-image: url(images/traditional_workflow_2.png)
 background-size: 90%
 class: hide-logo
 
-# ![:scale 9%](images/Rlogo.svg) data workflow
+# Traditional data workflow
 
 
+???
+
+
+---
+background-image: url(images/traditional_workflow_3.png)
+background-size: 90%
+class: hide-logo
+
+# Traditional data workflow
+
+
+???
+
+
+---
+background-image: url(images/traditional_workflow_4.png)
+background-size: 90%
+class: hide-logo
+
+# Traditional data workflow
+
+
+---
+background-image: url(images/traditional_workflow_5.png)
+background-size: 90%
+class: hide-logo
+
+# Traditional data workflow
+
+
+???
+
+
+---
+background-image: url(images/traditional_workflow_6.png)
+background-size: 90%
+class: hide-logo
+
+# Traditional data workflow `r icon::fa("frown-open")`
+
+
+???
+???
 ---
 background-image: url(images/workflow.gif)
 background-size: contain
@@ -165,6 +218,103 @@ class: hide-logo
 
 ???
 - The ideal data workflow - seamless.
+
+
+---
+background-image: url(images/r_workflow_1.png)
+background-size: 90%
+class: hide-logo
+
+# ![:scale 6%](images/Rlogo.svg) data workflow 
+
+???
+
+
+---
+background-image: url(images/r_workflow_2.png)
+background-size: 90%
+class: hide-logo
+
+# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("smile")`
+
+???
+
+
+---
+background-image: url(images/r_workflow_3.png)
+background-size: 90%
+class: hide-logo
+
+# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin")`
+
+???
+
+
+---
+background-image: url(images/r_workflow_4.png)
+background-size: 90%
+class: hide-logo
+
+# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin")`
+
+???
+
+
+---
+background-image: url(images/r_workflow_5.png) 
+background-size: 90%
+class: hide-logo
+
+# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin-beam")`
+
+???
+
+
+---
+background-image: url(images/r_workflow_6.png)
+background-size: 90%
+class: hide-logo
+
+# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin-beam")`
+
+???
+
+
+---
+background-image: url(images/r_workflow_7.png)
+background-size: 90%
+class: hide-logo
+
+# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin-squint")`
+
+???
+
+---
+background-image: url(images/r_workflow_8.png)
+background-size: 90%
+class: hide-logo
+
+# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin-squint")`
+
+???
+
+---
+background-image: url(images/r_workflow_9.png)
+background-size: 90%
+class: hide-logo
+
+# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin-stars")`
+
+???
+
+---
+background-image: url(images/r_workflow_10.png)
+background-size: 90%
+class: hide-logo
+
+# ![:scale 6%](images/Rlogo.svg) data workflow `r icon::fa("grin-stars")`
+
+???
 
 
 ---
