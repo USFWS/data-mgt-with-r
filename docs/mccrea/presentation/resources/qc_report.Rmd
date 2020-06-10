@@ -1,0 +1,249 @@
+---
+params:
+  author: 
+    label: "Report author:"
+    value: "Cliff Clavin"
+  email: 
+    label: "Author's email address:"
+    value: "cliff_clavin@fws.gov"
+  phone:
+    label: "Author's phone #:"
+    value: "555-867-5309"
+  o_dir: 
+    label: "Full file path to occurrence data:"
+    value: "C:/Users/mcobb/Desktop/r_webinar/docs/mccrea/demo/data/raw"
+    input: text
+  s_dir: 
+    label: "Full file path to sample site data:"
+    value: "C:/Users/mcobb/Desktop/r_webinar/docs/mccrea/demo/data/raw"
+    input: text
+  hab_data: 
+    label: "Input habitat covariate raster (.asc):"
+    value: 
+    input: file
+author: |
+  | `r params$author`
+  | Cheers National Wildlife Refuge
+  | National Wildlife Refuge System, Boston Region
+  | U.S. Fish and Wildlife Service
+  | `r params$email`
+  | `r params$phone`
+date: "`r Sys.Date()`"
+output: 
+  bookdown::pdf_document2:
+    toc: true
+    includes:
+      in_header: header.tex
+      before_body: before_body.tex
+---
+
+
+```{r setup, include=FALSE}
+
+# Load packages
+library(raster)
+library(unmarked)
+library(knitr)
+library(rmarkdown)
+
+knitr::opts_chunk$set(echo = FALSE, results = "asis", warning = TRUE)
+
+# Get user parameters
+s_dir <- params$s_dir
+o_dir <- params$o_dir
+hab_data <- params$hab_data
+
+```
+
+
+```{r data1, echo=FALSE, results="hide", cache=FALSE, message=FALSE, warning=FALSE, error=FALSE}
+
+o.files <- list.files(o_dir, pattern = "occurrence", full.names = TRUE)
+# o.files <- list.files("./data/raw", pattern = "occurrence", full.names = TRUE)
+o.years <- as.numeric(sapply(o.files, extract.year))
+# o.files <- o.files[o.years <= year]
+o.years <- as.numeric(sapply(o.files, extract.year))
+
+s.files <- list.files(s_dir, pattern = "sample_site", full.names = TRUE)
+# s.files <- list.files("./data/raw", pattern = "sample_site", full.names = TRUE)
+s.years <- as.numeric(sapply(s.files, extract.year))
+# s.files <- s.files[s.years <= year]
+s.years <- as.numeric(sapply(s.files, extract.year))
+
+##miss.o <- !(s.years %in% o.years)
+##miss.s <- !(o.years %in% s.years)
+years <- intersect(o.years, s.years)
+year <- max(years)
+occu.files <- o.files[o.years %in% years]
+site.files <- s.files[s.years %in% years]
+
+## Load survey year data
+nyears <- length(years)
+nlogical <- ifelse(nyears==1, FALSE, TRUE)
+
+# Load spatial data and plot survey map
+habcov <- raster(hab_data)
+# habcov <- raster("../resources/data/geodata/habcov.asc")
+nsites <- length(habcov)
+
+# Load site and occurrence data
+sitedfs <- lapply(site.files, read.csv)
+occudfs <- lapply(occu.files, read.csv)
+
+## Process and format data
+sdmpData <- process.data(occudfs, sitedfs, years, habcov)
+class(sdmpData) <- c("sdmpData", "list")
+
+# save(sdmpData,file = paste0("../data/final/species_occurrence_data_", year, ".RData"))
+figcap <- paste0("Plot of site-specific naive occurrence summed over ", nyears,
+                 " survey years and represented as scaled blue circles. ",
+                 "Cell colors represent habitat covariate values.")
+```
+
+\newpage
+
+## Project description
+
+The Species Disribution Monitoring Project is an annual refuge
+Inventory and Monitoring survey began in 2011 to monitor species
+occurrence and the relationship between occurrence and the
+distribution of habitat across a National Wildlife Refuge.
+The survey consists of conducting multiple surveys for a species presence.
+The survey design as described in the Refuge Species
+Distribution Monitoring Project Protocol requires the surveys be
+conducted at a random sample of 20 sites each year. With a given year,
+each site is surveyed for species presence every day for a consecutive
+5-day period, each day (i.e., occasion) constituting an independent sample of occurrence data. Sites
+are equal-area polygons (i.e., grid cells) as defined by a lattice
+overlaid on the Refuge boundary (Fig. \@ref(fig:surveymap)) which
+divides the refuge into `r nsites` unique sites. Observers are
+instructed to search each cell to which he/she is assigned with the
+same intensity to standardize detection by survey effort.  Detection
+is known to be affected by visibility conditions and, therefore, a
+categorical visibility covariate (i.e., good vs poor) is collected for
+each survey occasion in each year to be used in data analysis. Habitat
+quality is a known factor affecting the probability of species
+occurrence. Because habitat quality across the the refuge does not
+substantially vary over time (i.e., year to year), a static spatial
+data set measuring habitat quality at the level of the survey site
+(Fig. \@ref(fig:habitatmap)) is used in the analysis to account for variation in occurrence due to habitat quality.
+
+\newpage
+
+## Overall project summary
+
+The Species Occurrence Project began in 2011 and surveys
+have been conducted each year up to this year,
+`r max(years)`. This section provides summary information for the
+entire duration of the project.
+
+\newpage
+
+### Survey area
+
+The survey area corresponds to the entire refuge and is divided into `r nsites`
+equal-area polygons, each constituting a single survey site with a
+unique site ID (Fig. \@ref(fig:surveymap)). Each site is characterized by a
+measure of habitat quality measured on the the real number
+scale (Fig. \@ref(fig:habitatmap)).
+
+```{r surveymap, echo=FALSE, results="hide", fig.cap="Plot of the survey sites (i.e., grid cells) with site IDs and refuge boundary (blue line)."}
+
+#print(plot.surveymap(habcov))
+verts = as.vector(sp::bbox(habcov))
+rasterpts = data.frame(raster::rasterToPoints(habcov))
+raster::plot(raster::rasterToPolygons(habcov), axes = TRUE, xlab = "X", ylab= " Y", asp = 1)
+text(rasterpts$x, rasterpts$y, label = 1:nrow(rasterpts), cex = 0.75)
+polygon(x = verts, y = verts[c(1,3,4,2)], lwd = 2, border = "blue")
+```
+
+```{r habitatmap, echo=FALSE, results="hide", fig.cap="Plot of the habitat covariate values (scaled colors) at survey sites with site IDs listed at cell centroids."}
+
+#print(plot.habitatmap(habcov))
+rasterpts = data.frame(rasterToPoints(habcov))
+raster::plot(habcov, xlab = "X", ylab = "Y", asp = 1)
+text(rasterpts$x, rasterpts$y, label = 1:nrow(rasterpts), cex = 0.75)
+```
+
+```{r habcovhist, echo=FALSE, results="hide", fig.cap="Histogram of habitat covariate measured at all survey sites within study area."}
+
+#print(plot.habcov.hist(habcov))
+hist(values(habcov), breaks = seq(-3,3,0.2), ylim = c(0, 20),
+     main = "", xlab = "Habitat covariate")
+```
+
+\newpage
+
+### Survey data
+
+```{r condition1, echo=FALSE, results="hide", cache=FALSE, message=FALSE, warning=FALSE, error=FALSE}
+
+naiveoccus <- sapply(sdmpData$NaiveOccu, mean)
+if(nyears==1){
+    text1 <- paste0("To date, 1 covariate has been collected for detection and 1 covariate has been collected",
+                    " for species occurrence. The naive proportion of sites occupied in ",
+                   years, " was ", naiveoccus, ".")
+} else {
+    text1 <- paste0("To date, 1 covariate has been collected for detection and 1 covariate has been collected",
+                    " for species occurrence. The naive proportions of sites occupied each year ranged from ",
+                    min(naiveoccus), " to ", max(naiveoccus),
+                    "(Fig. \\@ref(fig:naiveoccuplot)).")
+}
+```
+
+```{r print1, results="asis",echo=FALSE}
+cat(text1)
+```
+
+```{r naiveoccuplot, eval=nlogical, echo=FALSE, results="asis", fig.cap="Plot of naive proportion of sites occupied each year."}
+
+if(nyears>1){
+    plot(years, naiveoccus, ylim = c(0,1), type = "b", pch = 16, frame.plot = FALSE,
+         axes = FALSE, ylab = "Naive proportion of sites occupied", xlab = "Year")
+    axis(2)
+    axis(1, at = years)
+}
+```
+
+
+\newpage
+
+## Individual year summaries
+
+This section contains year-specific summary information ...
+
+\newpage
+
+```{r echo=FALSE, results="asis", message=FALSE, warning=FALSE, error=FALSE}
+
+# Directory path for figures
+#figdir.path <- "../products/reports/annual_qc/figure/"
+dir.create("figure")
+figdir.path <- "./figure/"
+
+dummy <- mapply(annual.summaries, 
+                occu = sdmpData$occuDataList, 
+                site = sdmpData$siteDataList,
+                year = sdmpData$years, 
+                unmkd = sdmpData$unmarkedDataList, 
+                naiveoccu = sdmpData$NaiveOccu,
+                MoreArgs = list(habcov = sdmpData$habcovData, figdir.path = figdir.path),
+                SIMPLIFY = FALSE)
+```
+
+\clearpage
+
+## Appendix
+
+\clearpage
+
+### R session info
+
+```{r echo=FALSE, results="asis", message=FALSE, warning=FALSE, error=FALSE}
+sessionInfo()
+```
+
+---
+title: "Species Distribution Monitoring Project: Annual data summary and quality
+    control report for `r max(years)`"
+---
