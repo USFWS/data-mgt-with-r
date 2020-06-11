@@ -4,7 +4,7 @@
     <title>R tools for a code-based data workflow</title>
     <meta charset="utf-8" />
     <meta name="author" content="McCrea Cobb and Adam Smith" />
-    <meta name="date" content="2020-06-03" />
+    <meta name="date" content="2020-06-10" />
     <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="my-theme.css" type="text/css" />
@@ -22,7 +22,6 @@
 background-image: url(images/an-image.jpg)
 background-size: contain
 class: hide-logo, center, middle, inverse
-
 # ![:scale 9%](images/Rlogo.svg) Tools for a Code-based Data Workflow
 
 .pull-left[
@@ -39,15 +38,17 @@ class: hide-logo, center, middle, inverse
 <i class="fab  fa-github "></i> adamdsmith  
 ]
 
+&lt;br&gt;
+
+<i class="fab  fa-github "></i> usfws.github.io/data-mgt-with-r/
+
 ---
 class: inverse, center, middle, hide-logo
-
 # Outline
 
 
 ---
 class: inverse, center, middle, hide-logo
-
 # Outline
 
 *Review the data life cycle and data workflow*
@@ -55,7 +56,6 @@ class: inverse, center, middle, hide-logo
 
 ---
 class: inverse, center, middle, hide-logo
-
 # Outline
 
 Review the data life cycle and data workflow
@@ -65,7 +65,6 @@ Review the data life cycle and data workflow
 
 ---
 class: inverse, center, middle, hide-logo
-
 # Outline
 
 Review the data life cycle and data workflow
@@ -89,10 +88,17 @@ Present some tools in R for efficiently and effectively working with data along 
 
 
 ---
+background-image: url(images/draw_owl-kosher.jpg)
+background-size: contain
+class: hide-logo
 
+???
+
+
+---
 # Project and data life cycles
 
-.center[![:scale 100%](images/life_cycles.png)]
+.center[![:scale 80%](images/life_cycles.png)]
 
 
 ???
@@ -100,22 +106,23 @@ Present some tools in R for efficiently and effectively working with data along 
 
 
 ---
-background-image: url(images/data_life_cycle.png)
-background-size: contain
+background-image: url(images/life_cycles-data.png)
+background-size: 90%
 class: hide-logo
 
 
 ???
+- There are many versions of the data life cycle
 
 
 ---
 background-image: url(images/criteria_grouped3.png)
-background-size: contain
+background-size: 70%
 class: hide-logo
 
 
 ???
-- Here's some notes
+- Here are some criteria that can be used to evaluate your data workflow
 
 + The manual data workflow
   + Example
@@ -130,19 +137,67 @@ class: hide-logo
     
 
 ---
-background-image: url(images/traditional_workflow.png)
+background-image: url(images/traditional_workflow_1.png)
 background-size: 90%
 class: hide-logo
+# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow
 
-# Traditional data workflow
+
+???
+
 
 ---
-background-image: url(images/r_workflow.png)
+background-image: url(images/traditional_workflow_2.png)
 background-size: 90%
 class: hide-logo
+# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow
 
-# ![:scale 9%](images/Rlogo.svg) data workflow
 
+???
+
+
+---
+background-image: url(images/traditional_workflow_3.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow
+
+
+???
+
+
+---
+background-image: url(images/traditional_workflow_4.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow
+
+
+???
+
+
+---
+background-image: url(images/traditional_workflow_5.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow
+
+
+???
+
+
+---
+background-image: url(images/traditional_workflow_6.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow <i class="fas  fa-frown-open "></i>
+
+
+???
+Disadvantages  
+- Not reproducible
+- They are seperate from the code that you used to create your analysis and figures.
+- They are time-consuming to create and difficult to maintain.
 
 ---
 background-image: url(images/workflow.gif)
@@ -151,7 +206,105 @@ class: hide-logo
 
 
 ???
-- The ideal data workflow - seamless.
+- What we need is a seamless workflow like this, where the data go from acquiring to process (and archiving).
+- Your code should be the soruce of your products (report, etc). Based on your code. 
+
+
+---
+background-image: url(images/r_workflow_1.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow 
+
+
+???
+
+
+---
+background-image: url(images/r_workflow_2.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+
+
+???
+
+
+---
+background-image: url(images/r_workflow_3.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+
+
+???
+
+
+---
+background-image: url(images/r_workflow_4.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+
+
+???
+
+
+---
+background-image: url(images/r_workflow_5.png) 
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+
+
+???
+
+
+---
+background-image: url(images/r_workflow_6.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+
+
+???
+
+
+---
+background-image: url(images/r_workflow_7.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+
+
+???
+
+---
+background-image: url(images/r_workflow_8.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+
+
+???
+
+---
+background-image: url(images/r_workflow_9.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+
+
+???
+
+---
+background-image: url(images/r_workflow_10.png)
+background-size: 90%
+class: hide-logo
+# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow <i class="fas  fa-grin-stars "></i>
+
+
+???
 
 
 ---
@@ -177,29 +330,24 @@ class: hide-logo
   
 
 ---
-background-image: url(images/.svg)
-class: hide-logo
-
----
 class: center, middle, inverse
 
 # Planning
+![](images/life_cycles-data_planning.png)
 
-![](images/life_cycles-planning.png)
 
 ???
-- Add the logo for Planning
 
 
 ---
-# ![:scale 10%](images/standardized_circle_text.png) Organizing an ![:scale 8%](images/Rlogo.svg) project 
+# Organizing an ![:scale 7%](images/Rlogo.svg) project 
 
-### 1. Chose a  standardized file directory structure
+### <i class="fas  fa-sitemap "></i> Chose a  standardized project directory structure
 
 .pull-left[
-- Provides consistent relative directory paths for your scripts.
+Provides consistent relative directory paths for your scripts
 
-- R packages provide functions to create a standard file directory
+- R packages provide functions to create a standard file directory:
     - [`MakeProject::MakeProject()`](https://cran.r-project.org/web/packages/makeProject/index.html)
     - [`rrtools::use_analysis()`](https://www.rdocumentation.org/packages/rrtools/versions/0.1.0)
     - [`refugetools::create.dir()`](https://github.com/USFWS/refugetools)
@@ -235,15 +383,17 @@ project_name/
 
 
 ???
+- Project-oriented workflows are self-contained workflows enabling reproducibility and navigability when used in conjunction with organized project structures for ecological forecasting projects. Ideally a collaborator should be able to run the entire project without changing any code or files (e.g. file paths should be workstation-independent). R and Python both have options for enabling self-contained workflows in their coding environments. 
+    – RStudio projects allow for analyses to be contained in a single working directory that can be given to a collaborator and run without changing file directory paths. 
 - There are packages that produce a standardized directory structure
     - Examples: 
         - SppDistMonProj:: dir_create()
 
 
 ---
-# ![:scale 10%](images/standardized_circle_text.png) Organizing an ![:scale 8%](images/Rlogo.svg) project 
+# Organizing an ![:scale 7%](images/Rlogo.svg) project 
 
-### 2. Decide on a standardized file naming convention
+### <i class="fas  fa-file-signature "></i> Decide on a standardized file naming convention
 
 .pull-left[
 - Call files what they are
@@ -252,13 +402,14 @@ project_name/
 - If dates are used, use YYYYMMDD
 - Decide on a standard
     - e.g., ****camelCase, snake_case, PascelCase, kebab-case***
+
+Allows you to programmatically filter files:
 ]
 
 .pull-right[
 ![](images/naming-conventions.png)
 ]
 
-Allow you to programmatically filter files:
 
 ```r
 # Exclude files with 2016 or 2017 in their names
@@ -273,18 +424,21 @@ dat &lt;- lapply(f, read.csv)
 
 
 ---
-# ![:scale 10%](images/standardized_circle_text.png) Organizing an ![:scale 8%](images/Rlogo.svg) project 
+# Organizing an ![:scale 7%](images/Rlogo.svg) project 
 
-### 2. Consult a style guide
+### <i class="fas  fa-book "></i> Consult a style guide
 
-"Good coding style is like correct punctuation: you can manage without it, butitsuremakesthingseasiertoread"  -[Hadley Wickham](https://style.tidyverse.org/index.html)
+*"Good coding style is like correct punctuation: you can manage without it, butitsuremakesthingseasiertoread"*  
+*-[Hadley Wickham](https://style.tidyverse.org/index.html)*
 
 .pull-left[
 - Strive for consistent and meaningful names
+
 - Review existing style guides:
   - [tidyverse style guide](https://style.tidyverse.org/)
   - [Advanced R style guide](http://adv-r.had.co.nz/Style.html)
   - [Google's R style guide](https://google.github.io/styleguide/Rguide.html)
+
 - Helpful R packages:
   - `styler` 
   - `lintr`
@@ -323,56 +477,57 @@ lintr performs automated checks to confirm that you conform to the style guide.
 
 
 ---
-# [`styler` package](https://github.com/r-lib/styler)
+# [`styler`](https://github.com/r-lib/styler) package
 
-Can be used to format R code to a specific style. 
+Can be used to format R code to a specific style 
 
-Flexible for user to specific their own style.
+Flexible for user to specific their own style
 
 
 ```r
-# Before
+# Some messy code with irregular spacing, etc.
 some_data =data_frame(small= 2 ,
                       medium =4,#comment without space
-                      large=6   
-)
+                      large=6   )
 ```
 
 
-```r
-# After style_text(...)
 
+```r
+# :) After applying style_text()
 some_data &lt;- data_frame(
   small = 2,
   medium = 4, # comment without space
-  large = 6
-)
+  large = 6)
 ```
 
 ???
-- 
 
 
 ---
-# Project portability
+# <i class="fas  fa-people-carry "></i> Project portability
 
-![:scale 75%](images/package-hell.png)
 
-.left-column[
-&lt;br&gt;
-![:scale 85%](images/packrat.png)
+.pull-left[
+Maintaining dependencies can be frustrating!
+
+An R project should be: 
+
+1. **Isolated**
+2. **Portable**
+3. **Reproducible**
+
+There are R tools to help with this:
+- [`packrat`](https://rstudio.github.io/packrat/) package
+- `rocker` package
 ]
 
-.right-column[
-Isolated
-
-Portable
-
-Reproducible
+.pull-right[
+![:scale 100%](images/package-hell.png)
 ]
+
 
 ???
-
 - Isolated: 
   - Installing a new or updated package for one project won’t break your other projects, and vice versa. That’s because packrat gives each project its own private package library.
 - Portable: 
@@ -388,23 +543,69 @@ Reproducible
 
 
 ---
-# Version control 
+# ![:scale 8%](images/packrat_logo.png)
 
 .pull-left[
-Consider how you will control versions **before** starting an R projects.
+
+```r
+# Install packrat
+install.packages("packrat")
+
+# Set up your project to use packrat
+packrat::init()
+```
+
+
+```r
+# Install required packages into your project's private package library
+install.packages("tidyverse")
+
+# Take a snapshot to save the changes to packrat
+packrat::snapshot()
+```
 ]
+
+.pull-right[
+
+
+]
+
+
+???
+
+
+---
+# <i class="fas  fa-code-branch "></i> Version control 
+
+.pull-left[
+Consider how you will control versions **during the planning step**.
+
+References
+- Resources to learn git [(link)](https://try.github.io/)
+- Using git from RStudio [(link)](https://nceas.github.io/oss-lessons/version-control/4-getting-started-with-git-in-RStudio.html)
+]
+
+.pull-right[
+![](images/git_logo.png)
+]
+
+---
+# <i class="fas  fa-code-branch "></i> Version control 
+
 
 .pull-right[
 .center[![:scale 50%](images/github.svg)]
 .center[![:scale 50%](images/github-logo.png)]
-
-
 ]
 
 
----
+???
 
-&lt;video controls autoplay width="800" height="500" controls&gt;
+
+---
+class: center, middle, hide-logo
+
+&lt;video controls autoplay width="1200"&gt;
   &lt;source src="images/clone_repo.mp4" type="video/mp4"&gt;
 &lt;/video&gt;
 
@@ -418,9 +619,9 @@ Consider how you will control versions **before** starting an R projects.
 
 ---
 class: center, middle, inverse, hide-logo
-
 # Documenting
 
+![](images/life_cycles-data_documenting.png)
 
 ---
 # Documenting R object
@@ -474,40 +675,39 @@ calc.pao &lt;- function(topmod, stat = "mode", n){
 
 ---
 class: center, middle, inverse, hide-logo
-
 # Acquiring
+
+![](images/life_cycles-data_acquiring.png)
+
+
+???
 
 
 ---
 class: center, middle, inverse, hide-logo
-
 # Processing and Analyzing
 
 
+![](images/life_cycles-data_process_analyzing.png)
+
+
+???
+
+
 ---
 class: center, middle, inverse, hide-logo
+# Sharing and Archiving
 
-# Sharing
-
-
-???
-
-
----
-# ![:scale 10%](images/rmarkdown_logo.png) Reports
-
-
-.pull-left[
-[Dynamic reports]  
-[Interactive reports]
-]
-
-.pull-right[
-![](images/rmarkdown.png)
-]
+![](images/life_cycles-data_share-archiving.png)
 
 
 ???
+???
+
+Unlike cumbersome word processing applications, text written in Markdown can be easily shared between computers, mobile phones, and people. It’s quickly becoming the writing standard for academics, scientists, writers, and many more. Websites like GitHub and reddit use Markdown to style their comments.
+
+Formatting text in Markdown has a very gentle learning curve. It doesn’t do anything fancy like change the font size, color, or type. All you have control over is the display of the text—stuff like making things bold, creating headers, and organizing lists.
+
 - RMarkdown
   - Types of output
     - html
@@ -517,26 +717,169 @@ class: center, middle, inverse, hide-logo
   - Examples
     - Bat reporting for mobile aucistics
     - COVID 19 example
+    
 
-  
 ---
-# ![:scale 7%](images/rmarkdown_logo.png) Presentations 
+# ![:scale 5%](images/rmarkdown_logo.png) Rmarkdown
+You can generate reports directly from RStudio!
+
+.left-column[
+**Allows for:**
+- Code to be directly inserted into document
+
+- Multiple outputs
+
+- Easy to use
+
+- Increased reproducibility
+
+- Fewer sources of errors
+
+]
+
+.right-column[
+.center[![:scale 100%](images/rmarkdown_workflow2.png)]
+]
+
+
+???
+Literate Programming
+Traditionally, scientific writing and coding are separate activities—for example, a researcher who wants to use code to generate a figure for her paper will have the code for generating that figure in one file and the document itself in another. This is a challenge for reproducibility and provenance tracking because both criteria have to be maintained for multiple files simultaneously. “Literate programming” provides an alternative approach, whereby code and text are interleaved within a single file; these files can be processed by special literate programming software to produce documents with the output of the code (e.g. figures, tables, and summary statistics) automatically interspersed with the document’s body text. This approach has several advantages. For one, the code output of a literate programming document is by definition guaranteed to be consistent with the code in the document’s source. At the same time, literate programming can make it easier to develop analyses by reducing the separation between writing and coding; for instance, interactive literate programming software can be used to keep “digital lab notebooks” where analyses are developed and described in the same file. In the context of ecological forecasting, literate programming techniques can be particularly useful for writing forecast software documentation, and can even be used for creating automatically-updating documents and reports describing forecast output.
+
+
+---
+# ![:scale 5%](images/rmarkdown_logo.png) Simple YAML header
+
+
+```r
+---
+title: "My report"
+author: "McCrea Cobb"
+date: "6/24/2020"
+output: pdf_document
+---
+```
+
 
 ???
 
 
 ---
-background-image: url(images/rmarkdown_presentation.png)
-background-size: contain
-class: hide-logo
+# ![:scale 5%](images/rmarkdown_logo.png) More complex YAML header
+
+
+```r
+---
+title: |
+    | ![](usfws_refuges_logos.png){width=5cm}
+    | 
+    | \LARGE Region 4 Inventory and Monitoring Branch 
+subtitle: |
+    | \Large Mobile Acoustical Bat Monitoring
+    | \Large Annual Summary Report
+author: '`r params$year`'
+date: '`r params$station`'
+output:
+  pdf_document:
+    includes:
+      in_header: MABM_report_preamble.tex
+urlcolor: blue
+params:
+  year: 0 # placeholder 
+  station: placeholder
+  stn_start_yr: 0 # placeholder
+  route_path: placeholder
+  survey_path: placeholder
+  bat_path: placeholder
+  spp_path: placeholder
+  out_dir: placeholder
+  goog_API_key: placeholder
+---
+```
+
+
+???
+Here's an example of how to generate an Rmarkdown document
+
+
+---
+.pull-left[
+.small[
+`####` Some Rmarkdown code
+
+This is an `**`R Markdown`**` document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents.   
+
+You can embed an R code chunk like this:
+
+    ```{r eval=TRUE, echo=FALSE}
+    summary(cars)
+    ```
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+`####` Including Plots
+
+You can also embed plots, for example:
+
+    ```{r, eval=TRUE, echo=FALSE}
+    plot(pressure)
+    ```
+
+]
+]
+
+.pull-right[
+.small[
+#### Some Rmarkdown code
+This is an **R Markdown** document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. 
+
+You can embed an R code chunk like this:
+
+
+```
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+```
+
+#### Including Plots
+
+You can also embed plots, for example:
+
+![](presentation_files/figure-html/pressure-1.png)&lt;!-- --&gt;
+]
+]
 
 
 ???
 
 
 ---
-# ![:scale 7%](images/shiny.png) Web applications 
+# ![:scale 5%](images/xaringan_logo.png) Presentations 
 
+.center[![:scale 80%](images/rmarkdown_presentation.png)]
+
+???
+As mentioned earlier, Rmarkdown documents can be rendered into multiple different formats.
+You can create presentations, such as this one!
+
+
+---
+# ![:scale 5%](images/shiny.png) Shiny applications 
+
+
+???
+You can also generate interactive content from R, such as websites and dashboards. The Shiny package allows for these, which can also be imbedded into Rmarkdown outputs.
+
+Shiny is an R package that provides a framework for building interactive applications using R, without HTML, CSS, or JavaScript knowledge.
+
+You can host standalone apps as webpages, or embed them in rmarkdown documents
 
 ---
 background-image: url(images/collar_viewer.png)
@@ -552,27 +895,36 @@ class: hide-logo
 
 
 ---
-class: center, middle, inverse, hide-logo
+class: center, middle, hide-logo
 
-# Archiving
-
-
-???
-- Saving results to ServCat or some other data repository
-
-
----
-class: center, middle, inverse, hide-logo
-
-# Demo
+&lt;video controls autoplay width="1200"&gt;
+  &lt;source src="images/collar_viewer.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
 
 
 ???
 
 
 ---
-class: center, middle, inverse, hide-logo
+# <i class="fas  fa-file-archive "></i> Archiving 
 
+
+???
+- You can include code to save your data and products in a remote secure repository.
+- For example, instead of manually opening ServCat and saving your reports to as a product in a ServCat record, it is possible to use R code to save results to ServCat. 
+- This is an active area of development.
+- I encourage you to reach out to your data managers and ServCat managers to look into this more.
+
+---
+class: center, middle, inverse, hide-logo
+# Demo &lt;br&gt; <i class="fas  fa-walking "></i> <i class="fas  fa-desktop "></i> 
+
+
+???
+
+
+---
+class: center, middle, inverse, hide-logo
 # Questions
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
@@ -581,7 +933,8 @@ class: center, middle, inverse, hide-logo
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false
+"countIncrementalSlides": false,
+"ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

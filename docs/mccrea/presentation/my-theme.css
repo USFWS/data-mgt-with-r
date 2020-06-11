@@ -1,2 +1,8 @@
 .large { font-size: 130% }
-.small { font-size: 70% }
+.small { font-size: 80% }
+
+.remark-code-line {
+	white-space: pre-wrap;
+	padding-left: 1.85em;
+	text-indent: -1.85em;
+}
