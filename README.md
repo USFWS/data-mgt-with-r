@@ -10,7 +10,7 @@ After a brief review of the advantages of a code-based workflow for ecological s
 June 24, 2020 (3:00-4:30 EST)
 
 ## Location  
-[Webinar link]()
+[Webinar link](https://usfws.github.io/data-mgt-with-r/)
 
 ## Resources (Links)
 
