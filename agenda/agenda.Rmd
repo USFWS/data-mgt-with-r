@@ -31,7 +31,7 @@ June 24, 2020 (3:00-4:30 EST)
 
 # Outline
 
-## Introduction (*McCrea, 5 min*)
+## Introduction (*McCrea, 10 min*)
   + Data life cycle review 
   + Manual versus code-based workflow
     + The manual data workflow
@@ -65,7 +65,7 @@ June 24, 2020 (3:00-4:30 EST)
   + R documentation file
   + Code commenting
   
-## Acquiring (*Adam, 5 min*)
+## Acquiring (*Adam, 10 min*)
   + local and remote
   + querying data
     + AGOL
@@ -74,11 +74,11 @@ June 24, 2020 (3:00-4:30 EST)
     + SQL query: IRIS warehouse
     
 ## Processing and Analyzing (*Adam, 15 min*)
-   + Getting data into R
+  + Getting data into R
   + QC
   + Tidying data
   + Visualizing
-   + EDA
+  + EDA
    
 ## Sharing (*McCrea, 10 min*)
   + Reporting
@@ -90,7 +90,7 @@ June 24, 2020 (3:00-4:30 EST)
        + collarviewer
        + power analysis for butterfly surveys
        
-## Archiving (*McCrea, 10 min*)
+## Archiving (*McCrea, 5 min*)
    + Saving results to ServCat or some other data repository
 
 ## An example R project / Live demo (*10 min*)

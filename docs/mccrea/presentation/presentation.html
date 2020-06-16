@@ -4,8 +4,24 @@
     <title>R tools for a code-based data workflow</title>
     <meta charset="utf-8" />
     <meta name="author" content="McCrea Cobb and Adam Smith" />
-    <meta name="date" content="2020-06-10" />
+    <meta name="date" content="2020-06-15" />
     <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link href="libs/leaflet/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet/leaflet.js"></script>
+    <link href="libs/leafletfix/leafletfix.css" rel="stylesheet" />
+    <script src="libs/Proj4Leaflet/proj4-compressed.js"></script>
+    <script src="libs/Proj4Leaflet/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding/leaflet.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="my-theme.css" type="text/css" />
   </head>
@@ -42,43 +58,68 @@ class: hide-logo, center, middle, inverse
 
 <i class="fab  fa-github "></i> usfws.github.io/data-mgt-with-r/
 
----
-class: inverse, center, middle, hide-logo
-# Outline
+
+???
+Hello and welcome to Tools for a Code-based Data Workflow. 
+
+My name is McCrea Cobb. I work in the Inventory and Monitoring Program within the National Wildlife Refuge Sytem, and I am located in Anchorage, Alaska. I am co-presenting with Adam Smith, who is also with the I&amp;M program and based in Athens, Georgia.
+
+Our presentation slides can be found by following the link at the bottom.
 
 
 ---
 class: inverse, center, middle, hide-logo
 # Outline
 
-*Review the data life cycle and data workflow*
+
+---
+class: inverse, center, middle, hide-logo
+# Outline
+
+.left[.pull-right-70[
+#### Review the data life cycle and data workflow
+]
+]
 
 
 ---
 class: inverse, center, middle, hide-logo
 # Outline
 
-Review the data life cycle and data workflow
+.left[.pull-right-70[
 
-*Present some tools in R for efficiently and effectively working with data along the life cycle*
+&lt;span style="color:gray"&gt;Review the data life cycle and data workflow&lt;/span&gt;
+
+#### Present some tools in R for efficiently and effectively working with data along the life cycle
+]
+]
 
 
 ---
 class: inverse, center, middle, hide-logo
 # Outline
 
-Review the data life cycle and data workflow
+.left[.pull-right-70[
+&lt;span style="color:gray"&gt;Review the data life cycle and data workflow&lt;/span&gt;
 
-Present some tools in R for efficiently and effectively working with data along the life cycle
+&lt;span style="color:gray"&gt;Present some tools in R for efficiently and effectively working with data along the life cycle&lt;/span&gt;
 
-*Demonstrate a data workflow in R using an example project*
-
+#### *Demonstrate a data workflow in R using an example project*
+]
+]
 
 ???
 - What we will cover
   - Introduce some tools in R that can be used for a data workflow. 
   - We take a scientific data focus, but the tools that we introduce can be used for all types of data.
 
+
+---
+background-image: url(images/draw_owl-kosher.jpg)
+background-size: contain
+class: hide-logo
+
+???
 - Disclaimer: What we won't cover
   - This is not an "Intro to R", how to get your data into R, etc
     - There are many free online courses that cover these materials
@@ -88,21 +129,14 @@ Present some tools in R for efficiently and effectively working with data along 
 
 
 ---
-background-image: url(images/draw_owl-kosher.jpg)
-background-size: contain
-class: hide-logo
-
-???
-
-
----
 # Project and data life cycles
 
 .center[![:scale 80%](images/life_cycles.png)]
 
 
 ???
-- Here's some notes
+- This presentation will roughly follow the project and data life cycles that Jared and Maren introduced in the previous webinar on data management. 
+- Both cycles start with a Planning step, and we will start with recommended steps that we think should be considered during the planning step and cover some associated R tools.
 
 
 ---
@@ -112,29 +146,23 @@ class: hide-logo
 
 
 ???
-- There are many versions of the data life cycle
+- We will progress through data life cycle: the Acquire, Process, Analyze, Share and Achive steps.
 
 
 ---
-background-image: url(images/criteria_grouped3.png)
-background-size: 70%
+class: middle, center
+background-image: url("images/allison_horst_workflow.png")
+background-size: contain
+
+
+---
 class: hide-logo
+# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow
 
 
 ???
-- Here are some criteria that can be used to evaluate your data workflow
+Let's first walk through the traditional data workflow that is probably familiar to everybody here.
 
-+ The manual data workflow
-  + Example
-  + Limitations
-+ The code-based data workflow
-  + Advantages
-    + Documented
-    + Reproducible
-    + Replicable
-    + More efficient
-    + Less error-prone
-    
 
 ---
 background-image: url(images/traditional_workflow_1.png)
@@ -144,6 +172,7 @@ class: hide-logo
 
 
 ???
+First, you start with data. These could be paper datasheets, maybe some data that were collected using a mobile app like Collector or Survey123, or data that you found in a repository like ServCat or data.gov. 
 
 
 ---
@@ -154,6 +183,7 @@ class: hide-logo
 
 
 ???
+The first step is to acquire these data. This is generally done by digitizing paper data into Excel,  Access or ArcGIS, and downloading data from a repository by navigating to a webpage in Chrome and clicking on button. 
 
 
 ---
@@ -164,6 +194,7 @@ class: hide-logo
 
 
 ???
+Next, these data are process and quality checked in these same software. Occasionally, people might load data into R (convert to a csv first!), process the data in R and then export the clean data back into a csv, giving it a new name like "data_clean" to differentiate it from the raw data.
 
 
 ---
@@ -174,6 +205,7 @@ class: hide-logo
 
 
 ???
+The third step is data analysis. For spatial data, this is often done in ArcGIS. For exploratory data analysis of non-spatial data, this might be a accomplished using Excel or Access. More complex analyses might require the user to convert the data to a csv, load it into R, run from models, and write CSV table of results. 
 
 
 ---
@@ -184,6 +216,7 @@ class: hide-logo
 
 
 ???
+Reporting these results requires the user to write summary text in a Word document or in Powerpoint slides. ArcGIS, Excel, and and R are used to create figures that are often saved as JPGs. 
 
 
 ---
@@ -194,10 +227,38 @@ class: hide-logo
 
 
 ???
-Disadvantages  
-- Not reproducible
-- They are seperate from the code that you used to create your analysis and figures.
-- They are time-consuming to create and difficult to maintain.
+Finally, to complete the report or presentation slides, the user is required to manually copy and paste the JPG figures into Word or Powerpoint.
+
+
+---
+class: center, middle, hide-logo
+
+![](images/criteria_short.png)
+
+
+???
+A good data workflow should maximize the criteria listed here. Let's evaluate the traditional data workflow using these criteria. 
+ 
+- First, is it is reproducible? Not really. If someone else were attempting to reproduce this effort, they might not know which data were used to generate the figures and tables and they are even less likely to be able to replicate all the steps in the workflow. 
+
+- Is it replicable by the person that completed the workflow? Unlikely. The person that completed the workflow might have trouble replicating the steps for the next year's annual report.
+
+- Is it efficient? Perhaps for a single one-off project, but not for any long-term data collection effort. Almost all these steps have to be repeated to reproduce the results with new data.
+
+- Is it standardized? No, even small details like the sizes of figures is likely differ between analyses.
+
+- Is it scalable. No. Every time that new data are generated or the original data change, then the workflow breaks and needs to be restarted, sometimes from scratch. 
+    
+    
+---
+class: center, middle, hide-logo
+
+![](images/criteria_short_xed.png)
+
+
+???
+boo..
+
 
 ---
 background-image: url(images/workflow.gif)
@@ -206,8 +267,16 @@ class: hide-logo
 
 
 ???
-- What we need is a seamless workflow like this, where the data go from acquiring to process (and archiving).
+- What we need is a seamless workflow like this, where the data go from acquiring (i.e. hand) to process (and archiving).
 - Your code should be the soruce of your products (report, etc). Based on your code. 
+
+
+---
+class: hide-logo
+# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow 
+
+
+???
 
 
 ---
@@ -309,25 +378,41 @@ class: hide-logo
 
 ---
 background-image: url(images/Rlogo.svg)
-class: hide-logo
+class: hide-logo, middle, right
+background-size: 40%
+background-position: 10% 50%
+
+![:scale 50%](images/rstudio_logo.png)
 
 
 ???
-- Why use R?
+What is R? R is a programming language for statistical computing and graphics.
+
+What is RStudio? RStudio is a integrated development environment (IDE) for R (software) to develop and share work.
+
+- Why should you use R?
   - Free for everybody
   - Relatively easy to learn (compared to other programming languages)
-  - Popular
+  - Popular (2 millions users)
   - Powerful
   - Flexible
     - statistical analyses
     - graphics
     - reporting
-  - Active community of users
-    - stackoverflow
-    - package development
-    - GitHub integration
   - Nice free integrated development environment (RStudio)
   
+  
+---
+
+![](images/r_packages_plot.png)
+
+
+???
+- Active community of users
+  - stackoverflow
+  - package development - currently over 15,000 packages
+  - GitHub integration
+
 
 ---
 class: center, middle, inverse
@@ -401,15 +486,8 @@ project_name/
 - Avoid spaces
 - If dates are used, use YYYYMMDD
 - Decide on a standard
-    - e.g., ****camelCase, snake_case, PascelCase, kebab-case***
 
 Allows you to programmatically filter files:
-]
-
-.pull-right[
-![](images/naming-conventions.png)
-]
-
 
 ```r
 # Exclude files with 2016 or 2017 in their names
@@ -419,6 +497,12 @@ f &lt;- list.files(path = "./filepath",
 # Load these files
 dat &lt;- lapply(f, read.csv)
 ```
+]
+
+.pull-right[
+![Allison Horst](https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/other-stats-artwork/coding_cases.png)
+]
+
 
 ???
 
@@ -702,7 +786,6 @@ class: center, middle, inverse, hide-logo
 
 
 ???
-???
 
 Unlike cumbersome word processing applications, text written in Markdown can be easily shared between computers, mobile phones, and people. It’s quickly becoming the writing standard for academics, scientists, writers, and many more. Websites like GitHub and reddit use Markdown to style their comments.
 
@@ -720,10 +803,19 @@ Formatting text in Markdown has a very gentle learning curve. It doesn’t do an
     
 
 ---
+class: center, middle, hide-logo
+background-image: url("images/report_about_reporting.jpg")
+background-size: contain
+
+
+???
+
+
+---
 # ![:scale 5%](images/rmarkdown_logo.png) Rmarkdown
 You can generate reports directly from RStudio!
 
-.left-column[
+.pull-left-30[
 **Allows for:**
 - Code to be directly inserted into document
 
@@ -737,7 +829,7 @@ You can generate reports directly from RStudio!
 
 ]
 
-.right-column[
+.pull-right-70[
 .center[![:scale 100%](images/rmarkdown_workflow2.png)]
 ]
 
@@ -745,6 +837,15 @@ You can generate reports directly from RStudio!
 ???
 Literate Programming
 Traditionally, scientific writing and coding are separate activities—for example, a researcher who wants to use code to generate a figure for her paper will have the code for generating that figure in one file and the document itself in another. This is a challenge for reproducibility and provenance tracking because both criteria have to be maintained for multiple files simultaneously. “Literate programming” provides an alternative approach, whereby code and text are interleaved within a single file; these files can be processed by special literate programming software to produce documents with the output of the code (e.g. figures, tables, and summary statistics) automatically interspersed with the document’s body text. This approach has several advantages. For one, the code output of a literate programming document is by definition guaranteed to be consistent with the code in the document’s source. At the same time, literate programming can make it easier to develop analyses by reducing the separation between writing and coding; for instance, interactive literate programming software can be used to keep “digital lab notebooks” where analyses are developed and described in the same file. In the context of ecological forecasting, literate programming techniques can be particularly useful for writing forecast software documentation, and can even be used for creating automatically-updating documents and reports describing forecast output.
+
+
+---
+class: middle, center
+background-image: url("images/rmarkdown_wizards.png")
+background-size: contain
+
+
+???
 
 
 ---
@@ -807,24 +908,63 @@ Here's an example of how to generate an Rmarkdown document
 .small[
 `####` Some Rmarkdown code
 
-This is an `**`R Markdown`**` document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents.   
+This is an `**`R Markdown`**` document. You can write inline code like this: 1 + 1 = `` `r
+1 + 1` ``.
 
 You can embed an R code chunk like this:
 
     ```{r eval=TRUE, echo=FALSE}
-    summary(cars)
+    DT::datatable(iris[1:3], 
+                  rownames = FALSE,
+                  options = list(pageLength = 3))
     ```
 
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
+`####` Including Figures
 
-`####` Including Plots
-
-You can also embed plots, for example:
+You can also embed figures, for example:
 
     ```{r, eval=TRUE, echo=FALSE}
-    plot(pressure)
+    library(leaflet)
+
+    leaflet() %&gt;%
+      addTiles() %&gt;%
+      addMarkers(lng = 174.768, 
+                 lat = -36.852, 
+                 popup = "The birthplace of R")
+    ```
+
+]
+]
+
+
+---
+.pull-left[
+.small[
+`####` Some Rmarkdown code
+
+This is an `**`R Markdown`**` document. You can write inline code like this: 1 + 1 = `` `r
+1 + 1` ``.
+
+You can embed an R code chunk like this:
+
+    ```{r eval=TRUE, echo=FALSE}
+    DT::datatable(iris[1:3], 
+                  rownames = FALSE,
+                  options = list(pageLength = 3))
+    ```
+
+`####` Including Figures
+
+You can also embed figures, for example:
+
+    ```{r, eval=TRUE, echo=FALSE}
+    library(leaflet)
+
+    leaflet() %&gt;%
+      addTiles() %&gt;%
+      addMarkers(lng = 174.768, 
+                 lat = -36.852, 
+                 popup = "The birthplace of R")
     ```
 
 ]
@@ -833,26 +973,23 @@ You can also embed plots, for example:
 .pull-right[
 .small[
 #### Some Rmarkdown code
-This is an **R Markdown** document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. 
+This is an **R Markdown** document. You can write inline code like this: 1 + 1 = 2.
 
 You can embed an R code chunk like this:
+]
 
+.smaller[
+<div id="htmlwidget-d57951d570419bf36800" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d57951d570419bf36800">{"x":{"filter":"none","data":[[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+]
 
-```
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-```
+.small[
+#### Including Figures
 
-#### Including Plots
+You can also embed figures, for example:
 
-You can also embed plots, for example:
-
-![](presentation_files/figure-html/pressure-1.png)&lt;!-- --&gt;
+<div id="htmlwidget-525283a08eddb29317fb" style="width:432px;height:144px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-525283a08eddb29317fb">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 ]
 ]
 
@@ -906,21 +1043,122 @@ class: center, middle, hide-logo
 
 
 ---
+
+
+&lt;iframe src="https://vac-lshtm.shinyapps.io/ncov_tracker/?_ga=2.142693877.1775727125.1591996474-181506872.1532128536)" width="100%" height="600px"&gt;&lt;/iframe&gt;
+
+
+
+???
+
+---
+background-image:url("images/cher_data.jpg")
+background-position: center bottom 4em
 # <i class="fas  fa-file-archive "></i> Archiving 
 
 
 ???
-- You can include code to save your data and products in a remote secure repository.
+- A final and arguably the most important step that is often overlooked in the data life cycle is archiving data. For the typical scientific data project, this should the raw data and the code required to reproduce the results.
+- For an R project, you can include code to save your data and products in a remote secure repository.
 - For example, instead of manually opening ServCat and saving your reports to as a product in a ServCat record, it is possible to use R code to save results to ServCat. 
 - This is an active area of development.
 - I encourage you to reach out to your data managers and ServCat managers to look into this more.
 
+
 ---
-class: center, middle, inverse, hide-logo
-# Demo &lt;br&gt; <i class="fas  fa-walking "></i> <i class="fas  fa-desktop "></i> 
+background-image:url("images/cher_data.jpg")
+background-position: center bottom 4em
+# <i class="fas  fa-file-archive "></i> Archiving 
+
+.center[![:gen 35%, shadow](images/we_can_do_it_in_r.png)]
 
 
 ???
+- A final and arguably the most important step that is often overlooked in the data life cycle is archiving data. For the typical scientific data project, this should the raw data and the code required to reproduce the results.
+- For an R project, you can include code to save your data and products in a remote secure repository.
+- For example, instead of manually opening ServCat and saving your reports to as a product in a ServCat record, it is possible to use R code to save results to ServCat. 
+- This is an active area of development.
+- I encourage you to reach out to your data managers and ServCat managers to look into this more.
+
+
+---
+# [`sbtools` package](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf)
+
+A tool to allow complete access to the USGS ScienceBase API from R.
+
+Supports the creation, editing and access of data/metadata:
+
+.small[
+
+&lt;code class ='r hljs remark-code'&gt;library(&lt;span style='background-color:pink'&gt;sbtools&lt;/span&gt;)&lt;br&gt;&lt;br&gt;# Create new item (record), by default under "My Items" parent&lt;br&gt;new_item &lt;- &lt;span style='background-color:#ffff7f'&gt;item_create&lt;/span&gt;(title = "new test item")&lt;/code&gt;
+]
+
+Once an item is created, an authenticated user can edit the metadata or attach data files to that item:
+
+.small[
+
+&lt;code class ='r hljs remark-code'&gt;# Give the item a new title&lt;br&gt;edited_item &lt;- &amp;nbsp;&lt;span style='background-color:#ffff7f'&gt;item_update&lt;/span&gt;(new_item, list(title = "new updated item"))&lt;br&gt;&lt;br&gt;# Append data to the item&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;item_list_files&lt;/span&gt;(new_item)&lt;/code&gt;
+]
+
+
+???
+`sbtools` enables direct access to the advanced online data functionality provided by ScienceBase, the U.S. Geological Survey’s online scientific data storage platform.
+- Provides scripted R access to ScienceBase to manage metadata and data files, to search the catalog of datasets, and to view and modify data in formats familiar to R users.
+
+
+---
+# [`sbtools` package](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf) - Accessing data
+
+
+&lt;code class ='r hljs remark-code'&gt;# Access the record&lt;br&gt;test_item &lt;- &lt;span style='background-color:#ffff7f'&gt;item_get&lt;/span&gt;("572a2a7fe4b0b13d391a0f6c")&lt;br&gt;&lt;br&gt;# Take a look at the citation&lt;br&gt;test_item&lt;/code&gt;
+
+```
+
+&lt;ScienceBase Item&gt; 
+  Title: Moose population survey: Tetlin National Wildlife Refuge, Game Management Unit 12, eastern Alaska
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2016-05-04T16:59:43Z / 2016-11-29T21:04:15Z
+  Children: FALSE
+  Item ID: 572a2a7fe4b0b13d391a0f6c
+  Parent ID: 5771b40fe4b07657d1a6bb5e
+
+```
+
+
+???
+
+
+---
+
+&lt;style&gt;
+.leaflet {
+    margin: auto;
+}
+&lt;/style&gt;
+
+.small[
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;library(&lt;span style='background-color:#ffff7f'&gt;leaflet&lt;/span&gt;)&lt;br&gt;&lt;br&gt;# Get study area boundaries&lt;br&gt;study_area &lt;- &lt;span style='background-color:#ffff7f'&gt;item_get_wfs&lt;/span&gt;(test_item)&lt;br&gt;&lt;br&gt;# Map it&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;leaflet&lt;/span&gt;() &lt;span style='background-color:pink'&gt;%&gt;%&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;addPolygons(data = study_area@polygons[[1]], &lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;label = study_area$PopupInfo) &lt;span style='background-color:pink'&gt;%&gt;%&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;addTiles()&lt;/code&gt;
+
+
+<div id="htmlwidget-b45d1d7d54d351134d43" style="width:720px;height:360px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b45d1d7d54d351134d43">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addPolygons","args":[[[[{"lng":[-143.347991534,-143.228078123,-143.199521918,-143.122167375,-143.127109304,-143.198748868,-143.19378802,-143.229359705,-143.135073488,-143.078102266,-143.022414244,-142.99961064,-142.938665511,-142.843148631,-142.747251927,-142.688158016,-142.606909556,-142.591831249,-142.538758172,-142.416502074,-142.513136336,-142.440431435,-142.419714378,-142.139856192,-142.122260562,-142.079156323,-141.92258779,-141.918415775,-141.807245102,-141.742410732,-141.303569208,-141.282765721,-141.243599672,-141.174415326,-141.160249355,-141.079508421,-141.001773206,-140.994491425,-141.122555042,-141.232872959,-141.299849381,-141.388141605,-141.459216617,-141.541904316,-141.621384427,-141.666340145,-141.698119294,-141.68562115,-141.806637894,-141.924937519,-142.036132479,-141.986010868,-141.939892566,-141.990490604,-142.038438439,-142.068433621,-142.027118846,-141.961758042,-142.016839952,-142.049916116,-142.086205609,-142.190932214,-142.237634019,-142.234596278,-142.278523974,-142.276640753,-142.37659465,-142.512840519,-142.614390635,-142.705624508,-142.730105945,-142.847950339,-142.833787131,-142.811967361,-142.863114021,-142.959188601,-143.122713746,-143.283993166,-143.40724688,-143.455367327,-143.476311641,-143.511921879,-143.561225275,-143.64103108,-143.682506652,-143.725921397,-143.79857264,-143.834193846,-143.886227382,-143.979085435,-143.83522869,-143.734763013,-143.647338789,-143.669549739,-143.722476467,-143.714254457,-143.625932159,-143.582772384,-143.547696884,-143.502471311,-143.411813963,-143.38841452,-143.347026732,-143.301357003,-143.274342586,-143.279132863,-143.253884987,-143.243979313,-143.210630609,-143.19251129,-143.163194589,-143.241187738,-143.249712184,-143.317999267,-143.323203966,-143.358665087,-143.364054431,-143.372525819,-143.300558365,-143.240920644,-143.341745994,-143.378612129,-143.412538622,-143.464966854,-143.548860655,-143.503149306,-143.464119952,-143.464630309,-143.528824232,-143.61510396,-143.716758675,-143.646118397,-143.638756282,-143.70155483,-143.777700065,-143.86044888,-143.984989613,-144.046538598,-144.254544831,-144.225165367,-144.253642765,-144.301559405,-144.36816241,-144.465211351,-144.571191338,-144.529242495,-144.455767064,-144.333686004,-144.228967269,-144.092966294,-144.028391194,-144.061331524,-144.137068531,-144.158313061,-144.07957263,-143.978928344,-143.857762328,-143.740326127,-143.748368311,-143.712091459,-143.632585954,-143.653709154,-143.606609546,-143.467727062,-143.347991534],"lat":[63.7616274790001,63.7571575680001,63.7342614510001,63.7146903400001,63.668894019,63.6284448650001,63.5976204350001,63.5637357470001,63.5375116920001,63.5392432680001,63.5227209220001,63.5070318840001,63.5088318050001,63.497059409,63.5106815170001,63.495974652,63.4673455280001,63.4459835710001,63.44378678,63.3846471730001,63.343639443,63.3177921930001,63.2834422450001,63.2518373340001,63.2046232710001,63.2165666870001,63.190964713,63.1507797510001,63.125712972,63.1655757130001,63.1909519420001,63.1272911720001,63.0441622610001,63.036298145,63.0055383420001,63.001459835,63.024515131,61.506026326,61.5129688100001,61.5227397950001,61.5107513470001,61.511642957,61.5218236530001,61.510148121,61.482539036,61.4479293430001,61.4254246660001,61.3930256400001,61.369824592,61.354555707,61.4104825160001,61.455304416,61.479714947,61.504635874,61.525168073,61.5499287100001,61.5760944090001,61.599783002,61.6501588100001,61.675405541,61.674583795,61.732069154,61.7685801910001,61.7888348450001,61.8140133540001,61.8323650710001,61.83834877,61.850661335,61.9016429660001,61.8814334780001,61.855572673,61.835179204,61.8070562190001,61.773966897,61.7171774700001,61.7076220440001,61.7279696370001,61.7442388860001,61.7211886470001,61.7369208900001,61.7619436670001,61.7924853660001,61.8018722750001,61.813991641,61.8360162330001,61.866633279,61.8873552000001,61.9227740540001,61.938690406,61.995083885,61.9747243130001,61.988689364,62.0165049880001,62.0705015730001,62.130935611,62.1987362830001,62.22690751,62.226316963,62.2618906590001,62.277290776,62.2664497910001,62.254531634,62.2601356600001,62.2500367960001,62.269839162,62.289646453,62.3041079880001,62.3399065350001,62.342865536,62.3670206240001,62.404338308,62.406424095,62.4445731260001,62.4617973430001,62.4874572310001,62.517444352,62.5637609760001,62.618160883,62.639066707,62.6465213320001,62.676490346,62.709080768,62.7288283760001,62.7618611290001,62.775214056,62.807096179,62.817727242,62.8451542620001,62.8557921870001,62.8829234580001,62.9102723340001,62.9526627710001,63.001693043,63.01682544,63.051695517,63.0555396390001,63.0573769750001,63.0395419710001,63.0665577820001,63.1190678130001,63.1342032650001,63.1305856130001,63.1672604450001,63.189720042,63.215793192,63.2519489310001,63.2762887920001,63.302940354,63.3088479370001,63.3102552060001,63.3388752870001,63.3697082020001,63.3989751660001,63.4394820480001,63.4720371180001,63.4951432560001,63.4995182150001,63.4924478020001,63.5124705160001,63.5598353490001,63.601049904,63.646614346,63.6832923640001,63.7068998140001,63.7616274790001]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,["GMU 12Z","Tetlin NWR"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"limits":{"lat":[61.354555707,63.7616274790001],"lng":[-144.571191338,-140.994491425]}},"evals":[],"jsHooks":[]}</script>
+]
+
+???
+
+
+---
+class: center, middle, hide-logo
+background-image: url("images/demo.jpg")
+background-size: cover
+
+
+???
+Time for the demo.
 
 
 ---

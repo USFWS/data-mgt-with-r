@@ -98,3 +98,25 @@ https://ecos.fws.gov/ServCatServices/servcat-secure/v4/documentation/servcat-sec
 ### Continue discussion on how to divide the presentations of material
 
 ## Action Items
+
+\newpage
+
+# 6/11/2020
+
+### Review presentation materials
+- Teaching shiny app, monarch project example
+- Archiving?? memes...
+    - github
+    - dryad (R package)
+    - ScienceBase
+    - code.usgs.gov?
+    - IRMA (like ServCat)
+    - **zenodo (zenodo R package)**
+- Analysis
+    - cran task views
+- Add mention of packages to McCrea's slide about R, distinction between R and Rstudio
+
+
+### Action Items
+
+- Add sf to the R data workflow slide
