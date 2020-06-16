@@ -5,9 +5,9 @@ date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: ["xaringan-themer.css", "my-theme.css"]
+    css: ["css/xaringan-themer.css", "css/my-theme.css"]
     nature:
-      beforeInit: "macros.js"
+      beforeInit: "macros/macros.js"
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
