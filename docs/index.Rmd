@@ -252,7 +252,7 @@ class: center, middle, hide-logo
 
 
 ???
-How do you evaludate whether a data workflow is a "good" one. To do this, you need some criteria from which to measure success. You can probably imagine a list of these, but for this webinar, we focus just on these six.
+How do you evaludate whether a data workflow is a "good" one. To do this, you need some criteria from which to measure success. You can probably imagine a list of these, but for this webinar, we focus on these six.
 
 A good data workflow should maximize the criteria listed here. Let's evaluate the traditional data workflow using these criteria. 
  
@@ -417,15 +417,7 @@ What is RStudio? RStudio is a integrated development environment (IDE) for R (so
     - graphics
     - reporting
   - Nice free integrated development environment (RStudio)
-  
-  
----
-
-![](images/r_packages_plot.png)
-
-
-???
-- Active community of users
+  - Active community of users
   - stackoverflow
   - package development - currently over 15,000 packages
   - GitHub integration
@@ -569,7 +561,7 @@ if(readability()) {
 
 Two R packages support this style guide:
 
-styler allows you to interactively restyle selected text, files, or entire projects. It includes an RStudio add-in, the easiest way to re-style existing code.
+styler - I'll talk about in more detail on the next slide. 
 
 lintr performs automated checks to confirm that you conform to the style guide.
 
@@ -577,25 +569,93 @@ lintr performs automated checks to confirm that you conform to the style guide.
 ---
 # [`styler`](https://github.com/r-lib/styler) package
 
-Can be used to format R code to a specific style 
+.pull-left-30[
+A package to reformat R code
 
-Flexible for user to specific their own style
+- Can format to a specific style or focus on specific issue (e.g., spacing) 
 
-```{r, eval=FALSE, message=FALSE, warning=FALSE}
+- Flexible for user to customize their own style
+]
+
+.pull-right-70[
+.small[
+```{r messy1, include=FALSE, eval=FALSE, message=FALSE, warning=FALSE}
 # Some messy code with irregular spacing, etc.
-some_data =data_frame(small= 2 ,
-                      medium =4,#comment without space
-                      large=6   )
+p =dat%>%#a comment
+select(refuge ,lat, long) %>%filter(refuge!='kodiak ')%>%
+  ggplot(data,aes(x =lat,y= long,group=refuge))%>%  geom_line()#comment without space"
 ```
 
-
-```{r, message=FALSE, warning=FALSE}
-# :) After applying style_text()
-some_data <- data_frame(
-  small = 2,
-  medium = 4, # comment without space
-  large = 6)
+```{r, echo=FALSE}
+decorate("messy1", eval=FALSE) %>%
+  flair("styler") %>%
+  flair("select", background = "pink") %>%
+  flair("filter", background = "pink") %>%
+  flair("ggplot", background = "pink") %>%
+  flair("geom_line", background = "pink") %>%
+  flair("a comment", color="blue") %>%
+  flair("comment without space", color = "blue")
 ```
+]
+]
+
+???
+styler allows you to interactively restyle selected text, files, or entire projects. It isincludes an RStudio add-in, the easiest way to re-style existing code.
+
+---
+# [`styler`](https://github.com/r-lib/styler) package
+
+.pull-left-30[
+A package to reformat R code
+
+- Can format to a specific style or focus on specific issue (e.g., spacing) 
+
+- Flexible for user to customize their own style
+]
+
+.pull-right-70[
+.small[
+```{r messy2, include=FALSE, eval=FALSE, message=FALSE, warning=FALSE}
+# Some messy code with irregular spacing, etc.
+
+p =dat%>%#a comment
+select(refuge ,lat, long) %>%filter(refuge!='kodiak ')%>%
+  ggplot(data,aes(x =lat,y= long,group=refuge))%>%  geom_line()#comment without space"
+```
+
+```{r, echo=FALSE}
+decorate("messy2", eval=FALSE) %>%
+  flair("styler") %>%
+  flair("select", background = "pink") %>%
+  flair("filter", background = "pink") %>%
+  flair("ggplot", background = "pink") %>%
+  flair("geom_line", background = "pink") %>%
+  flair("a comment", color="blue") %>%
+  flair("comment without space", color = "blue")
+```
+
+```{r cleaned, include=FALSE, message=FALSE, warning=FALSE, comment=""}
+# Let's clean it up!
+
+library(styler)
+
+style_text("p =dat%>%#a comment
+select(refuge ,lat, long) %>%filter(refuge!='kodiak ')%>%
+  ggplot(data,aes(x =lat,y= long,group=refuge))%>%  geom_line()#comment without space") 
+```
+
+```{r, echo=FALSE}
+decorate("cleaned", eval=TRUE) %>%
+  flair("styler") %>%
+  flair("select", background = "pink") %>%
+  flair("filter", background = "pink") %>%
+  flair("ggplot", background = "pink") %>%
+  flair("geom_line", background = "pink") %>%
+  flair("a comment", color="blue") %>%
+  flair("comment without space", color = "blue")
+```
+]
+]
 
 ???
 
@@ -604,7 +664,7 @@ some_data <- data_frame(
 # `r icon::fa("people-carry")` Project portability
 
 
-.pull-left[
+.pull-left-30[
 Maintaining dependencies can be frustrating!
 
 An R project should be: 
@@ -618,7 +678,7 @@ There are R tools to help with this:
 - `rocker` package
 ]
 
-.pull-right[
+.pull-right-70[
 ![:scale 100%](images/package-hell.png)
 ]
 
@@ -641,7 +701,11 @@ There are R tools to help with this:
 ---
 # ![:scale 8%](images/packrat_logo.png)
 
-.pull-left[
+.pull-left-30[
+
+]
+
+.pull-right-70[
 ```{r, eval=FALSE}
 # Install packrat
 install.packages("packrat")
@@ -657,11 +721,6 @@ install.packages("tidyverse")
 # Take a snapshot to save the changes to packrat
 packrat::snapshot()
 ```
-]
-
-.pull-right[
-
-
 ]
 
 
@@ -818,6 +877,7 @@ background-size: contain
 
 
 ???
+Alright, here's my report about reporting...
 
 
 ---
@@ -845,7 +905,11 @@ You can generate reports directly from RStudio!
 
 ???
 Literate Programming
-Traditionally, scientific writing and coding are separate activities—for example, a researcher who wants to use code to generate a figure for her paper will have the code for generating that figure in one file and the document itself in another. This is a challenge for reproducibility and provenance tracking because both criteria have to be maintained for multiple files simultaneously. “Literate programming” provides an alternative approach, whereby code and text are interleaved within a single file; these files can be processed by special literate programming software to produce documents with the output of the code (e.g. figures, tables, and summary statistics) automatically interspersed with the document’s body text. This approach has several advantages. For one, the code output of a literate programming document is by definition guaranteed to be consistent with the code in the document’s source. At the same time, literate programming can make it easier to develop analyses by reducing the separation between writing and coding; for instance, interactive literate programming software can be used to keep “digital lab notebooks” where analyses are developed and described in the same file. In the context of ecological forecasting, literate programming techniques can be particularly useful for writing forecast software documentation, and can even be used for creating automatically-updating documents and reports describing forecast output.
+Traditionally, scientific writing and coding are separate activities—for example, a researcher who wants to use code to generate a figure for her paper will have the code for generating that figure in one file and the document itself in another. 
+
+This is a challenge for reproducibility and provenance tracking because both criteria have to be maintained for multiple files simultaneously. “Literate programming” provides an alternative approach, whereby code and text are interleaved within a single file; these files can be processed by special literate programming software to produce documents with the output of the code (e.g. figures, tables, and summary statistics) automatically interspersed with the document’s body text. 
+
+This approach has several advantages. For one, the code output of a literate programming document is by definition guaranteed to be consistent with the code in the document’s source. At the same time, literate programming can make it easier to develop analyses by reducing the separation between writing and coding; for instance, interactive literate programming software can be used to keep “digital lab notebooks” where analyses are developed and described in the same file. 
 
 
 ---
@@ -858,7 +922,7 @@ background-size: contain
 
 
 ---
-# ![:scale 5%](images/rmarkdown_logo.png) Simple YAML header
+# ![:scale 5%](images/rmarkdown_logo.png) The YAML header
 
 ````{r, eval=FALSE}
 ---
@@ -874,7 +938,7 @@ output: pdf_document
 
 
 ---
-# ![:scale 5%](images/rmarkdown_logo.png) More complex YAML header
+# ![:scale 5%](images/rmarkdown_logo.png) A more complex header
 
 ````{r, eval=FALSE}
 ---
