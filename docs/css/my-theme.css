@@ -5,6 +5,7 @@
 }
 
 /* new font size classes */
+.huge { font-size: 5em; }
 .largest { font-size: 2.488em; }
 .larger { font-size: 2.074em; }
 .large { font-size: 1.44em;}

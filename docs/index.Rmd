@@ -1180,7 +1180,7 @@ decorate("map_moose") %>%
 
 ---
 class: center, middle, hide-logo
-background-image: url("images/demo.jpg")
+background-image: url("images/demo_thinking.jpg")
 background-size: cover
 
 
