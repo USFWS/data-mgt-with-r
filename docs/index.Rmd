@@ -73,6 +73,10 @@ class: inverse, center, middle, hide-logo
 # Outline
 
 
+???
+I'll start out by providing a brief outline of what we will be covering today.
+
+
 ---
 class: inverse, center, middle, hide-logo
 # Outline
@@ -83,6 +87,10 @@ class: inverse, center, middle, hide-logo
 ]
 
 
+??
+First, we will review some of the concepts introduced earlier today by Jared and Maren. We will provide a cursory review of the data and project life cycles and how these fit into a typical scientific data workflow. We will compare the traditional "point and click" data workflow to a code-based data workflow in R, and provide some reasons why we are advocating for the code-based data workflow.
+
+
 ---
 class: inverse, center, middle, hide-logo
 # Outline
@@ -91,9 +99,13 @@ class: inverse, center, middle, hide-logo
 
 <span style="color:gray">Review the data life cycle and data workflow</span>
 
-#### Present some tools in R for efficiently and effectively working with data along the life cycle
+#### Present tools in R for efficiently and effectively working with data along the life cycle
 ]
 ]
+
+
+???
+Next, following the steps of a data life cycle, we will present tool in R for efficiently and effectively working with data.
 
 
 ---
@@ -105,14 +117,14 @@ class: inverse, center, middle, hide-logo
 
 <span style="color:gray">Present some tools in R for efficiently and effectively working with data along the life cycle</span>
 
-#### *Demonstrate a data workflow in R using an example project*
+#### Demonstrate a data workflow in R using an example project
 ]
 ]
 
 ???
-- What we will cover
-  - Introduce some tools in R that can be used for a data workflow. 
-  - We take a scientific data focus, but the tools that we introduce can be used for all types of data.
+Finally, we will walk through a demonstration of how these tools and concepts can be applied to a real-world FWS scientific survey.
+
+In general, the focus of this webinar is on scientific data, but the tools that we cover could be applied to other types of data.
 
 
 ---
@@ -121,12 +133,10 @@ background-size: contain
 class: hide-logo
 
 ???
-- Disclaimer: What we won't cover
-  - This is not an "Intro to R", how to get your data into R, etc
-    - There are many free online courses that cover these materials
-      - DataCamp
-      - NCTC courses
-- Take home message: It is possible to use a scripting languaging like R to complete your data workflow that follows the data life cycle. Doing this is more efficient and less error prone than a manual data workflow commonly used.
+Before starting though, we wanted to include a disclaimer. 
+  - This webinar is not an "Introduction to R", and "How to get your data into R", or "Learn the Tidyverse".
+  - If you are interested in learning R, there are many courses that cover these materials, from online courses from DataCamp or in-person courses through NCTC courses (CSP1004 Data Wrangling in R)
+- Our take home message is simply: It is possible to use a scripting languaging like R to complete your data workflow that follows the data life cycle. Doing this is more efficient and less error prone than a traditional data workflow that is commonly used.
 
 
 ---
@@ -136,8 +146,8 @@ class: hide-logo
 
 
 ???
-- This presentation will roughly follow the project and data life cycles that Jared and Maren introduced in the previous webinar on data management. 
-- Both cycles start with a Planning step, and we will start with recommended steps that we think should be considered during the planning step and cover some associated R tools.
+- As I mentioned, we will roughly follow the project and data life cycles that Jared and Maren introduced in the previous webinar on data management. 
+- Both the data and project life cycles start with a **Planning** step, and so we will start with recommended steps that we think should be considered during the planning step and cover some associated R tools.
 
 
 ---
@@ -147,7 +157,7 @@ class: hide-logo
 
 
 ???
-- We will progress through data life cycle: the Acquire, Process, Analyze, Share and Achive steps.
+- Next, we will progress through data life cycle: starting with the Acquire step, and moving through the Process, Analyze, Share and Achive steps.
 
 
 ---
@@ -156,13 +166,17 @@ background-image: url("images/allison_horst_workflow.png")
 background-size: contain
 
 
+???
+Here's another way to look at the same workflow. The typical FWS scientific project starts with acquiring data, by collecting the data and importing existing data that have been archived. Next there is a Processing step to tidy the data for analysis, the following step. The next step is to share the data and results through presentations and reports. Finally, missing from this figure, these data and products are archived so that others can build upon them.
+
+
 ---
 class: hide-logo
 # `r icon::fa("times", color = "red")` Traditional data workflow
 
 
 ???
-Let's first walk through the traditional data workflow that is probably familiar to everybody here.
+Ok. So how are these steps typically accomplished? Let's first walk through the traditional data workflow that is probably familiar to everybody here.
 
 
 ---
@@ -238,6 +252,8 @@ class: center, middle, hide-logo
 
 
 ???
+How do you evaludate whether a data workflow is a "good" one. To do this, you need some criteria from which to measure success. You can probably imagine a list of these, but for this webinar, we focus just on these six.
+
 A good data workflow should maximize the criteria listed here. Let's evaluate the traditional data workflow using these criteria. 
  
 - First, is it is reproducible? Not really. If someone else were attempting to reproduce this effort, they might not know which data were used to generate the figures and tables and they are even less likely to be able to replicate all the steps in the workflow. 
