@@ -13,13 +13,14 @@ output:
       highlightLines: true
       countIncrementalSlides: false
       navigation:
-        scroll: true
+        scroll: false
     seal: false
     includes:
       after_body: usfws-logo.html
 editor_options: 
   chunk_output_type: console
 ---
+class: hide-logo, center, middle, inverse
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
@@ -38,10 +39,6 @@ mono_light(
 library(dplyr)
 library(flair)
 ```
-
-background-image: url(images/an-image.jpg)
-background-size: contain
-class: hide-logo, center, middle, inverse
 
 # ![:scale 9%](images/Rlogo.svg) Tools for a Code-based Data Workflow
 
@@ -62,7 +59,7 @@ class: hide-logo, center, middle, inverse
 ---
 class: inverse, center, middle, hide-logo
 
-# Documenting
+# Document
 
 ???
 
@@ -72,12 +69,6 @@ Before we dig into data acquisition, processing, and analysis, we need to have
 ---
 
 # Why document our code?
-
-???
-
-Why should we document our code? There are plenty of good reasons to document our code, but we'll focus on one --- reproducibility. It's one of criteria McCrea mentioned that we should strive for in the data management life cycle. Namely, at the very least, given the same set of data and a road map for data manipulation and analysis, we should be able to arrive at the same analytical or graphical result. The arguments about whether our methodology was the "correct" methodology are independent of this. At the very least we should be able to start from the same results. That's reproducibility. McCrea and I are asserting that reproducibility it much easier in a code-based workflow. Documentation helps turn the "computer-speak" of code into human readable format. Those humans will often be your colleagues, but are more than likely to be you, some time into the future. And good documentation discourages the self-loathing that often accompanies the experience or reading your code 6 months after you started it...
-
---
 
 .pull-left[
 .large[**Reproducibility**]
@@ -91,6 +82,10 @@ Make it reproducible for:
 .left[[![:scale 50%](images/xkcd-future_self.png)](https://m.xkcd.com/1421/)]
 ]
 
+???
+
+Why should we document our code? There are plenty of good reasons to document our code, but we'll focus on one --- reproducibility. It's one of criteria McCrea mentioned that we should strive for in the data management life cycle. To put it simply, if you and I start with the same set of data, and a road map for data manipulation and analysis, we should at the very least be able to arrive at the same analytical or graphical results. Arguments about whether our particular analytical road map was "correct" are independent of reproducibility. Reproducibility makes sure we can start those arguments from the same place. McCrea and I are asserting that reproducibility it much easier in a code-based workflow. What does that have to do with documentation? Well, code is written for computers. Documentation helps turn the "computer-speak" of code into human readable content so we can better understand our mutual starting point for discussion/argument. Those humans will often be your colleagues, but are more than likely to be you, some time into the future. And good documentation discourages the self-loathing that often accompanies the experience or revisiting your code 6 months after you started it...
+
 ---
 
 # Documenting basics
@@ -103,7 +98,7 @@ Make it reproducible for:
 
 ???
 
-Most of the documentation "basics" we cover are described well in these three sources, which I leave here for posterity. These are worthy reads once you start down the slippery slope of a code-based workflow. 
+Most of the documentation "basics" we cover are described well in these three sources, along with more rigorous documentation techniques. So we simply leave these references here for posterity. But they are worthy reads once you start down the slippery slope of a code-based workflow. 
 ---
 class: despaced
 
@@ -111,42 +106,62 @@ class: despaced
 
 .pull-left[
 <br>
+<br>
+.left[![:scale 100%](images/document-it-mkay.jpg)]]
+
+.pull-right[
 - Comment code as you go
 
-- Write self-documenting code
+- Name objects informatively
+
+- Follow a style guide
 
 - Make dependencies explicit
 
 - Write modular code
 
-- Include a project README
-
 - Record working environment
+
+- Include a project README
 
 - Version control
 ]
 
-.pull-right[.center[[![:scale 70%](images/documentation.jpg)](http://geek-and-poke.com/geekandpoke/2010/12/31/coders-new-years-resolution.html)]]
 
 ???
 
-I'm just going to hit you with all of these at once, as well take each in turn. There's nothing R-specific about these basics. They'll apply equally to your forays into Python, C++, Matlab, or any other coding program. As we take them in turn, however, we'll see a brief example or two of how these basics "look" in R.
+Let me hit you with all of these "basics" of documentation at once, as we'll take each in turn. But it's worth pointing out there's nothing R-specific about this list. They apply equally to your forays into Python, C++, Matlab, or any other coding program. But since this *is* a presentation about R, we'll see a brief example or two of how these basics "look" in R as we work our way through them.
 
 ---
 
 # Comment code as you write it
 
+.pull-left[
 - "Lab notebook" for code
 
 - Write for people, not computers
 
-- Bare minimum form of documentation
+- Bare minimum documentation
+]
+.pull-right[.right[![:scale 100%](images/disturbing.jpg)]]
+
+???
+
+Our first stop on the documentation train is adding comments to the code you write. COmments give you the opportunity to integrate a "lab notebook" into your code. Code is written for computer understanding, comments are written for human understanding. Consider commenting your code as the bare minimum requirement of documenting your code. 
 
 ---
 
-## Comment code as you write it
+# Commenting R code
 
-- In ![:scale 3%](images/Rlogo.svg), comment marker is number sign/hash (`#`)
+- Comment marker in ![:scale 3%](images/Rlogo.svg): `#` (number sign/hash)
+
+```{r echo = TRUE, eval = FALSE}
+# This is a comment
+
+x <- 2 # This is also a comment
+```
+
+--
 
 - <ins>Barest minimum</ins>: brief explanatory description at top of file
 
@@ -162,17 +177,23 @@ I'm just going to hit you with all of these at once, as well take each in turn. 
 
 # Comment code as you write it
 
-- Better: comment **succintly** throughout code
+- <ins>Better</ins>: comment **succintly** throughout code
 
-- Note your intentions, not mechanics: **"why"** not "what" nor "how"
+- Focus on your intentions, not mechanics: **"why"** not "what" nor "how"
 
-.center[[![:scale 65%](images/abstrusegoose-bridge.png)](https://abstrusegoose.com/432)]
+.center[[![:scale 70%](images/abstrusegoose-bridge.png)](https://abstrusegoose.com/432)]
+
+???
+
+But if you want to be the star student, or hate yourself later, a better approach is to provide thoughtful comments throughout the code that informs the reader, *succintly*, of your intentions. This isn't play-by-play. We don't need to rehash "what" we're doing with the code ("loading in my data"), or "how" the code is doing it ("looping over individuals"), but rather "why" we wrote any particular piece of code. What is that code intending to accomplish?
 
 ---
+class: despaced
 
 # Comment code as you write it
 
-**NOT HELPFUL**
+<br>
+**LESS HELPFUL**
 
 ```{r echo = TRUE, eval = FALSE}
 # Import data
@@ -196,13 +217,11 @@ df <- mutate(df, above_water = above / (above + below))
 
 ---
 
-# Write self-documenting code 
-
-- Name objects informatively
+# Name objects informatively
 
 .pull-left[
 
-**NOT HELPFUL**
+**LESS HELPFUL**
 
 ```{r echo = TRUE, eval = FALSE}
 # Data object naming
@@ -218,8 +237,6 @@ my_fun <- function(r) {pi * r ^ 2}
 ```
 
 ]
-
---
 
 .pull-right[
 
@@ -240,35 +257,36 @@ calc_circle_area <- function(radius) {pi * radius ^ 2}
 
 ]
 
----
+???
 
-# Write self-documenting code
+Comments are one very useful way to help translate the code written for computers into human-readable content. Another important way to integrate human-readable language into our code, without really impacting our software's ability to interpret that code, is to give informative names to the objects we create.
 
-- Follow (or at least read) a style guide
-
-.center[[![:scale 65%](images/xkcd-code_quality.png)](https://xkcd.com/1513/)]
+On the left...
 
 ---
 
+# Follow (or at least read) a style guide
+
+.center[[![:gen 75%, shadow](images/xkcd-code_quality.png)](https://xkcd.com/1513/)]
+
+???
+
+So, thoughtful commenting and informative object naming are the two main ways you can alter the content of your code to better express your intentions and goals. 
+
+But there are several other documentation "basics" that help you to better organize your code to make it more readable and easier to troubleshoot. The first of these is straightforward---when you write code, do it with a consistent style. McCrea covered this earlier in the presentation, so consider this a friendly reminder to at least read a style guide. 
+
+We link several in the repository associated with this presentation. Whatever style you choose, being consistent with it can dramatically improve the readability of your code, making your intentions that much easier to follow.
+
+---
 # Make dependencies explicit
 
-### Two types of dependencies
+### Package dependencies of code
 
-- Package dependencies of code
-  - Load required packages at beginning of script
-
---
-
-- Function dependencies (package source)
-  - Identify the package source of used functions
-
----
-
-# Make package dependencies explicit
+- Load required packages at beginning of script
 
 ```{r load-packages, echo=FALSE, tidy=FALSE}
 decorate('
-# General pattern
+# General usage
 library(package)
 
 # Example
@@ -279,14 +297,16 @@ library(dplyr)
 ```
 
 ---
+# Make dependencies explicit
 
-# Make function source package explicit
+### Function dependencies (package source)
 
+- Identify the package source of used functions
 - Avoids conflicts when multiple packages share function names 
 
 ```{r explicit-dependency, echo=FALSE, tidy=FALSE}
 decorate('
-# General pattern
+# General usage
 package::function()
 
 # Examples
@@ -304,25 +324,87 @@ dplyr::mutate()
 
 - Separate scripts for separate tasks
 
-- Turn repeated code tasks into functions
+- Execute or load the functionality with the `source` function
 
-- Load functionality
-  - `source("your_script.R)`
+```{r echo = TRUE, eval = FALSE}
+source("code/00_load_dependencies.R")
+source("code/01_import_data.R")
+source("code/02_tidy_data.R")
+source("code/03_fit_regression_models.R")
+source("code/04_generate_figures.R")
+source("code/05_generate_report.R")
+```
+
+???
+
+It's much easier to navigate through code that has been divided into multiple scripts that perform a focused, specific purpose. This is compared to, say, generating a single script that sequentially proceeds through much of the data management lifecycle. Even the best documentation in the world isn't going to make such a script digestible or easy to navigate.
+
+In R, we can execute the code, or load the functionality of the code, in these separate, modular scripts with the `source` function.
 
 ---
 
-# Modularize your code
+# Turn repeated code tasks into functions
 
-- Makes automated documentation tools handy/available
+### Function structure in ![:scale 3%](images/Rlogo.svg)
 
-- `roxygen2` package
+```{r functions, include = FALSE, echo = FALSE}
+# General usage
+functionName <- function(argument1, argument2, ...) {
+  # Do stuff
+}
 
+# Example
+createAwesomePlot <- function(data, 
+                              outpath = "plot.png") {
+  # Make awesome plot
+}
+```
+
+.smaller[
+```{r, echo = FALSE}
+decorate("functions") %>%
+  flair_rx("functionName|createAwesomePlot", background = "#CBB5FF") %>%
+  flair_rx("argument1|argument2|\\.\\.\\.|data|outpath", background = "#FFDFD1")
+```
+]
+
+???
+
+Regardless of whether we modularize our code, repeating code (or very nearly repeating code) is a common occurrence. Often we want to perform similar actions, make similar data transformations, generate similar plots, or repeat analyses. Well, in the spirit of avoiding long scripts, and breaking your code up into more manageable, modular chunks, consider turning those sections of repetitive code into functions.
+
+In R, the general structure of functions look like...
+
+---
+count: false
+
+```{r, eval = FALSE}
+source("code/functions/createAwesomePlot.R")
+figure_2 <- createAwesomePlot(data = bird_counts, outpath = "output/birds_plot.png")
+figure_3 <- createAwesomePlot(data = veg_data, output = "output/veg_plot.png")
+```
+
+.center[![:scale 50%](images/function.jpg)]
+
+???
+
+It's extremely satisfying to write a stand-alone function, `source`ing that functionality into R, and then performing some task with a line of code. It's easier to troubleshoot too...
+
+---
+
+# Documentation for (nearly) free!
+
+- Automated documentation tools
+- [`roxygen2`](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
   - specialized comments (`#'`) translated into documentation
 
-  - [introductory vignette](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
+.center[![:scale 50%](images/false.jpg)]
 
-- Human readable documentation for free!
-  
+???
+
+While we're on the topic of turning repetitive code into functions, let's bring up another perk beside easier maintenance and the satisfaction of calling your own functions - automated documentation tools
+
+Since you'd be commenting your functions anyway (right?), R has a handy package (roxygen2) that allows you turn basically turn your comments into standardized, human readable, html documentation. You accomplish this through the use of a special comment character (roxygen comment) and a few special tags (e.g., to identify the parameters, product, and examples, etc. of your function)
+
 ---
 
 # `roxygen2` example
@@ -338,25 +420,6 @@ count: false
 
 ---
 
-# Include a README file
-
-- Brief introduction to a project before accessing the code
-
---
-
-### General Structure
-
-1. What your code is/does (with context)
-2. Demonstrate how to use your code (install, configure, find help)
-3. What your code looks like in action (examples)
-4. Other relevant details (license, acknowledgments, working environment)
-
---
-
-### Handy templates available (e.g., [`usethis::use_readme_rmd`](https://usethis.r-lib.org/reference/use_readme_rmd.html))
-
----
-
 # Record working environment
 
 - Version info for ![:scale 3%](images/Rlogo.svg), the OS, and packages
@@ -365,9 +428,39 @@ count: false
 
 ???
 
-McCrea will mention a couple of ways to wrap all your dependencies up into a single
+McCrea mention a couple of ways to wrap all your dependencies up into a single
 package prior to sharing to help avoid issues with dealing with different 
 operating systems and R package versions
+
+---
+
+# Include a README file
+
+- Briefly introduce your project to users before they access the code
+
+.center[![:scale 60%](images/morpheus.jpg)]
+
+---
+# Include a README file
+
+### General Structure
+
+1. What your code is/does (with context)
+
+2. Demonstrate how to use your code (install, configure, find help)
+
+3. What your code looks like in action (examples)
+
+4. Other relevant details (license, acknowledgments, working environment)
+
+---
+# Include a README file
+
+### Handy templates available
+
+- e.g., [`usethis::use_readme_rmd`](https://usethis.r-lib.org/reference/use_readme_rmd.html)
+
+### Bonus points: create a [vignette](http://r-pkgs.had.co.nz/vignettes.html)
 
 ---
 
@@ -375,15 +468,746 @@ operating systems and R package versions
 
 - Stays "synced" with code as it changes
 
-- Modularize and take advantage of automated documentation tools
+.center[![:scale 60%](images/dangerous.jpg)]
+
 
 ???
 
 The same benefits of putting your code under version control (with Git/Github for example)
 apply to the documentation. When code and the documentation change substantially, you
-retain a record of all past versions. And if you smartly decide to modularize your code, 
-and store the documentation alongside your code using comments and roxygen, you
-can take advantage of the automated documentation tools R offers
+retain a record of all past versions and can better manage keeping your documentation in step with your code.
+
+---
+class: inverse, center, middle, hide-logo
+
+# Acquire
+
+???
+
+On to data acquisition. In our current context of a code-based workflow, we're not referring to the actual collection of data, say, as a part of field work in a biological monitoring program.(REFERENCE EARLIER WEBINAR RE DIGITATL DATA COLLECTION?) We're referring in this case to the act of retrieving the data that you've toiled to collect and bringing it into R so we can process it, quality control it, visualize it, analyze it, report on it, and share and archive it. 
 
 ---
 
+# Data sources
+
+.pull-left[
+- Flat file database
+  - e.g., `csv`, `xls`, `tsv`, `txt`, etc.
+
+- Relational database
+  - e.g., Access, SQL, etc.
+
+- web API (open or internal)
+    - AGOL, ServCat, IRMA, ...
+]
+
+.pull-right[
+<br>
+![:gen 100%, shadow](images/so-many-file-types.jpg)]
+
+???
+
+We distinguish generally between three sources of the data that you might reasonably want to bring into R: flat file databases (things like csvs, Excel and Google spreadsheets, fixed width), relational databases (e.g., Microsoft Access, SQL Server, etc), or data that sitting behind a web API (either open or secured). For flat files and relational databases, R doesn't generally care if that file is sitting on your machine or on a server somewhere as long as ou can construct a path to it.
+
+We simply don't have time to tackle these in depth, so we'll focus on a handy R package for getting data in flat files into R as well as demonstrate that one can pull directly from ArcGIS online into R.
+
+---
+
+# Acquiring data in flat files
+
+.pull-left-70[
+- [`rio`](https://cran.r-project.org/web/packages/rio/index.html) 
+
+- [Opinionated defaults](https://github.com/leeper/rio#package-philosophy) simplify data I/O
+
+- `import`, `export`, and `convert` functionality
+]
+
+.pull-right-30[.center[![:scale 60%](images/rio-logo.png)]]
+
+---
+
+# [Supported `rio` file formats](https://github.com/leeper/rio#supported-file-formats)
+
+```{r rio-formats, echo = FALSE}
+library(DT)
+rio_file_types <- rio::import("~/FWS_Projects/Requests_for_assistance/data-mgt-with-r/docs/adam/data/rio_formats.csv")
+DT::datatable(rio_file_types, options = list(pageLength = 6, dom = 'tip'), rownames = FALSE)
+```
+
+???
+
+Really a Swiss army knife of data I/O
+---
+
+#`rio` example - local file or web URL
+
+```{r flat-file, eval = FALSE}
+species <- rio::import("data/species.csv")
+species <- rio::import("https://motus.org/data/downloads/api-proxy/species")
+```
+
+```{r flat-output, echo = FALSE}
+library(knitr); library(kableExtra)
+rio::import("https://motus.org/data/downloads/api-proxy/species") %>% 
+  select(english, scientific) %>%
+  filter(grepl("Red Knot|Painted Bunting|Ruddy Turnston|Saltmarsh", english, TRUE)) %>%
+  kable() %>%
+  kable_styling()
+```
+
+---
+
+# Acquiring data in relational databases
+
+.pull-left-70[
+- [several database architectures supported](https://db.rstudio.com/databases)
+
+- SQL-related options supported generally
+
+  - can execute queries prior to import (`dplyr`)
+
+- Communication with MS Access is problematic
+  
+  - export flat files (e.g., `csv`, `xlsx`) for `rio`
+]
+
+.pull-right-30[
+<br>
+<br>
+.center[![:gen 100%, shadow](images/access.jpg)]]
+
+???
+
+We won't dwell long on relational databases, but there is flexibility. In general, SQL-based options are well-supported. And with the `dplyr` r package that we'll see again later, there's functionality to perform SQL actions in place prior to pulling the data into memory. Getting data directly from Access is an issue, so the best option there is generally to export flat files from Access and work with those...
+
+---
+
+# Acquiring data behind web APIs
+
+- Dedicated ![:scale 3%](images/Rlogo.svg) packages
+
+   - [ScienceBase](https://www.usgs.gov/centers/cdi/science/sbtools-r-package-sciencebase?qt-science_center_objects=0#qt-science_center_objects), [eBird](https://cran.r-project.org/web/packages/auk/index.html), [iNaturalist](https://github.com/ropensci/rinat), [FishBase](https://www.fishbase.in/search.php), [GBIF](https://cran.r-project.org/web/packages/rgbif/index.html), [BISON](https://cran.r-project.org/web/packages/rbison/index.html), [ITIS](https://cran.rstudio.com/web/packages/ritis/)
+
+.center[![:genv 150px, shadow](images/sb.png)  ![:genv 150px, shadow](images/ebird.png)  ![:genv 150px, shadow](images/inaturalist.png)]  ![:genv 150px, shadow](images/fishbase.png)]
+.center[![:genv 150px, shadow](images/gbif.jpg)  ![:genv 150px, shadow](images/itis.jpg)]
+
+???
+
+Another useful way for us to access data is though a web API service. Put simply, an API is any interface in which we can use a set of programming functions to access features or data from some application. In a web API, that service sits on the web, and we access via HTTP protocols. 
+
+We expect that data access, storage, and archiving via web APIs will become commonplace. For example, we are starting to see more and more of our biological inventory and monitoring work hosted on services like ArcGIS online
+
+For the purposes of this webinar, there is simply too much to cover, so we'll focus on a couple of points. 
+
+FIrst, some web APIs we're likely to find useful have existing dedicated R packages. Services like USGS's ScienceBase (which McCrea will illustrate later), eBird, iNaturalist, FishBase, online biodiversity repositories like GBIF and BISON, as well as ITIS, our taxonomic information system. 
+
+---
+count: false
+
+# Acquiring data behind web APIs
+
+- Some APIs already have dedicated ![:scale 3%](images/Rlogo.svg) packages
+
+   - [ScienceBase](https://www.usgs.gov/centers/cdi/science/sbtools-r-package-sciencebase?qt-science_center_objects=0#qt-science_center_objects), [eBird](https://cran.r-project.org/web/packages/auk/index.html), [GBIF](https://cran.r-project.org/web/packages/rgbif/index.html), [BISON](https://cran.r-project.org/web/packages/rbison/index.html), [iNaturalist](https://github.com/ropensci/rinat), [ITIS](https://cran.rstudio.com/web/packages/ritis/)
+
+.pull-left-70[
+- Do-It-Yourself
+
+  - AGOL, ServCat, IRMA, PRIMR, data.gov
+  
+  - [`httr`](https://cran.r-project.org/web/packages/httr/index.html) and [`crul`](https://cran.r-project.org/web/packages/crul/index.html) packages
+]
+
+.pull-right-30[
+.left[![:gen 90%, shadow](images/servcat-api.jpg)]]
+???
+
+But there are plenty of other APIs we're likely to find useful that don't have existing R packages, and we may be interested in setting up access on our own. Services like AGOL...
+
+THere are a couple of handy packages to help you with passing the necessary HTTP requests, like the `httr` and `crul` packages. Although I'll note the  `crul` package is aimed more at developers than casual users.
+
+One complication is that while most web APIs use the same HTTP requests (so most can be accessed using the `httr` package, for example), the format of those requests varies from API to API, and some are more complicated than others. But the rewards for getting it to work can be substantial to a complete code-based workflows. Let's take ArcGIS Online as an example, which the FWS is using increasingly for digital data collection, storage, and archiving of wildlife survey and monitoring data.
+
+---
+background-image: url(images/rcw-agol.png)
+background-size: contain
+
+<br>
+
+--
+
+.pull-left[.right[![:gen 75%, shadow](images/rcw-surveys.png)]]
+
+--
+
+.pull-right[.left[![:gen 65%, shadow](images/rcw-cluster-survey-app.png)]]
+
+---
+count: false
+background-image: url(images/rcw-agol.png)
+background-size: contain
+
+
+.center[![:gen 70%, shadow](images/rcw-cluster-survey-stakeholder.png)]
+
+???
+
+Behind a secure web service API, but we can access it...
+
+Compare to going to web browser, navigating to project and specific survey, exporting to a flat file locally, and then reading into R.
+
+---
+```{r pull-rcw, include = FALSE, echo = FALSE, eval = FALSE}
+pull_rcw_cluster_survey <- function() {
+
+  # Do some stuff...
+  
+  # Connect and pull content of RCW cluster status feature on USFWS AGOL
+  url <- "https://services.arcgis.com/...path_RCW_cluster_feature_server"
+  token <- "wouldnt_you_like_to_know"
+  outFields <- "*"
+  where = "1=1"
+  layerInfo <- jsonlite::fromJSON(
+    httr::content(httr::POST(url, 
+                             query = list(f = "json", token = token), 
+                             encode = "form",
+                             config = httr::config(ssl_verifypeer = FALSE)), 
+                  as = "text"))
+  
+  # Do some more stuff...
+  
+}
+```
+
+.smaller[
+```{r, echo = FALSE}
+decorate("pull-rcw") %>%
+  flair_rx("httr::content|httr::POST|httr::config", background = "#CBB5FF")
+```
+]
+
+---
+```{r, echo = FALSE}
+source("~/FWS_Projects/Requests_for_assistance/data-mgt-with-r/code/functions/pull_rcw_cluster_survey.R")
+```
+
+```{r rcw-agol, cache=TRUE}
+rcw_clusters <- pull_rcw_cluster_survey()
+```
+
+.scroll-output[
+```{r rcw-data, echo = FALSE}
+rcw_clusters %>%
+  select(-globalid, -FK_cluster_ID)
+```
+]
+
+---
+count: false
+
+.center[
+```{r rcw-plot, echo = FALSE, fig.width=15, fig.height=8}
+library(mapview); library(leaflet)
+mapview(rcw_clusters, map.types = "OpenStreetMap")@map %>%
+  fitBounds(-93, 30, -78, 36)
+```
+]
+
+---
+class: inverse, center, middle, hide-logo
+
+# Process
+
+???
+
+---
+# Data processing to us
+
+- Reshaping
+- Maniputing, transforming, cleaning
+- Profiling
+- Assertions
+- Exploratory data analysis
+
+---
+# Data reshaping
+
+.center[[![:gen 60%](images/wide-long.png)](https://www.garrickadenbuie.com/project/tidyexplain/)]
+
+???
+First, let's talk a bit about tabular data.
+
+We can present it in two distinct forms: wide and long.
+
+In 'wide' format, each sample/individual get a row, and each variable of interest occupies a column. This can be a useful format for recording data, and often for analyzing data.
+
+In 'long' format, that 'wide' data is pivoted such that all recorded values for that sample/individual occupy a column, and there's an associated column providing the variable "context" for that value. This can be a useful format for summarizing and visualizing data.
+
+So an important data processing task is to reshape data from one form to the other.
+
+---
+# Moving from wide to long
+
+.pull-left[
+- [`tidyr`](https://tidyr.tidyverse.org/articles/pivot.html) (example)
+- [`data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html)
+]
+
+.pull-right[
+.center[![:gen 70%, shadow](images/tidyr-pivots.gif)]
+]
+
+???
+---
+# "Tidy" data
+
+- Not "clean", but "wide" data organized such that:
+  - each variable has its own column
+  - each observation has its own row
+  - each value has its own cell
+  
+.center[[![:gen 80%, shadow](images/tidy.png)](https://r4ds.had.co.nz/tidy-data.html)]
+
+---
+# Data manipulation and transformation
+
+.pull-left[
+- Transform variables
+- Create new variables
+- Filter 
+- Sort
+- Group and summarize
+- Wrangle (clean) factors, strings, dates, times
+]
+
+.pull-right[.center[![:gen 80%, shadow](images/tidy-yoda.jpg)]]
+
+---
+# Post-processing R packages
+
+.pull-left[
+### [Tidyverse](https://www.tidyverse.org/)
+- [`tidyr`](https://cran.r-project.org/web/packages/tidyr/index.html) (pivoting, split/unite)
+- [`dplyr`](https://cran.r-project.org/web/packages/dplyr/index.html) (data manipulation)
+- [`lubridate`](https://cran.r-project.org/web/packages/lubridate/index.html) (dates, times)
+- [`forcats`](https://cran.r-project.org/web/packages/forcats/index.html) (factors)
+- [`stringr`](https://cran.r-project.org/web/packages/stringr/index.html) (strings)
+- facilitates ["piped" workflow](https://r4ds.had.co.nz/pipes.html#pipes)
+]
+
+.pull-right[
+### Alternative API
+- [`data.table`](https://cran.r-project.org/web/packages/data.table/index.html) (acquisition, pivoting, manipulation)
+]
+
+---
+# Piped workflow
+
+- Pipe operator: `%>%` 
+
+### Traditional (no pipes)
+```{r, eval = FALSE}
+raw_data <- rio::import("survey_data.xlsx")
+mod_data <- dplyr::mutate(raw_data, new_var = var_one + var_two)
+mod_data <- dplyr::filter(mod_data, new_var < 100)
+mod_data <- dplyr::arrange(mod_data, sort_var)
+```
+
+---
+count: false
+
+# Piped workflow
+
+- Pipe operator: `%>%` 
+
+### Piped
+
+```{r piped, include = FALSE, eval = FALSE}
+raw_data <- rio::import("survey_data.xlsx")
+mod_data <- raw_data %>%
+  dplyr::mutate(new_var = var_one + var_two) %>%
+  dplyr::filter(new_var < 100) %>%
+  dplyr::arrange(sort_var)
+```
+
+```{r, echo = FALSE}
+decorate("piped", eval = FALSE) %>%
+  flair_rx("%.%", background = "#CBB5FF")
+```
+
+???
+
+
+---
+# Data profiling
+
+.pull-left[
+- Intuitions and expectations
+  - how many records?
+  - how many variables?
+  - variable types?
+  - ranges of variable values
+]
+
+.pull-right[
+- Informative summaries
+  - identify questionable entries
+  - extreme/unlikely values
+  - data entry errors
+  - missing data
+]
+
+Small mammal trapping data set from [Portal Project Teaching Database](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459)
+```{r, eval = FALSE}
+mammals <- rio::import("data/small_mammals.csv")
+```
+
+???
+
+---
+# `summary`
+
+```{r, echo=FALSE}
+mammals <- rio::import("~/FWS_Projects/Requests_for_assistance/data-mgt-with-r/docs/adam/data/small_mammals.csv")
+```
+
+.scroll-output[
+```{r}
+summary(mammals)
+```
+]
+
+---
+# `str`
+
+```{r}
+str(mammals)
+```
+
+---
+# `summarytools::dfSummary`
+
+```{r, eval = FALSE}
+summarytools::view(summarytools::dfSummary(mammals))
+```
+
+.scroll-output[.smaller[
+```{r, echo = FALSE}
+print(summarytools::dfSummary(mammals, valid.col = FALSE, graph.magnif = 0.75), method = "render")
+```
+]]
+
+---
+# `skimr::skim`
+
+.scroll-output[.smallest[
+```{r, fig.width = 15}
+skimr::skim(mammals)
+```
+]]
+
+---
+# `DataExplorer::create_report`
+
+```{r, eval = FALSE}
+# An .html file is output to your current working directory and opens in browser
+DataExplorer::create_report(mammals, 
+                            output_file = "mammal_data_profile.html")
+```
+
+---
+.scroll-output-tall[.smaller[
+```{r, echo = FALSE, child="rmd/mammal_report.rmd"}
+```
+]]  
+
+---
+# QA/QC with assertive programming
+
+- Test explicit assumptions/expectations
+- Play QA/QC offense, not defense
+- [`assertr`](https://cran.r-project.org/web/packages/assertr/index.html) ([vignette](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html))
+
+```{r, eval = FALSE}
+# Expect maximum weight
+mammals %>% assertr::verify(weight < 100)
+
+# Alternative, giving weight range
+mammals %>% assertr::assert(assertr::within_bounds(15, 100), weight)
+
+# Confirm expected format of sex variable
+mammals %>% assertr::assert(assertr::in_set(c("M", "F")))
+```
+
+???
+Data interrogation and data profiling examples we just covered are a nice, graphical way to test your assumptions and expectations about your data. But they're a bit ad hoc. If we're familiar with the data we're using, or what we expect it to look like up front, then we can be more explicit and assertive so that you can detect and correct any deviations from that expectation as soon as possible in your workflow. That is, we can be on offense in our data QA/QC, rather than playing defense.
+
+The `assertr` package gives us a suite of functions designed to verify our assumptions about the data as early as possible.
+
+A few simple examples. So many more possibilities --> vignette
+
+---
+# Exploratory data analysis
+
+- More thoughtful and intentional than data profiling
+- Aims for understanding
+  - variation, missing values, covariation
+- Iterative (questions -> answers -> questions)
+- Visualization is key
+
+???
+Once we're past the data profiling and QA/QC, we can start looking to better understand our data with exploratory data analysis.
+
+---
+# Visualization framework
+
+- Need flexible but consistent grammar for visualization
+  - [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/index.html): a grammar of graphics	
+  
+.center[![:genv 375px, shadow](images/ggplot-layers.png)]
+
+???
+Graphics are built by layering independent elements, such as:
+  - data
+  - aesthetic mapping (position, color, fill, shape, size, linetype, etc.)
+  - geometric object (points, lines, bars, rasters, etc.)
+  - scales
+  - faceting (separate graphics by groups)
+  - coordinate systems
+  - labels
+  - themes
+...among others 
+
+There are alternative visualization tools in R, but we appreciate the flexibility and intuitiveness of ggplot, and how quickly you can go from data to publication quality figures. We could spend a solid week on ggplot, so we'll restrict the demonstration to a quick example of the building of a plot using the layers, as well as show you a few figures created by ggplot to illustrate the range of possibilities. Couple that with the relative ease of turning ggplot-based figures into animations and interactive graphics
+
+---
+
+```{r, child = "rmd/sav_flipbook.Rmd"}
+```
+
+---
+
+.center[![:gen 80%, shadow](images/ggeg-dabblers.png)]
+
+---
+count:false
+
+.center[![:gen 50%, shadow](images/ggeg-nansound.png)]
+
+---
+count: false
+
+.center[![:gen 70%, shadow](images/ggeg-waterquality.png)]
+
+---
+count: false
+
+.center[![:gen 75%, shadow](images/ggeg-duck_models.png)]
+
+---
+count: false
+
+.center[![:gen 60%, shadow](images/ggeg-REKN.png)]
+
+---
+class: inverse, center, middle, hide-logo
+
+# Analyze
+
+???
+
+We can't reasonably spend much time here because there's simply too much material. So we'll focus on a few good resources to lead you down the right code-based path in R for whatever analysis you're looking for. The good news is that, if it can be done, there's likely an R resource available.
+
+---
+# CRAN task views
+
+- relevant R packages for ~ 40 topics
+
+- very focused to emphasize packages 
+
+- not endorsements
+
+---
+# Animal tracking example
+
+```{r, echo = FALSE, fig.width=15}
+include_url("https://cran.r-project.org/web/views/Tracking.html")
+```
+
+---
+# Diverse topics
+
+.scroll-output[
+<table summary="CRAN Task Views">
+  <tbody><tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Bayesian.html">Bayesian</a></td>
+    <td>Bayesian Inference</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/ChemPhys.html">ChemPhys</a></td>
+    <td>Chemometrics and Computational Physics</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/ClinicalTrials.html">ClinicalTrials</a></td>
+    <td>Clinical Trial Design, Monitoring, and Analysis</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Cluster.html">Cluster</a></td>
+    <td>Cluster Analysis &amp; Finite Mixture Models</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Databases.html">Databases</a></td>
+    <td>Databases with R</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/DifferentialEquations.html">DifferentialEquations</a></td>
+    <td>Differential Equations</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Distributions.html">Distributions</a></td>
+    <td>Probability Distributions</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Econometrics.html">Econometrics</a></td>
+    <td>Econometrics</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Environmetrics.html">Environmetrics</a></td>
+    <td>Analysis of Ecological and Environmental Data</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/ExperimentalDesign.html">ExperimentalDesign</a></td>
+    <td>Design of Experiments (DoE) &amp; Analysis of Experimental Data</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/ExtremeValue.html">ExtremeValue</a></td>
+    <td>Extreme Value Analysis</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Finance.html">Finance</a></td>
+    <td>Empirical Finance</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/FunctionalData.html">FunctionalData</a></td>
+    <td>Functional Data Analysis</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Genetics.html">Genetics</a></td>
+    <td>Statistical Genetics</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Graphics.html">Graphics</a></td>
+    <td>Graphic Displays &amp; Dynamic Graphics &amp; Graphic Devices &amp; Visualization</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/HighPerformanceComputing.html">HighPerformanceComputing</a></td>
+    <td>High-Performance and Parallel Computing with R</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Hydrology.html">Hydrology</a></td>
+    <td>Hydrological Data and Modeling</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/MachineLearning.html">MachineLearning</a></td>
+    <td>Machine Learning &amp; Statistical Learning</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/MedicalImaging.html">MedicalImaging</a></td>
+    <td>Medical Image Analysis</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/MetaAnalysis.html">MetaAnalysis</a></td>
+    <td>Meta-Analysis</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/MissingData.html">MissingData</a></td>
+    <td>Missing Data</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/ModelDeployment.html">ModelDeployment</a></td>
+    <td>Model Deployment with R</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Multivariate.html">Multivariate</a></td>
+    <td>Multivariate Statistics</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/NaturalLanguageProcessing.html">NaturalLanguageProcessing</a></td>
+    <td>Natural Language Processing</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/NumericalMathematics.html">NumericalMathematics</a></td>
+    <td>Numerical Mathematics</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/OfficialStatistics.html">OfficialStatistics</a></td>
+    <td>Official Statistics &amp; Survey Methodology</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Optimization.html">Optimization</a></td>
+    <td>Optimization and Mathematical Programming</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Pharmacokinetics.html">Pharmacokinetics</a></td>
+    <td>Analysis of Pharmacokinetic Data</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Phylogenetics.html">Phylogenetics</a></td>
+    <td>Phylogenetics, Especially Comparative Methods</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Psychometrics.html">Psychometrics</a></td>
+    <td>Psychometric Models and Methods</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/ReproducibleResearch.html">ReproducibleResearch</a></td>
+    <td>Reproducible Research</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Robust.html">Robust</a></td>
+    <td>Robust Statistical Methods</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/SocialSciences.html">SocialSciences</a></td>
+    <td>Statistics for the Social Sciences</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Spatial.html">Spatial</a></td>
+    <td>Analysis of Spatial Data</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/SpatioTemporal.html">SpatioTemporal</a></td>
+    <td>Handling and Analyzing Spatio-Temporal Data</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Survival.html">Survival</a></td>
+    <td>Survival Analysis</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/TeachingStatistics.html">TeachingStatistics</a></td>
+    <td>Teaching Statistics</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/TimeSeries.html">TimeSeries</a></td>
+    <td>Time Series Analysis</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/Tracking.html">Tracking</a></td>
+    <td>Processing and Analysis of Tracking Data</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/WebTechnologies.html">WebTechnologies</a></td>
+    <td>Web Technologies and Services</td>
+  </tr>
+  <tr valign="top">
+    <td><a href="https://cran.r-project.org/web/views/gR.html">gR</a></td>
+    <td>gRaphical Models in R</td>
+  </tr>
+</tbody></table>
+]
+
+---
+# When all else fails...
+
+.center[![:gen 60%, shadow](images/google-it.jpg)]
