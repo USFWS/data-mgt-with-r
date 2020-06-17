@@ -87,7 +87,7 @@ class: inverse, center, middle, hide-logo
 ]
 
 
-??
+???
 First, we will review some of the concepts introduced earlier today by Jared and Maren. We will provide a cursory review of the data and project life cycles and how these fit into a typical scientific data workflow. We will compare the traditional "point and click" data workflow to a code-based data workflow in R, and provide some reasons why we are advocating for the code-based data workflow.
 
 
