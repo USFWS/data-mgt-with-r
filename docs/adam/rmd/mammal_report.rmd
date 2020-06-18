@@ -1,5 +1,6 @@
 ---
 title: "Data Profiling Report"
+output: html_fragment
 ---
 
 ```{r global_options, include=FALSE}
@@ -26,6 +27,7 @@ config <- configure_report(
 )
 
 ## Get user data
+mammals <- rio::import("~/FWS_Projects/Requests_for_assistance/data-mgt-with-r/docs/adam/data/small_mammals.csv")
 data <- mammals
 report_config <- config
 response <- NULL

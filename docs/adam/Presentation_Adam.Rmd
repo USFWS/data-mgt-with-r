@@ -59,7 +59,8 @@ library(flair)
 ---
 class: inverse, center, middle, hide-logo
 
-# Document
+# Documenting
+![](images/life_cycles-data_documenting.png)
 
 ???
 
@@ -185,7 +186,7 @@ x <- 2 # This is also a comment
 
 ???
 
-But if you want to be the star student, or hate yourself later, a better approach is to provide thoughtful comments throughout the code that informs the reader, *succintly*, of your intentions. This isn't play-by-play. We don't need to rehash "what" we're doing with the code ("loading in my data"), or "how" the code is doing it ("looping over individuals"), but rather "why" we wrote any particular piece of code. What is that code intending to accomplish?
+But if you want to be the star student, or at least not hate yourself later, a better approach is to provide thoughtful comments throughout the code that informs the reader, *succintly*, of your intentions. This isn't play-by-play. We don't need to rehash "what" we're doing with the code ("loading in my data"), or "how" the code is doing it ("looping over individuals"), but rather "why" we wrote any particular piece of code. What is that code intending to accomplish?
 
 ---
 class: despaced
@@ -383,7 +384,7 @@ figure_2 <- createAwesomePlot(data = bird_counts, outpath = "output/birds_plot.p
 figure_3 <- createAwesomePlot(data = veg_data, output = "output/veg_plot.png")
 ```
 
-.center[![:scale 50%](images/function.jpg)]
+.center[![:scale 60%](images/function.jpg)]
 
 ???
 
@@ -397,7 +398,7 @@ It's extremely satisfying to write a stand-alone function, `source`ing that func
 - [`roxygen2`](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
   - specialized comments (`#'`) translated into documentation
 
-.center[![:scale 50%](images/false.jpg)]
+.center[![:scale 45%](images/false.jpg)]
 
 ???
 
@@ -481,6 +482,8 @@ retain a record of all past versions and can better manage keeping your document
 class: inverse, center, middle, hide-logo
 
 # Acquire
+![](images/life_cycles-data_acquire.png)
+
 
 ???
 
@@ -589,7 +592,7 @@ We won't dwell long on relational databases, but there is flexibility. In genera
 
    - [ScienceBase](https://www.usgs.gov/centers/cdi/science/sbtools-r-package-sciencebase?qt-science_center_objects=0#qt-science_center_objects), [eBird](https://cran.r-project.org/web/packages/auk/index.html), [iNaturalist](https://github.com/ropensci/rinat), [FishBase](https://www.fishbase.in/search.php), [GBIF](https://cran.r-project.org/web/packages/rgbif/index.html), [BISON](https://cran.r-project.org/web/packages/rbison/index.html), [ITIS](https://cran.rstudio.com/web/packages/ritis/)
 
-.center[![:genv 150px, shadow](images/sb.png)  ![:genv 150px, shadow](images/ebird.png)  ![:genv 150px, shadow](images/inaturalist.png)]  ![:genv 150px, shadow](images/fishbase.png)]
+.center[![:genv 150px, shadow](images/sb.png)  ![:genv 150px, shadow](images/ebird.png)  ![:genv 150px, shadow](images/inaturalist.png)  ![:genv 150px, shadow](images/fishbase.png)]
 .center[![:genv 150px, shadow](images/gbif.jpg)  ![:genv 150px, shadow](images/itis.jpg)]
 
 ???
@@ -689,10 +692,13 @@ decorate("pull-rcw") %>%
 
 ---
 ```{r, echo = FALSE}
-source("~/FWS_Projects/Requests_for_assistance/data-mgt-with-r/code/functions/pull_rcw_cluster_survey.R")
+# source("~/FWS_Projects/Requests_for_assistance/data-mgt-with-r/code/functions/pull_rcw_cluster_survey.R")
+# rcw_clusters <- pull_rcw_cluster_survey()
+# saveRDS(rcw_cluster, "data/rcw_clusters.rds")
+rcw_clusters <- readRDS("data/rcw_clusters.rds")
 ```
 
-```{r rcw-agol, cache=TRUE}
+```{r rcw-agol, eval = FALSE}
 rcw_clusters <- pull_rcw_cluster_survey()
 ```
 
@@ -718,17 +724,24 @@ mapview(rcw_clusters, map.types = "OpenStreetMap")@map %>%
 class: inverse, center, middle, hide-logo
 
 # Process
+![](images/life_cycles-data_process.png)
+
 
 ???
 
 ---
-# Data processing to us
+# Data processing
 
 - Reshaping
-- Maniputing, transforming, cleaning
-- Profiling
-- Assertions
+- Manipulating, transforming, cleaning
+- Quality control
 - Exploratory data analysis
+
+.center[![:gen 60%](images/spinning-gold.gif)]
+
+???
+
+One way or the other, we've wrangled our data into R. Now it's time to process that raw data into something fit for visualization and analysis. Way more time is spent on these general tasks of data reshaping, manipulation, cleaning, and quality control than you'd probably be comfortable with. But it's a fact of life, and I like to think this is where we start the process of spinning straw into golden thread...
 
 ---
 # Data reshaping
@@ -736,13 +749,11 @@ class: inverse, center, middle, hide-logo
 .center[[![:gen 60%](images/wide-long.png)](https://www.garrickadenbuie.com/project/tidyexplain/)]
 
 ???
-First, let's talk a bit about tabular data.
+In the vast majority of cases, we're working on tabular data. It may be spatially referenced, but there's still likely underlying tabular data association with it. We need to get comfortable moving that tabular data between two distinct presentations---wide and long.
 
-We can present it in two distinct forms: wide and long.
+In 'wide' format, each sample/individual occupies a row of the table, and each variable that we've measured on those samples occupies a column. This can be a useful format for recording data, and it's typically the format we need for analyzing data.
 
-In 'wide' format, each sample/individual get a row, and each variable of interest occupies a column. This can be a useful format for recording data, and often for analyzing data.
-
-In 'long' format, that 'wide' data is pivoted such that all recorded values for that sample/individual occupy a column, and there's an associated column providing the variable "context" for that value. This can be a useful format for summarizing and visualizing data.
+In 'long' format, that 'wide' data is pivoted such that all those variables of interest end up in a single column that provides the context for another column that contains the values of that variable. So each sample or individual is represented by multiple rows. While it may see strange, this can be a useful format for summarizing and visualizing data.
 
 So an important data processing task is to reshape data from one form to the other.
 
@@ -750,7 +761,7 @@ So an important data processing task is to reshape data from one form to the oth
 # Moving from wide to long
 
 .pull-left[
-- [`tidyr`](https://tidyr.tidyverse.org/articles/pivot.html) (example)
+- [`tidyr::pivot_*`](https://tidyr.tidyverse.org/articles/pivot.html) functions (example)
 - [`data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html)
 ]
 
@@ -759,18 +770,29 @@ So an important data processing task is to reshape data from one form to the oth
 ]
 
 ???
+
+The most convenient way to perform this action in R is with the `pivot_longer` and `pivot_wider` functions from the tidyr package, though the `data.table` package possess similar functionality.
+
 ---
 # "Tidy" data
 
-- Not "clean", but "wide" data organized such that:
+- Not "clean", but organized such that:
   - each variable has its own column
   - each observation has its own row
   - each value has its own cell
   
 .center[[![:gen 80%, shadow](images/tidy.png)](https://r4ds.had.co.nz/tidy-data.html)]
 
+???
+
+Somewhat related to wide data is the concept of tidy data.
+
+These three criteria capture all the information available. There's no information encoded in color, or bold font, etc...
+
+Tidy data is our goal as we head towards analysis, though we'll almost certainly have to wrangle the data to get there. FOrtunately, there are R tools for that...
+
 ---
-# Data manipulation and transformation
+# Data manipulation and wrangling
 
 .pull-left[
 - Transform variables
@@ -784,7 +806,7 @@ So an important data processing task is to reshape data from one form to the oth
 .pull-right[.center[![:gen 80%, shadow](images/tidy-yoda.jpg)]]
 
 ---
-# Post-processing R packages
+# Data manipulation and wrangling R packages
 
 .pull-left[
 ### [Tidyverse](https://www.tidyverse.org/)
@@ -833,60 +855,66 @@ mod_data <- raw_data %>%
 
 ```{r, echo = FALSE}
 decorate("piped", eval = FALSE) %>%
-  flair_rx("%.%", background = "#CBB5FF")
+  flair("%>%", background = "#CBB5FF")
 ```
 
-???
-
-
 ---
-# Data profiling
+# Quality control
 
 .pull-left[
-- Intuitions and expectations
-  - how many records?
-  - how many variables?
-  - variable types?
-  - ranges of variable values
+- Passive: <ins>**data profiling**</ins>
+- Active: <ins>**assertive programming**</ins>
 ]
 
-.pull-right[
-- Informative summaries
-  - identify questionable entries
-  - extreme/unlikely values
-  - data entry errors
-  - missing data
-]
+.pull-right[.center[![:gen 70%, shadow](images/quality-control-is.jpg)]]
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 Small mammal trapping data set from [Portal Project Teaching Database](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459)
+
 ```{r, eval = FALSE}
-mammals <- rio::import("data/small_mammals.csv")
+mammals <- rio::import("https://ndownloader.figshare.com/files/10717177")
 ```
 
 ???
 
+We think about quality control in terms of a more passive, ad hoc approach (which we refer to as data profiling), and a more explicity, active quality control we refer to as assertive programming. 
+
+Data profiling is passive in that it doesn't involve testing any specific aspects of the data, but rather uses informative summaries to help you identify flag potential issues like questionable data entries, extreme/unlikely values, and patterns of missing data
+
+On the other hand, assertive programming turns your knowledge of the data into explicit tests to make sure the data meets your requirements
+
 ---
-# `summary`
+# Data profiling functions
+
+## `str` & `summary` (base ![:scale 3%](images/Rlogo.svg))
 
 ```{r, echo=FALSE}
-mammals <- rio::import("~/FWS_Projects/Requests_for_assistance/data-mgt-with-r/docs/adam/data/small_mammals.csv")
+mammals <- rio::import("data/small_mammals.csv")
 ```
-
-.scroll-output[
-```{r}
-summary(mammals)
-```
-]
-
----
-# `str`
 
 ```{r}
 str(mammals)
 ```
 
+???
+
+We'll take the more passive data profiling approach first, illustrating some R functions to help us along. The first two examples are part of base R (not in any special package but part of the core R software)
+
 ---
-# `summarytools::dfSummary`
+.scroll-output-tall[.smallest[
+```{r}
+summary(mammals)
+```
+]]
+
+---
+## `summarytools::dfSummary`
 
 ```{r, eval = FALSE}
 summarytools::view(summarytools::dfSummary(mammals))
@@ -898,8 +926,12 @@ print(summarytools::dfSummary(mammals, valid.col = FALSE, graph.magnif = 0.75), 
 ```
 ]]
 
+???
+
+Three additional functions we've found useful give us a fairly robust profile of our data without much work. I'll speed through them a bit since they contain similar types of information with some variation in how the summaries are presented. The first is the `dfSummary` function from the `summarytools` package.
+
 ---
-# `skimr::skim`
+## `skimr::skim`
 
 .scroll-output[.smallest[
 ```{r, fig.width = 15}
@@ -908,7 +940,7 @@ skimr::skim(mammals)
 ]]
 
 ---
-# `DataExplorer::create_report`
+## `DataExplorer::create_report`
 
 ```{r, eval = FALSE}
 # An .html file is output to your current working directory and opens in browser
@@ -917,52 +949,65 @@ DataExplorer::create_report(mammals,
 ```
 
 ---
-.scroll-output-tall[.smaller[
-```{r, echo = FALSE, child="rmd/mammal_report.rmd"}
+.scroll-output-tall[.smallest[
+```{r, echo = FALSE}
+htmltools::includeHTML("rmd/mammal_report.html")
 ```
 ]]  
 
----
-# QA/QC with assertive programming
+???
 
-- Test explicit assumptions/expectations
-- Play QA/QC offense, not defense
+More graphical presentation, plus some additional looks at covariation among your data. Each of these last three functions have additional functionality (for example, exploring data profiles by groups), so I encourage to dig a little deeper with these functions that give you a fair bit of useful information for very little overhead...
+
+---
+# Assertive programming
+
 - [`assertr`](https://cran.r-project.org/web/packages/assertr/index.html) ([vignette](https://cran.r-project.org/web/packages/assertr/vignettes/assertr.html))
 
+.pull-left-70[
 ```{r, eval = FALSE}
 # Expect maximum weight
-mammals %>% assertr::verify(weight < 100)
+mammals %>% 
+  assertr::verify(weight < 100)
 
 # Alternative, giving weight range
-mammals %>% assertr::assert(assertr::within_bounds(15, 100), weight)
+mammals %>% 
+  assertr::assert(assertr::within_bounds(15, 100), weight)
 
 # Confirm expected format of sex variable
-mammals %>% assertr::assert(assertr::in_set(c("M", "F")))
+mammals %>% 
+  assertr::assert(assertr::in_set(c("M", "F")))
 ```
+]
+
+.pull-right-30[
+![:gen 100%, shadow](images/assertive.jpg)]
 
 ???
-Data interrogation and data profiling examples we just covered are a nice, graphical way to test your assumptions and expectations about your data. But they're a bit ad hoc. If we're familiar with the data we're using, or what we expect it to look like up front, then we can be more explicit and assertive so that you can detect and correct any deviations from that expectation as soon as possible in your workflow. That is, we can be on offense in our data QA/QC, rather than playing defense.
+SO that's data profiling. A good approach to take a general pulse check of your data. But in many, if not most cases, we should be very familiar with the data we've collected and are now trying to wrangle. So we should have some pretty strong intuitions or ideas of what the data *should* look like. In those cases, we can go on the quality control offensive, and be more explicit and assertive to detect problematic records as soon as possible in the processing workflow. 
 
-The `assertr` package gives us a suite of functions designed to verify our assumptions about the data as early as possible.
-
-A few simple examples. So many more possibilities --> vignette
+The `assertr` package gives us a suite of functions designed to help us test and verify our intuitions and assumptions about the data. I only illustrate three very simple examples, such as checking that are small mammal weights meet a couple of criteria, or that we recorded sex in a consistent format. But there are many, many more possibilities, so we encourage you to check out the linked vignette
 
 ---
 # Exploratory data analysis
 
-- More thoughtful and intentional than data profiling
+.pull-left-70[
 - Aims for understanding
   - variation, missing values, covariation
 - Iterative (questions -> answers -> questions)
 - Visualization is key
+]
+
+.pull-right-30[
+![:gen 90%, shadow](images/visualization.jpg)]
 
 ???
-Once we're past the data profiling and QA/QC, we can start looking to better understand our data with exploratory data analysis.
+Once we've wrangled the data to our liking, and finished our QC due diligence, we can be more thoughtful and intentional with our data, and attempt to start understanding it with exploratory data analysis. EDA is often an iterative process of asking questions and seeking answers from your data, and it often involves a lot of visualization. So that's were we focus this abbreviated coverage---with a quick look at the most popular visualization framework in R---ggplot2
 
 ---
 # Visualization framework
 
-- Need flexible but consistent grammar for visualization
+- Flexible, consistent grammar for visualization
   - [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/index.html): a grammar of graphics	
   
 .center[![:genv 375px, shadow](images/ggplot-layers.png)]
@@ -979,12 +1024,246 @@ Graphics are built by layering independent elements, such as:
   - themes
 ...among others 
 
-There are alternative visualization tools in R, but we appreciate the flexibility and intuitiveness of ggplot, and how quickly you can go from data to publication quality figures. We could spend a solid week on ggplot, so we'll restrict the demonstration to a quick example of the building of a plot using the layers, as well as show you a few figures created by ggplot to illustrate the range of possibilities. Couple that with the relative ease of turning ggplot-based figures into animations and interactive graphics
+There are alternative visualization tools in R, but we appreciate the flexibility and intuitiveness of ggplot, and how quickly you can go from data to publication quality figures. Couple that with the relative ease of turning ggplot-based figures into animations and interactive graphics, and you've got a useful tool. I'll hope a quick demonstration of plot building illustrates the idea of building a plot in layers, point you to a good resource to learn more, and show you a few figures created by ggplot to illustrate the range of possibilities. 
 
 ---
 
-```{r, child = "rmd/sav_flipbook.Rmd"}
+
+### Target output: *Submerged aquatic vegetation - Mattamuskeet NWR*
+
+.center[![:genv 500px, shadow](images/sav.png)]
+
+```{r, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE}
+library(sf); library(ggplot2)
+sav_pts <- readRDS("~/FWS_Projects/Requests_for_assistance/data-mgt-with-r/docs/adam/data/sav_obs.rds")
+sav_model_fit <- readRDS("~/FWS_Projects/Requests_for_assistance/data-mgt-with-r/docs/adam/data/gridded_sav.rds")
+LM <- readRDS("~/FWS_Projects/Requests_for_assistance/data-mgt-with-r/docs/adam/data/LM.rds")
+theme_set(theme_gray(base_size = 20))
 ```
+
+---
+.pull-left-60[.smallest[
+```{r, echo = TRUE, eval = FALSE}
+ggplot(data = sav_model_fit) #<<
+```
+]]
+
+.pull-right-40[
+```{r, echo = FALSE, eval = TRUE, fig.width=8, fig.height=4}
+ggplot(data = sav_model_fit)
+```
+]
+
+---
+count: false
+
+.pull-left-60[.smallest[
+```{r, echo = TRUE, eval = FALSE}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) #<<
+```
+]]
+
+.pull-right-40[
+```{r, echo = FALSE, eval = TRUE, fig.width=8, fig.height=4}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav))
+```
+]
+
+---
+count: false
+
+.pull-left-60[.smallest[
+```{r, echo = TRUE, eval = FALSE}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) + 
+  geom_sf(data = LM, color = "black", fill = NA) #<<
+```
+]]
+
+.pull-right-40[
+```{r, echo = FALSE, eval = TRUE, fig.width=8, fig.height=4}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) + 
+  geom_sf(data = LM, color = "black", fill = NA)
+```
+]
+
+---
+count: false
+
+.pull-left-60[.smallest[
+```{r, echo = TRUE, eval = FALSE}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) + 
+  geom_sf(data = LM, color = "black", fill = NA) +
+  geom_point(data = sav_pts, shape = 21, #<< 
+             aes(x, y, fill = sav)) #<<
+```
+]]
+
+.pull-right-40[
+```{r, echo = FALSE, eval = TRUE, fig.width=8, fig.height=4}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) + 
+  geom_sf(data = LM, color = "black", fill = NA) +
+  geom_point(data = sav_pts, shape = 21, 
+             aes(x, y, fill = sav))
+```
+]
+
+---
+count: false
+
+.pull-left-60[.smallest[
+```{r, echo = TRUE, eval = FALSE}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) + 
+  geom_sf(data = LM, color = "black", fill = NA) +
+  geom_point(data = sav_pts, shape = 21, 
+             aes(x, y, fill = sav)) + 
+  scale_fill_viridis_c("Proportion\nSAV", #<< 
+                     breaks = c(0,0.1,0.4,0.7,1), #<<
+                     limits = c(0,1)) #<<
+```
+]]
+
+.pull-right-40[
+```{r, echo = FALSE, eval = TRUE, fig.width=8, fig.height=4}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) + 
+  geom_sf(data = LM, color = "black", fill = NA) +
+  geom_point(data = sav_pts, shape = 21, 
+             aes(x, y, fill = sav)) + 
+  scale_fill_viridis_c("Proportion\nSAV", 
+                     breaks = c(0,0.1,0.4,0.7,1), 
+                     limits = c(0,1))
+```
+]
+
+---
+count: false
+
+.pull-left-60[.smallest[
+```{r, echo = TRUE, eval = FALSE}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) + 
+  geom_sf(data = LM, color = "black", fill = NA) +
+  geom_point(data = sav_pts, shape = 21, 
+             aes(x, y, fill = sav)) + 
+  scale_fill_viridis_c("Proportion\nSAV", 
+                     breaks = c(0,0.1,0.4,0.7,1), 
+                     limits = c(0,1)) +
+  coord_sf() #<<
+```
+]]
+
+.pull-right-40[
+```{r, echo = FALSE, eval = TRUE, fig.width=8, fig.height=4}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) + 
+  geom_sf(data = LM, color = "black", fill = NA) +
+  geom_point(data = sav_pts, shape = 21, 
+             aes(x, y, fill = sav)) + 
+  scale_fill_viridis_c("Proportion\nSAV", 
+                     breaks = c(0,0.1,0.4,0.7,1), 
+                     limits = c(0,1)) +
+  coord_sf()
+```
+]
+
+---
+count: false
+
+.pull-left-60[.smallest[
+```{r, echo = TRUE, eval = FALSE}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) + 
+  geom_sf(data = LM, color = "black", fill = NA) +
+  geom_point(data = sav_pts, shape = 21, 
+             aes(x, y, fill = sav)) + 
+  scale_fill_viridis_c("Proportion\nSAV", 
+                     breaks = c(0,0.1,0.4,0.7,1), 
+                     limits = c(0,1)) +
+  coord_sf() +
+  labs(title = "SAV in Lake Mattamuskeet", #<<
+       subtitle = "2004", #<<
+       x = NULL, y = NULL) #<<
+```
+]]
+
+.pull-right-40[
+```{r, echo = FALSE, eval = TRUE, fig.width=8, fig.height=4}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) + 
+  geom_sf(data = LM, color = "black", fill = NA) +
+  geom_point(data = sav_pts, shape = 21, 
+             aes(x, y, fill = sav)) + 
+  scale_fill_viridis_c("Proportion\nSAV", 
+                     breaks = c(0,0.1,0.4,0.7,1), 
+                     limits = c(0,1)) +
+  coord_sf() +
+  labs(title = "SAV in Lake Mattamuskeet",
+       subtitle = "2004",
+       x = NULL, y = NULL)
+```
+]
+
+---
+count: false
+
+.pull-left-60[.smallest[
+```{r, echo = TRUE, eval = FALSE}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) + 
+  geom_sf(data = LM, color = "black", fill = NA) +
+  geom_point(data = sav_pts, shape = 21, 
+             aes(x, y, fill = sav)) + 
+  scale_fill_viridis_c("Proportion\nSAV", 
+                     breaks = c(0,0.1,0.4,0.7,1), 
+                     limits = c(0,1)) +
+  coord_sf() +
+  labs(title = "SAV in Lake Mattamuskeet",
+       subtitle = "2004",
+       x = NULL, y = NULL) +
+  theme_bw() #<<
+```
+]]
+
+.pull-right-40[
+```{r, echo = FALSE, eval = TRUE, fig.width=8, fig.height=4}
+ggplot(data = sav_model_fit) + 
+  geom_raster(aes(x = x, y = y, fill = sav)) + 
+  geom_sf(data = LM, color = "black", fill = NA) +
+  geom_point(data = sav_pts, shape = 21, 
+             aes(x, y, fill = sav)) + 
+  scale_fill_viridis_c("Proportion\nSAV", 
+                     breaks = c(0,0.1,0.4,0.7,1), 
+                     limits = c(0,1)) +
+  coord_sf() +
+  labs(title = "SAV in Lake Mattamuskeet",
+       subtitle = "2004",
+       x = NULL, y = NULL) +
+  theme_bw(base_size = 20)
+```
+]
+
+```{css, echo = FALSE}
+.box{
+  text-align: center;
+  float:left;
+  margin-right:20px;
+}
+.clear{
+    clear:both;
+}
+```
+
+--
+
+.pull-left[.right[<iframe width="356" height="200" src="https://www.youtube.com/embed/h29g21z0a68" frameborder="0" allowfullscreen></iframe>]]
+.pull-right[.left[<iframe width="356" height="200" src="https://www.youtube.com/embed/0m4yywqNPVY" frameborder="0" allowfullscreen></iframe>]]
 
 ---
 
@@ -1017,14 +1296,14 @@ class: inverse, center, middle, hide-logo
 
 ???
 
-We can't reasonably spend much time here because there's simply too much material. So we'll focus on a few good resources to lead you down the right code-based path in R for whatever analysis you're looking for. The good news is that, if it can be done, there's likely an R resource available.
+We've made to analysis. We now have some idea of the modelling approach we want to take. ANd that's probably different for every person wathcih. So instead of picking favorites, we'll focus on a few good resources to lead you down the right code-based path in R for whatever analysis you're looking for. The good news is that, if it can be done, there's likely R resources available.
 
 ---
 # CRAN task views
 
 - relevant R packages for ~ 40 topics
 
-- very focused to emphasize packages 
+- emphasize packages, not methodologies 
 
 - not endorsements
 
