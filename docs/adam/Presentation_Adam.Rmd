@@ -59,7 +59,7 @@ library(flair)
 ---
 class: inverse, center, middle, hide-logo
 
-# Documenting
+# Document
 ![](images/life_cycles-data_documenting.png)
 
 ???
@@ -555,8 +555,7 @@ library(knitr); library(kableExtra)
 rio::import("https://motus.org/data/downloads/api-proxy/species") %>% 
   select(english, scientific) %>%
   filter(grepl("Red Knot|Painted Bunting|Ruddy Turnston|Saltmarsh", english, TRUE)) %>%
-  kable() %>%
-  kable_styling()
+  kable()
 ```
 
 ---
@@ -705,7 +704,8 @@ rcw_clusters <- pull_rcw_cluster_survey()
 .scroll-output[
 ```{r rcw-data, echo = FALSE}
 rcw_clusters %>%
-  select(-globalid, -FK_cluster_ID)
+  select(-globalid, -FK_cluster_ID) %>%
+  kable()
 ```
 ]
 
@@ -826,8 +826,6 @@ Tidy data is our goal as we head towards analysis, though we'll almost certainly
 ---
 # Piped workflow
 
-- Pipe operator: `%>%` 
-
 ### Traditional (no pipes)
 ```{r, eval = FALSE}
 raw_data <- rio::import("survey_data.xlsx")
@@ -853,11 +851,12 @@ mod_data <- raw_data %>%
   dplyr::arrange(sort_var)
 ```
 
+.smaller[
 ```{r, echo = FALSE}
 decorate("piped", eval = FALSE) %>%
   flair("%>%", background = "#CBB5FF")
 ```
-
+]
 ---
 # Quality control
 
@@ -883,9 +882,9 @@ mammals <- rio::import("https://ndownloader.figshare.com/files/10717177")
 
 ???
 
-We think about quality control in terms of a more passive, ad hoc approach (which we refer to as data profiling), and a more explicity, active quality control we refer to as assertive programming. 
+We think about quality control in terms of a more passive, ad hoc approach (which we refer to as data profiling), and a more explicit, active quality control we refer to as assertive programming. 
 
-Data profiling is passive in that it doesn't involve testing any specific aspects of the data, but rather uses informative summaries to help you identify flag potential issues like questionable data entries, extreme/unlikely values, and patterns of missing data
+Data profiling is passive in that it doesn't involve testing any specific aspects of the data, but rather uses informative summaries to help you identify or flag potential issues like questionable data entries, extreme/unlikely values, and patterns of missing data
 
 On the other hand, assertive programming turns your knowledge of the data into explicit tests to make sure the data meets your requirements
 
@@ -1490,3 +1489,13 @@ include_url("https://cran.r-project.org/web/views/Tracking.html")
 # When all else fails...
 
 .center[![:gen 60%, shadow](images/google-it.jpg)]
+
+---
+# Case study: Mobile Acoustical Bat Monitoring
+
+- 86 survey routes at 63 FWS field stations (~ 40 participate annually)
+- Data life cycle bottlenecks
+  - process bat software output for entry into relational database
+  - annual reports for each participating station
+
+.center[![:gen 38%, shadow](images/MABM_route_centroids_bw.png)]
