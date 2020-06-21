@@ -552,42 +552,6 @@ I'll talk about in more detail on the next slide.
 ---
 # [`styler`](https://github.com/r-lib/styler) package
 
-.pull-left-30[
-A package to reformat R code
-
-- Can format to a specific style or focus on specific issue (e.g., spacing) 
-
-- Flexible for user to customize their own style
-]
-
-.pull-right-70[
-.small[
-```{r messy1, include=FALSE, eval=FALSE, message=FALSE, warning=FALSE}
-# Some messy code with irregular spacing, etc.
-p =dat%>%#a comment
-select(refuge ,lat, long) %>%filter(refuge!='kodiak ')%>%
-  ggplot(data,aes(x =lat,y= long,group=refuge))%>%  geom_line()#comment without space"
-```
-
-```{r, echo=FALSE}
-decorate("messy1", eval=FALSE) %>%
-  flair("styler") %>%
-  flair("select", background = "pink") %>%
-  flair("filter", background = "pink") %>%
-  flair("ggplot", background = "pink") %>%
-  flair("geom_line", background = "pink") %>%
-  flair("a comment", color="blue") %>%
-  flair("comment without space", color = "blue")
-```
-]
-]
-
-???
-styler allows you to interactively restyle selected text, files, or entire projects. It isincludes an RStudio add-in, the easiest way to re-style existing code.
-
----
-# [`styler`](https://github.com/r-lib/styler) package
-
 .pull-left[
 Here's some messy code:
 
@@ -983,6 +947,12 @@ leaflet() %>%
 ```
 ]
 ]
+
+
+???
+
+---
+(Insert a example of an Rmarkdown report here .. maybe Jared's QAQC report.)
 
 
 ???
