@@ -496,7 +496,7 @@ dat <- lapply(f, read.csv)
 
 
 ???
-Data managers might tell you that it doesn't matter what you name your files, as long as they are full documented and archived. Although file names might not matter much for data management purposes, again there are advantages to having a standardized file naming convention for R project management. Descriptive file names are an important part of organizing, sharing, and keeping track of data files.
+Data managers might tell you that it doesn't matter what you name your files, as long as they are full documented and archived. Although descriptive file names might be required for data management, there are advantages to having a standardized file naming convention for R project management. Descriptive file names are an important part of organizing, sharing, and keeping track of data files.
 
 Some general guidance includes: call files what they are, keep file names short, avoid spaces and special characters (which might not play well with some software), use a standard for dates such as ISO 8601. 
 
@@ -547,13 +547,43 @@ A good starting place is to consult a style guide. There are a number of them ou
 If you are past the planning stage and are struggling to make sense of ugly code, there are an R package called `styler` that has functions to read through and clean up code to a standard of your chosing. Another package called `lintr` will perform on the fly checking to confirm that you are conforming to the style guide. Links to more information are included here.
 
 I'll talk about in more detail on the next slide. 
+ 
+ 
+---
+# [`styler`](https://github.com/r-lib/styler) package
+
+.pull-left[
+Some messy code `r icon::fa("flushed", color = "grey")`
+
+.small[
+```{r messy1, include=FALSE, eval=FALSE, message=FALSE, warning=FALSE}
+p =dat%>%#a comment
+select(refuge ,lat, long) %>%filter(refuge!='kodiak ')%>%
+  ggplot(data,aes(x =lat,y= long,group=refuge))%>%  geom_line()#comment without space"
+```
+
+```{r, echo=FALSE}
+decorate("messy2", eval=FALSE) %>%
+  flair("styler") %>%
+  flair("select", background = "pink") %>%
+  flair("filter", background = "pink") %>%
+  flair("ggplot", background = "pink") %>%
+  flair("geom_line", background = "pink") %>%
+  flair("a comment", color="blue") %>%
+  flair("comment without space", color = "blue")
+```
+]
+]
+
+
+???
 
 
 ---
 # [`styler`](https://github.com/r-lib/styler) package
 
 .pull-left[
-Here's some messy code:
+Some messy code `r icon::fa("flushed", color = "grey")`
 
 .small[
 ```{r messy2, include=FALSE, eval=FALSE, message=FALSE, warning=FALSE}
@@ -576,7 +606,7 @@ decorate("messy2", eval=FALSE) %>%
 ]
 
 .pull-right[
-The `style_text()` function cleans it up!
+The `style_text()` function cleans it up! `r icon::fa("smile-beam", color = "grey")`
 .small[
 ```{r cleaned, include=FALSE, message=FALSE, warning=FALSE, comment=""}
 library(styler)
@@ -647,54 +677,90 @@ To be reproducible means that:
 ---
 # ![:scale 8%](images/packrat_logo.png)
 
-.pull-left-30[
+.pull-left[
+Option 1: Add to a new project
 
+![](images/packrat_rstudio.PNG)
 ]
 
-.pull-right-70[
-```{r, eval=FALSE}
+.pull-right[
+Option 2: Add to an existing project
+
+.small[
+```{r packrat1, include=FALSE, eval=FALSE}
 # Install packrat
-install.packages("packrat")
+install.packages('packrat')
 
 # Set up your project to use packrat
 packrat::init()
 ```
 
-```{r, eval=FALSE}
-# Install required packages into your project's private package library
-install.packages("tidyverse")
+```{r, echo=FALSE}
+decorate("packrat1", eval=FALSE) %>%
+  flair("init()") %>%
+  flair("install.packages('packrat')", background = "pink")
+```
+]
+
+.small[
+```{r packrat2, include=FALSE, eval=FALSE}
+# Install required packages
+install.packages('tidyverse')
 
 # Take a snapshot to save the changes to packrat
 packrat::snapshot()
 ```
-]
 
+```{r, echo=FALSE}
+decorate("packrat2", eval=FALSE) %>%
+  flair("snapshot()")
+```
+]
+]
 
 ???
 
 
 ---
+background-image: url("images/version_control.png")
+background-size: 55%
+background-position: 95% 70%
 # `r icon::fa("code-branch")` Version control 
 
-.pull-left[
-Consider how you will control versions **during the planning step**.
-
-References
-- Resources to learn git [(link)](https://try.github.io/)
-- Using git from RStudio [(link)](https://nceas.github.io/oss-lessons/version-control/4-getting-started-with-git-in-RStudio.html)
+.pull-left-30[
+<br>
+<br>
+.center[
+.large[Consider how you will manage versions when ***planning*** your project!]
+]
 ]
 
-.pull-right[
-![](images/git_logo.png)
-]
+???
+Version control is the processes and tools designed to keep track of multiple different versions of data, including data products. It can be as simple as renaming the updated files to as complex as a distributed version control system like Git. Whatever the level of complexity, it is important to consider what version control system that a project will be using during the *planning stage*.  
 
 ---
 # `r icon::fa("code-branch")` Version control 
 
+.pull-left[
+- Benefits of a version control system
+    - Collaboration
+    - Storing versions
+    - Restoring versions
+    - Understanding what happened
+    - Backup
+
+- RStudio makes version control with Git and GitHub easier. 
+
+- References
+  - Resources to learn git [(link)](https://try.github.io/)
+  - Using git from RStudio [(link)](https://nceas.github.io/oss-lessons/version-control/4-getting-started-with-git-in-RStudio.html)
+  - GitHub and R: An Intro for FWS Biologists [(link)](https://mccrea-cobb.github.io/r-github-presentation/#1)
+]
 
 .pull-right[
-.center[![:scale 50%](images/github.svg)]
-.center[![:scale 50%](images/github-logo.png)]
+![:scale 60%](images/git_logo.png)
+.center[![:scale 40%](images/github.svg)]
+.center[![:scale 40%](images/github-logo.png)]
 ]
 
 
@@ -728,21 +794,7 @@ class: center, middle, inverse, hide-logo
 
 
 ???
-
-Unlike cumbersome word processing applications, text written in Markdown can be easily shared between computers, mobile phones, and people. It’s quickly becoming the writing standard for academics, scientists, writers, and many more. Websites like GitHub and reddit use Markdown to style their comments.
-
-Formatting text in Markdown has a very gentle learning curve. It doesn’t do anything fancy like change the font size, color, or type. All you have control over is the display of the text—stuff like making things bold, creating headers, and organizing lists.
-
-- RMarkdown
-  - Types of output
-    - html
-    - pdf
-    - dashboards
-    - websites
-  - Examples
-    - Bat reporting for mobile aucistics
-    - COVID 19 example
-    
+Last but not least, I was cover the sharing and archiving steps of the data life cycle.
 
 ---
 class: center, middle, hide-logo
@@ -751,39 +803,34 @@ background-size: contain
 
 
 ???
-Alright, here's my report about reporting...
+Or in other words, I will attempt to report about reporting...
 
 
 ---
-# ![:scale 5%](images/rmarkdown_logo.png) Rmarkdown
-You can generate reports directly from RStudio!
+background-image: url("images/rmarkdown_logo.png")
+background-position: 85% 50%
+background-size: 40%
+# Literate programming
 
-.pull-left-30[
+.pull-left-70[
+.large[You can generate reports directly  
+from RStudio!]
+
 **Allows for:**
 - Code to be directly inserted into document
-
 - Multiple outputs
-
 - Easy to use
-
 - Increased reproducibility
-
 - Fewer sources of errors
-
-]
-
-.pull-right-70[
-.center[![:scale 100%](images/rmarkdown_workflow2.png)]
 ]
 
 
 ???
-Literate Programming
-Traditionally, scientific writing and coding are separate activities—for example, a researcher who wants to use code to generate a figure for her paper will have the code for generating that figure in one file and the document itself in another. 
+As I mentioned earlier, scientific writing and coding were traditionally separate activities. For example, a scientist who wants to use code to generate a figure for her report would have the code for generating that figure in one file and the document itself in another. 
 
-This is a challenge for reproducibility and provenance tracking because both criteria have to be maintained for multiple files simultaneously. “Literate programming” provides an alternative approach, whereby code and text are interleaved within a single file; these files can be processed by special literate programming software to produce documents with the output of the code (e.g. figures, tables, and summary statistics) automatically interspersed with the document’s body text. 
+This is a challenge for reproducibility and keeping track of where each piece of data came from and whether it's up-to-date. “Literate programming” provides an alternative approach, whereby code and text are interleaved within a single file, which can be processed by software to produce documents with the output of the code (e.g. figures, tables, and summary statistics) automatically interwoven with the document’s body text. A common literate programming file format in R is call RMarkdown
 
-This approach has several advantages. For one, the code output of a literate programming document is by definition guaranteed to be consistent with the code in the document’s source. At the same time, literate programming can make it easier to develop analyses by reducing the separation between writing and coding; for instance, interactive literate programming software can be used to keep “digital lab notebooks” where analyses are developed and described in the same file. 
+Unlike cumbersome word processing applications, text written in Markdown can be easily shared between computers, mobile phones, and people. It’s quickly becoming the writing standard for academics and scientists. This approach has several advantages. For one, the code output of a literate programming document is by definition guaranteed to be consistent with the code in the document’s source. At the same time, literate programming can make it easier to develop analyses by reducing the separation between writing and coding.
 
 
 ---
@@ -793,6 +840,7 @@ background-size: contain
 
 
 ???
+How does it work? Well, unless you really want to get into the weeds...given our time constrainst today, let's just say that it's like magic! As shown here, you start by adding text and what's called "chunks" of code to an Rmarkdown document. You then what's called "knit" the file by running the `knit` function or clicking the `knit` button in RMarkdown. Magic happens and you can celebrate the percieved wizardy. A document is produced in the file format of your choosing, generally html, Word, or PDF.
 
 
 ---
@@ -809,12 +857,14 @@ output: pdf_document
 
 
 ???
+So what does an RMarkdown file contain? There are two required sections: a header and the main body. As shown here, a simple header (written in YAML- Yet Another Markup Language) generally contains some metadata and the desired file output. 
 
 
 ---
 # ![:scale 5%](images/rmarkdown_logo.png) A more complex header
 
-````{r, eval=FALSE}
+.smaller[
+````{r complex_header, eval=FALSE, include=FALSE}
 ---
 title: |
     | ![](usfws_refuges_logos.png){width=5cm}
@@ -844,9 +894,14 @@ params:
 
 ````
 
+```{r, echo=FALSE}
+decorate("complex_header", eval=FALSE) %>%
+  flair("params")
+```
+]
 
 ???
-Here's an example of how to generate an Rmarkdown document
+Header can get more complex as the document gets more customized. This one includes input parameters (`params`) that allow the user to customize the content of the report based on their input values. In this report, the user select the year of data and refuge station on which to generate a report.
 
 
 ---
@@ -881,6 +936,10 @@ You can also embed figures, for example:
 
 ]
 ]
+
+
+???
+The meat of the report happens in the main body of an RMarkdown document. As I mentioned earlier, the main body, as shown here, is a combination of text written in markdown format and embedded R code that are either included as distinct chunks surrounded by three backticks or in-line surrounded by one backtick. 
 
 
 ---
@@ -950,12 +1009,18 @@ leaflet() %>%
 
 
 ???
+When the file is knitted, the result is a document that includes the text and the output of the R code. In this example, the R code chunk produced a table and a map. The in-line code calculated a value (1 + 1).
+
 
 ---
-(Insert a example of an Rmarkdown report here .. maybe Jared's QAQC report.)
+
+```{r, echo=FALSE, out.width="100%", out.height="100%"}
+knitr::include_graphics("./images/rmarkdown_report.pdf")
+```
 
 
 ???
+Here's an example of an RMarkdown PDF report that is automatically generated every week to summarize GPS collar data for quality control. As data regularly upload from the collars to the satellites to servers, the tables and figures in the report are also updated.
 
 
 ---
@@ -965,12 +1030,25 @@ leaflet() %>%
 
 ???
 As mentioned earlier, Rmarkdown documents can be rendered into multiple different formats.
-You can create presentations, such as this one!
+You can even create presentations, such as the one that you are looking at right now!
 
 
 ---
-# ![:scale 5%](images/shiny.png) Shiny applications 
+background-image: url("images/shiny.png")
+background-position: 90% 50%
+background-size: 40%
+# Web applications 
 
+<br>
+.pull-left[
+.large[
+- Build interactive web apps from R
+
+- Host standalone apps online
+
+- Embed them in RMarkdown docs
+]
+]
 
 ???
 You can also generate interactive content from R, such as websites and dashboards. The Shiny package allows for these, which can also be imbedded into Rmarkdown outputs.
@@ -978,18 +1056,6 @@ You can also generate interactive content from R, such as websites and dashboard
 Shiny is an R package that provides a framework for building interactive applications using R, without HTML, CSS, or JavaScript knowledge.
 
 You can host standalone apps as webpages, or embed them in rmarkdown documents
-
----
-background-image: url(images/collar_viewer.png)
-background-size: contain
-class: hide-logo
-
-
-???
-- Shiny apps
-    - Examples
-      - collarviewer
-      - power analysis for butterfly surveys
 
 
 ---
@@ -1001,6 +1067,7 @@ class: center, middle, hide-logo
 
 
 ???
+Here's an example of a shiny app in action. In this example, the user pulls the shiny app from GitHub and runs it locally. After providing data, the app maps GPS collar data, in this case from lynx in Alaska. The user can than select a subset of GPS collars, create home ranges, and do thing like measure the diameter of the home range.
 
 
 ---
@@ -1016,13 +1083,15 @@ knitr::include_app("https://vac-lshtm.shinyapps.io/ncov_tracker/?_ga=2.142693877
 
 ---
 background-image:url("images/cher_data.jpg")
-background-position: center bottom 4em
+background-position: 50% 80%
 # `r icon::fa("file-archive")` Archiving 
 
 
 ???
-- A final and arguably the most important step that is often overlooked in the data life cycle is archiving data. For the typical scientific data project, this should the raw data and the code required to reproduce the results.
-- For an R project, you can include code to save your data and products in a remote secure repository.
+Ok, now for the final and arguably the most important step that is often overlooked in the data life cycle: archiving. For the typical scientific data project, this should the raw data and the code required to reproduce the results.
+
+Typically the process to do this is to visit a repository website and then manually upload data and metadata.
+Our take home here, is that if you are using R, it is possible for you can include code to save your data and products in a remote secure repository.
 - For example, instead of manually opening ServCat and saving your reports to as a product in a ServCat record, it is possible to use R code to save results to ServCat. 
 - This is an active area of development.
 - I encourage you to reach out to your data managers and ServCat managers to look into this more.
@@ -1030,26 +1099,61 @@ background-position: center bottom 4em
 
 ---
 background-image:url("images/cher_data.jpg")
-background-position: center bottom 4em
+background-position: 50% 80%
 # `r icon::fa("file-archive")` Archiving 
 
 .center[![:gen 35%, shadow](images/we_can_do_it_in_r.png)]
 
 
 ???
-- A final and arguably the most important step that is often overlooked in the data life cycle is archiving data. For the typical scientific data project, this should the raw data and the code required to reproduce the results.
-- For an R project, you can include code to save your data and products in a remote secure repository.
-- For example, instead of manually opening ServCat and saving your reports to as a product in a ServCat record, it is possible to use R code to save results to ServCat. 
-- This is an active area of development.
-- I encourage you to reach out to your data managers and ServCat managers to look into this more.
+It is possible to do this manual step programmically in R!
+
+Just as Adam discussed about R's ability to *access* data from remote repositories, the opposite is also true; R code can also be used to *save* your data and products to a remote secure repository.
+
+- Although it is possible to use web services to get, put and delete data in a remote repository, this is often not straightforward. - For example, instead of manually opening ServCat and saving your reports to as a product in a ServCat record, it is *possible* to use R code to save results to ServCat. Emphasis on "possible".
+
+To aid in this process, custom R packages have been built to access and archive scientific data repositories, such as ScienceBase. These make it much easier to use the repositories web services.
+
+This is an active area of development. I encourage you to reach out to your data managers and ServCat managers to look into this more option for your repository of interest.
+
+Today I was cover an example of an R package called `sbtools` that was developed for interfacing R with data services from ScienceBase, the USGS data repository.
 
 
 ---
-# [`sbtools` package](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf)
+# ![:scale 5%](images/sciencebase_logo.png) [`sbtools`](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf) 
 
-A tool to allow complete access to the USGS ScienceBase API from R.
+.pull-left[
+The tool to allow complete access to the USGS ScienceBase API from R. It supports the creation, editing and access of data/metadata:
 
-Supports the creation, editing and access of data/metadata:
+.small[
+```{r, echo=FALSE}
+decorate('
+library(sbtools)
+
+# Create new item (record), by default under "My Items" parent
+new_item <- item_create(title = "new test item")
+', eval=FALSE) %>%
+  flair("item_create") %>%
+  flair("sbtools", background="pink")
+```
+]
+]
+
+.pull-right[
+![](images/sciencebase.PNG)
+]
+
+
+???
+`sbtools` enables direct access to the advanced online data functionality provided by ScienceBase, the U.S. Geological Survey’s online scientific data storage platform.
+- Provides scripted R access to ScienceBase to manage metadata and data files, to search the catalog of datasets, and to view and modify data in formats familiar to R users.
+
+
+---
+# ![:scale 5%](images/sciencebase_logo.png) [`sbtools`](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf) 
+
+.pull-left[
+The tool to allow complete access to the USGS ScienceBase API from R. It supports the creation, editing and access of data/metadata:
 
 .small[
 ```{r, echo=FALSE}
@@ -1079,6 +1183,11 @@ item_list_files(new_item)
   flair("item_list_files")
 ```
 ]
+]
+
+.pull-right[
+![](images/sciencebase.PNG)
+]
 
 
 ???
@@ -1087,7 +1196,7 @@ item_list_files(new_item)
 
 
 ---
-# [`sbtools` package](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf) - Accessing data
+# ![:scale 5%](images/sciencebase_logo.png) [`sbtools`](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf) - Accessing data
 
 ```{r, echo=FALSE}
 decorate('
@@ -1146,8 +1255,3 @@ background-size: cover
 
 ???
 Time for the demo.
-
-
----
-class: center, middle, inverse, hide-logo
-# Questions
