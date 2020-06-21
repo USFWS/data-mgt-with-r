@@ -1,0 +1,25 @@
+ Format , Typical Extension 
+ Comma-separated data , .csv 
+ Pipe-separated data , .psv 
+ Tab-separated data , .tsv 
+ Excel , .xls 
+ Excel , .xlsx 
+ SAS , .sas7bdat 
+ SPSS , .sav 
+ Stata , .dta 
+ Saved R objects ," .RData, .rda "
+ Serialized R objects , .rds 
+ Minitab , .mtp 
+ Systat , .syd 
+ "XBASE" database files, .dbf 
+ Fixed-width format data , .fwf 
+ gzip comma-separated data , .csv.gz 
+ Apache Arrow (Parquet) , .parquet 
+ Fast Storage , .fst 
+ JSON , .json 
+ Matlab , .mat 
+ OpenDocument Spreadsheet , .ods 
+ HTML Tables , .html 
+ Shallow XML documents , .xml 
+ Clipboard , default is tsv 
+ Google Sheets, as Comma-separate data
