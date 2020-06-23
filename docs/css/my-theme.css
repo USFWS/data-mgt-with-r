@@ -10,7 +10,7 @@
 .large { font-size: 1.44em;}
 .small { font-size: 0.833em; }
 .smaller { font-size: 0.694em; }
-.smallest{ font-size: 0.579em; }
+.smallest{ font-size: 0.5em; }
 
 /* spaced para style */
 .spaced {
@@ -59,6 +59,18 @@
   margin-right: 0.5%;
   margin-left: 0.5%;
 }
+.pull-left-40 {
+  width: 39%;
+  float: left;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+.pull-right-60 {
+  width: 59%;
+  float: right;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
 .shadow {
     border-radius: 5px;
     box-shadow: 4.2px 4.5px 2.5px rgba(65, 65, 65, 0.737);
@@ -71,4 +83,16 @@
 .scroll-output-tall {
   height: 20em;
   overflow-y: scroll;
+}
+.scroll-output-full {
+  height: 27em;
+  overflow-y: scroll;
+}
+
+/* new font code size class */
+.huge .remark-code {
+  font-size: 150% !important;
+}
+.tiny .remark-code {
+  font-size: 80% !important;
 }
