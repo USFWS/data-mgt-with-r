@@ -1,67 +1,77 @@
-<!DOCTYPE html>
-<html lang="" xml:lang="">
-  <head>
-    <title>R tools for a code-based data workflow</title>
-    <meta charset="utf-8" />
-    <meta name="author" content="McCrea Cobb and Adam D. Smith" />
-    <meta name="date" content="2020-06-23" />
-    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
-    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
-    <script src="libs/jquery/jquery.min.js"></script>
-    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
-    <script src="libs/datatables-binding/datatables.js"></script>
-    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
-    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
-    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
-    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
-    <link href="libs/leaflet/leaflet.css" rel="stylesheet" />
-    <script src="libs/leaflet/leaflet.js"></script>
-    <link href="libs/leafletfix/leafletfix.css" rel="stylesheet" />
-    <script src="libs/Proj4Leaflet/proj4-compressed.js"></script>
-    <script src="libs/Proj4Leaflet/proj4leaflet.js"></script>
-    <link href="libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
-    <script src="libs/leaflet-binding/leaflet.js"></script>
-    <link rel="stylesheet" href="css\xaringan-themer.css" type="text/css" />
-    <link rel="stylesheet" href="css\my-theme.css" type="text/css" />
-  </head>
-  <body>
-    <textarea id="source">
+---
+title: "R tools for a code-based data workflow"
+author: "McCrea Cobb and Adam D. Smith"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["css/xaringan-themer.css", "css/my-theme.css"]
+    nature:
+      ratio: "16:9"
+      beforeInit: "macros/macros.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      navigation:
+        scroll: false
+    seal: false
+    includes:
+      after_body: usfws-logo.html
+editor_options: 
+  chunk_output_type: console
+---
 
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
+                      fig.retina = 3, fig.align = "center")
 
+options(htmltools.dir.version = FALSE)
+library(knitr)
+library(icon)
+library(tidyverse)
+library(crayon)
+library(flair)
+library(sbtools)
+```
 
-
-
+```{r xaringan-themer, include=FALSE, eval=TRUE}
+library(xaringanthemer)
+mono_light(code_font_family = "Fira Code",
+  code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css",
+  base_font_size = "22px",
+  outfile = "css/xaringan-themer.css"
+)
+```
 
 class: hide-logo, center, middle, inverse
 # ![:scale 9%](images/Rlogo.svg) Tools for a Code-based Data Workflow
 
-&lt;br&gt;
+<br>
 
 .pull-left[
 .large[McCrea Cobb]  
-<i class="fas  fa-envelope "></i> mccrea_cobb@fws.gov  
-<i class="fas  fa-phone "></i> 907-786-3403  
-<i class="fab  fa-github "></i> mccrea.cobb  
+`r icon::fa("envelope")` mccrea_cobb@fws.gov  
+`r icon::fa("phone")` 907-786-3403  
+`r icon::fa("github")` mccrea.cobb  
 ]
 
 .pull-right[
 .large[Adam D. Smith]  
-<i class="fas  fa-envelope "></i> adam_d_smith@fws.gov  
-<i class="fas  fa-phone "></i> 706-425-2197  
-<i class="fab  fa-github "></i> adamdsmith  
+`r icon::fa("envelope")` adam_d_smith@fws.gov  
+`r icon::fa("phone")` 706-425-2197  
+`r icon::fa("github")` adamdsmith  
 ]
 
-&lt;br&gt;
+<br>
 
-<i class="fab  fa-github "></i> usfws.github.io/data-mgt-with-r
+`r icon::fa("github")` usfws.github.io/data-mgt-with-r
 
 
 ???
 Hello and welcome to "R Tools for a Code-based Data Workflow"! 
 
-As mentioned, my name is McCrea Cobb. I am a biometrician for the Inventory and Monitoring Program within the National Wildlife Refuge Sytem, and I am located in Anchorage, Alaska. I am co-presenting with Adam Smith, who is quantitative ecologist with the I&amp;M program based in Athens, Georgia.
+As mentioned, my name is McCrea Cobb. I am a biometrician for the Inventory and Monitoring Program within the National Wildlife Refuge Sytem, and I am located in Anchorage, Alaska. I am co-presenting with Adam Smith, who is quantitative ecologist with the I&M program based in Athens, Georgia.
 
 At the bottom of this slide, you can find a link to our GitHub repository that contains this presentation and more R resources.
 
@@ -78,10 +88,10 @@ Ok, what will we be covering today?
 ---
 class: inverse, center, hide-logo
 
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
+<br>
+<br>
+<br>
+<br>
 
 # Outline
 
@@ -95,14 +105,14 @@ First, we will **review** the data and project life cycles introduced earlier to
 ---
 class: inverse, center, hide-logo
 
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
+<br>
+<br>
+<br>
+<br>
 
 # Outline
 
-&lt;span style="color:gray"&gt;Review the data life cycle and data workflow&lt;/span&gt;
+<span style="color:gray">Review the data life cycle and data workflow</span>
 
 #### Present tools in ![:scale 3%](images/Rlogo.svg) for efficiently and effectively working with data along the life cycle
 
@@ -116,16 +126,16 @@ Next, we will follow the steps of a data life cycle, from Planning to Archiving,
 ---
 class: inverse, center, hide-logo
 
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
+<br>
+<br>
+<br>
+<br>
 
 # Outline
 
-&lt;span style="color:gray"&gt;Review the data life cycle and data workflow&lt;/span&gt;
+<span style="color:gray">Review the data life cycle and data workflow</span>
 
-&lt;span style="color:gray"&gt;Present some tools in ![:scale 3%](images/Rlogo.svg) for efficiently and effectively  working with data along the life cycle&lt;/span&gt;
+<span style="color:gray">Present some tools in ![:scale 3%](images/Rlogo.svg) for efficiently and effectively  working with data along the life cycle</span>
 
 #### Demonstrate a data workflow in ![:scale 3%](images/Rlogo.svg) with a case study
 
@@ -174,7 +184,7 @@ After that, we will progress through th rest of the data life cycle: starting wi
 
 ---
 class: hide-logo
-# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow
+# `r icon::fa("times", color = "red")` Traditional data workflow
 
 
 ???
@@ -185,7 +195,7 @@ Ok. So how are these steps typically accomplished? Let's first walk through the 
 background-image: url(images/traditional_workflow_1.png)
 background-size: 90%
 class: hide-logo
-# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow
+# `r icon::fa("times", color = "red")` Traditional data workflow
 
 
 ???
@@ -196,7 +206,7 @@ First, you start with data. These could be paper datasheets, maybe some data tha
 background-image: url(images/traditional_workflow_2.png)
 background-size: 90%
 class: hide-logo
-# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow
+# `r icon::fa("times", color = "red")` Traditional data workflow
 
 
 ???
@@ -207,7 +217,7 @@ The first step is to acquire these data. This is generally done by digitizing pa
 background-image: url(images/traditional_workflow_3.png)
 background-size: 90%
 class: hide-logo
-# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow
+# `r icon::fa("times", color = "red")` Traditional data workflow
 
 
 ???
@@ -218,7 +228,7 @@ Next, these data are processed and quality-checked using these same software. Oc
 background-image: url(images/traditional_workflow_4.png)
 background-size: 90%
 class: hide-logo
-# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow
+# `r icon::fa("times", color = "red")` Traditional data workflow
 
 
 ???
@@ -229,7 +239,7 @@ Data are then analyzed using a suite of software. For spatial data, this step is
 background-image: url(images/traditional_workflow_6.png)
 background-size: 90%
 class: hide-logo
-# <i class="fas  fa-times " style="color:red;"></i> Traditional data workflow <i class="fas  fa-frown-open "></i>
+# `r icon::fa("times", color = "red")` Traditional data workflow `r icon::fa("frown-open")`
 
 
 ???
@@ -287,7 +297,7 @@ I think you know where I'm going with this...
 
 ---
 class: hide-logo
-# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow 
+# `r icon::fa("check", color = "green")` ![:scale 7%](images/Rlogo.svg) data workflow 
 
 
 ???
@@ -298,7 +308,7 @@ This is where R comes in. Let's take a look at a code-based workflow in R.
 background-image: url(images/r_workflow_1.png)
 background-size: 90%
 class: hide-logo
-# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow 
+# `r icon::fa("check", color = "green")` ![:scale 7%](images/Rlogo.svg) data workflow 
 
 
 ???
@@ -309,7 +319,7 @@ To start, the input data are often the same, although eliminating paper datashee
 background-image: url(images/r_workflow_3.png)
 background-size: 90%
 class: hide-logo
-# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+# `r icon::fa("check", color = "green")` ![:scale 7%](images/Rlogo.svg) data workflow
 
 
 ???
@@ -320,7 +330,7 @@ As we will show, R can directly import data from a variety of sources. This is n
 background-image: url(images/r_workflow_5.png) 
 background-size: 90%
 class: hide-logo
-# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+# `r icon::fa("check", color = "green")` ![:scale 7%](images/Rlogo.svg) data workflow
 
 
 ???
@@ -335,7 +345,7 @@ Where R starts to really shine is tidying up messy data, and there are a whole s
 background-image: url(images/r_workflow_6.png)
 background-size: 90%
 class: hide-logo
-# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+# `r icon::fa("check", color = "green")` ![:scale 7%](images/Rlogo.svg) data workflow
 
 
 ???
@@ -346,7 +356,7 @@ R was originally developed as a statistical software, and there are now too many
 background-image: url(images/r_workflow_8.png)
 background-size: 90%
 class: hide-logo
-# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+# `r icon::fa("check", color = "green")` ![:scale 7%](images/Rlogo.svg) data workflow
 
 
 ???
@@ -357,7 +367,7 @@ Maybe less known is the ability to generate reports using a mixture of text and 
 background-image: url(images/r_workflow_9.png)
 background-size: 90%
 class: hide-logo
-# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow
+# `r icon::fa("check", color = "green")` ![:scale 7%](images/Rlogo.svg) data workflow
 
 
 ???
@@ -368,7 +378,7 @@ These code-based reports can be saved in variety of file format; including html,
 background-image: url(images/r_workflow_10.png)
 background-size: 90%
 class: hide-logo
-# <i class="fas  fa-check " style="color:green;"></i> ![:scale 7%](images/Rlogo.svg) data workflow <i class="fas  fa-grin-stars "></i>
+# `r icon::fa("check", color = "green")` ![:scale 7%](images/Rlogo.svg) data workflow `r icon::fa("grin-stars")`
 
 
 ???
@@ -430,7 +440,7 @@ Ok. Let's get started with the first step: Planning
 ---
 # Organizing an ![:scale 7%](images/Rlogo.svg) project 
 
-### <i class="fas  fa-sitemap "></i> Chose a standardized working directory structure
+### `r icon::fa("sitemap")` Chose a standardized working directory structure
 
 .pull-left[
 Provides consistent relative directory paths for your scripts
@@ -444,13 +454,12 @@ R packages provide functions to create a standard file directory:
 ]
 
 .pull-right[.tiny[
-
-```r
+```{r, eval=FALSE}
 project_name/
   admin/
-* code/
+  code/ #<<
     functions/
-* data/
+  data/ #<<
     derived_data/
     raw_data/
   incoming/
@@ -460,7 +469,7 @@ project_name/
     raw_analysis/
     tables/
   products/
-* resources/
+  resources/ #<<
     data/ 
     publications/
     reports/
@@ -484,7 +493,7 @@ There are tools in R that can produce a standardized directory structure. Unfort
 ---
 # Organizing an ![:scale 7%](images/Rlogo.svg) project 
 
-### <i class="fas  fa-file-signature "></i> Decide on a standardized file naming convention
+### `r icon::fa("file-signature")` Decide on a standardized file naming convention
 
 .pull-left[
 - Call files what they are
@@ -494,14 +503,13 @@ There are tools in R that can produce a standardized directory structure. Unfort
 
 Programmically filter files:
 .tiny[
-
-```r
+```{r, eval=FALSE}
 # Exclude files with 2016 or 2017 in their names
-f &lt;- list.files(path = "./filepath", 
-*               pattern = "[^2016|2017].csv$")
+f <- list.files(path = "./filepath", 
+                pattern = "[^2016|2017].csv$") #<<
 
 # Load these files
-dat &lt;- lapply(f, read.csv)
+dat <- lapply(f, read.csv)
 ```
 ]
 ]
@@ -524,7 +532,7 @@ Sticking to a standard allows you to do things in R that would be difficult othe
 ---
 # Organizing an ![:scale 7%](images/Rlogo.svg) project 
 
-### <i class="fas  fa-book "></i> Consult a style guide
+### `r icon::fa("book")` Consult a style guide
 
 *"Good coding style is like correct punctuation: you can manage without it, butitsuremakesthingseasiertoread"*  
 *-[Hadley Wickham](https://style.tidyverse.org/index.html)*
@@ -541,8 +549,7 @@ Sticking to a standard allows you to do things in R that would be difficult othe
 ]
 
 .pull-right[
-
-```r
+```{r, eval=FALSE, results='markup'}
 # R code readability
 
 if(readability()) {
@@ -568,13 +575,25 @@ Let's take a closer look at the `styler` package.
 # [`styler`](https://github.com/r-lib/styler) package
 
 .pull-left[
-Some messy code <i class="fas  fa-flushed " style="color:grey;"></i>
+Some messy code `r icon::fa("flushed", color = "grey")`
 
 .small[
+```{r messy1, include=FALSE, eval=FALSE, message=FALSE, warning=FALSE}
+p =dat%>%#a comment
+select(refuge ,lat, long) %>%filter(refuge!='kodiak ')%>%
+  ggplot(data,aes(x =lat,y= long,group=refuge))%>%  geom_line()#comment without space"
+```
 
-
-
-&lt;code class ='r hljs remark-code'&gt;p =dat%&gt;%#&lt;span style='color:blue'&gt;a comment&lt;/span&gt;&lt;br&gt;&lt;span style='background-color:pink'&gt;select&lt;/span&gt;(refuge ,lat, long) %&gt;%&lt;span style='background-color:pink'&gt;filter&lt;/span&gt;(refuge!='kodiak ')%&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style='background-color:pink'&gt;ggplot&lt;/span&gt;(data,aes(x =lat,y= long,group=refuge))%&gt;% &amp;nbsp;&lt;span style='background-color:pink'&gt;geom_line&lt;/span&gt;()#&lt;span style='color:blue'&gt;comment without space&lt;/span&gt;"&lt;/code&gt;
+```{r, echo=FALSE}
+decorate("messy2", eval=FALSE) %>%
+  flair("styler") %>%
+  flair("select", background = "pink") %>%
+  flair("filter", background = "pink") %>%
+  flair("ggplot", background = "pink") %>%
+  flair("geom_line", background = "pink") %>%
+  flair("a comment", color="blue") %>%
+  flair("comment without space", color = "blue")
+```
 ]
 .center[![:scale 60%](images/messy_code.jpg)]
 ]
@@ -588,32 +607,48 @@ Here we see some **messy** code. The line spacing is irregular, there are equals
 # [`styler`](https://github.com/r-lib/styler) package
 
 .pull-left[
-Some messy code <i class="fas  fa-flushed " style="color:grey;"></i>
+Some messy code `r icon::fa("flushed", color = "grey")`
 
 .small[
+```{r messy2, include=FALSE, eval=FALSE, message=FALSE, warning=FALSE}
+p =dat%>%#a comment
+select(refuge ,lat, long) %>%filter(refuge!='kodiak ')%>%
+  ggplot(data,aes(x =lat,y= long,group=refuge))%>%  geom_line()#comment without space"
+```
 
-
-
-&lt;code class ='r hljs remark-code'&gt;p =dat%&gt;%#&lt;span style='color:blue'&gt;a comment&lt;/span&gt;&lt;br&gt;&lt;span style='background-color:pink'&gt;select&lt;/span&gt;(refuge ,lat, long) %&gt;%&lt;span style='background-color:pink'&gt;filter&lt;/span&gt;(refuge!='kodiak ')%&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style='background-color:pink'&gt;ggplot&lt;/span&gt;(data,aes(x =lat,y= long,group=refuge))%&gt;% &amp;nbsp;&lt;span style='background-color:pink'&gt;geom_line&lt;/span&gt;()#&lt;span style='color:blue'&gt;comment without space&lt;/span&gt;"&lt;/code&gt;
+```{r, echo=FALSE}
+decorate("messy2", eval=FALSE) %>%
+  flair("styler") %>%
+  flair("select", background = "pink") %>%
+  flair("filter", background = "pink") %>%
+  flair("ggplot", background = "pink") %>%
+  flair("geom_line", background = "pink") %>%
+  flair("a comment", color="blue") %>%
+  flair("comment without space", color = "blue")
+```
 ]
 ]
 
 .pull-right[
-The `style_text()` function cleans it up! <i class="fas  fa-smile-beam " style="color:grey;"></i>
+The `style_text()` function cleans it up! `r icon::fa("smile-beam", color = "grey")`
 .small[
+```{r cleaned, include=FALSE, message=FALSE, warning=FALSE, comment=""}
+library(styler)
 
-
-
-&lt;code class ='r hljs remark-code'&gt;library(&lt;span style='background-color:#ffff7f'&gt;styler&lt;/span&gt;)&lt;br&gt;&lt;br&gt;style_text("p =dat%&gt;%#&lt;span style='color:blue'&gt;a comment&lt;/span&gt;&lt;br&gt;&lt;span style='background-color:pink'&gt;select&lt;/span&gt;(refuge ,lat, long) %&gt;%&lt;span style='background-color:pink'&gt;filter&lt;/span&gt;(refuge!='kodiak ')%&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;&lt;span style='background-color:pink'&gt;ggplot&lt;/span&gt;(data,aes(x =lat,y= long,group=refuge))%&gt;% &amp;nbsp;&lt;span style='background-color:pink'&gt;geom_line&lt;/span&gt;()#&lt;span style='color:blue'&gt;comment without space&lt;/span&gt;")&lt;/code&gt;
-
+style_text("p =dat%>%#a comment
+select(refuge ,lat, long) %>%filter(refuge!='kodiak ')%>%
+  ggplot(data,aes(x =lat,y= long,group=refuge))%>%  geom_line()#comment without space") 
 ```
 
-p &lt;- dat %&gt;% # a comment
-  select(refuge, lat, long) %&gt;%
-  filter(refuge != "kodiak ") %&gt;%
-  ggplot(data, aes(x = lat, y = long, group = refuge)) %&gt;%
-  geom_line() # comment without space
-
+```{r, echo=FALSE}
+decorate("cleaned", eval=TRUE) %>%
+  flair("styler") %>%
+  flair("select", background = "pink") %>%
+  flair("filter", background = "pink") %>%
+  flair("ggplot", background = "pink") %>%
+  flair("geom_line", background = "pink") %>%
+  flair("a comment", color="blue") %>%
+  flair("comment without space", color = "blue")
 ```
 ]
 ]
@@ -625,7 +660,7 @@ I should note that `styler` also includes a Rstudio Add-in that allows you to us
 
 
 ---
-# <i class="fas  fa-people-carry "></i> Project dependencies
+# `r icon::fa("people-carry")` Project dependencies
 
 ### [Maintaining dependencies can be frustrating!](https://en.wikipedia.org/wiki/Dependency_hell)
 
@@ -673,17 +708,34 @@ Another is called `rocker`, which interfaces R with **Docker**. Docker is a prog
 **Option 2**: Add to an existing project
 
 .tiny[
+```{r packrat1, include=FALSE, eval=FALSE}
+# Install packrat
+install.packages('packrat')
 
+# Set up your project to use packrat
+packrat::init()
+```
 
-
-&lt;code class ='r hljs remark-code'&gt;# Install packrat&lt;br&gt;&lt;span style='background-color:pink'&gt;install.packages('packrat')&lt;/span&gt;&lt;br&gt;&lt;br&gt;# Set up your project to use packrat&lt;br&gt;packrat::&lt;span style='background-color:#ffff7f'&gt;init()&lt;/span&gt;&lt;/code&gt;
+```{r, echo=FALSE}
+decorate("packrat1", eval=FALSE) %>%
+  flair("init()") %>%
+  flair("install.packages('packrat')", background = "pink")
+```
 ]
 
 .tiny[
+```{r packrat2, include=FALSE, eval=FALSE}
+# Install required packages
+install.packages('tidyverse')
 
+# Take a snapshot to save the changes to packrat
+packrat::snapshot()
+```
 
-
-&lt;code class ='r hljs remark-code'&gt;# Install required packages&lt;br&gt;install.packages('tidyverse')&lt;br&gt;&lt;br&gt;# Take a snapshot to save the changes to packrat&lt;br&gt;packrat::&lt;span style='background-color:#ffff7f'&gt;snapshot()&lt;/span&gt;&lt;/code&gt;
+```{r, echo=FALSE}
+decorate("packrat2", eval=FALSE) %>%
+  flair("snapshot()")
+```
 ]
 ]
 
@@ -699,11 +751,11 @@ Alternatively, if you want to add packrat to an existing project, you need to in
 background-image: url("images/version_control.png")
 background-size: 55%
 background-position: 95% 70%
-# <i class="fas  fa-code-branch "></i> Version control 
+# `r icon::fa("code-branch")` Version control 
 
 .pull-left-30[
-&lt;br&gt;
-&lt;br&gt;
+<br>
+<br>
 .center[
 .large[Consider how you will manage versions when ***planning*** your project!]
 ]
@@ -715,7 +767,7 @@ Version control is the processes and tools designed to keep track of multiple di
 
 
 ---
-# <i class="fas  fa-code-branch "></i> Version control 
+# `r icon::fa("code-branch")` Version control 
 
 .pull-left[
 - Benefits of GitHub
@@ -758,6 +810,7 @@ Ok. I will now turn it over to Adam, who will cover the Documenting, Processing 
 
 Before we dig into data acquisition, processing, and analysis, we need to have 
 "THE TALK". Yep, we need to talk about documentation. 
+
 
 
 ---
@@ -827,15 +880,14 @@ As shown here, an Rmarkdown document is created by adding text and what's called
 ---
 # ![:scale 5%](images/rmarkdown_logo.png) The YAML header
 
-
-```r
+````{r, eval=FALSE}
 ---
 title: "My report"
 author: "McCrea Cobb"
 date: "6/24/2020"
 output: pdf_document
 ---
-```
+````
 
 
 ???
@@ -846,10 +898,40 @@ Ok ok. Let's get under the hood a little bit more. So what does an RMarkdown fil
 # ![:scale 5%](images/rmarkdown_logo.png) A more complex header
 
 .smaller[
+````{r complex_header, eval=FALSE, include=FALSE}
+---
+title: |
+    | ![](usfws_refuges_logos.png){width=5cm}
+    | 
+    | \LARGE Region 4 Inventory and Monitoring Branch 
+subtitle: |
+    | \Large Mobile Acoustical Bat Monitoring
+    | \Large Annual Summary Report
+author: '`r params$year`'
+date: '`r params$station`'
+output:
+  pdf_document:
+    includes:
+      in_header: MABM_report_preamble.tex
+urlcolor: blue
+params:
+  year: 0 # placeholder 
+  station: placeholder
+  stn_start_yr: 0 # placeholder
+  route_path: placeholder
+  survey_path: placeholder
+  bat_path: placeholder
+  spp_path: placeholder
+  out_dir: placeholder
+  goog_API_key: placeholder
+---
 
+````
 
-
-&lt;code class ='r hljs remark-code'&gt;---&lt;br&gt;title: |&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;| ![](usfws_refuges_logos.png){width=5cm}&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;| &lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;| \LARGE Region 4 Inventory and Monitoring Branch &lt;br&gt;subtitle: |&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;| \Large Mobile Acoustical Bat Monitoring&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;| \Large Annual Summary Report&lt;br&gt;author: '`r &lt;span style='background-color:#ffff7f'&gt;params&lt;/span&gt;$year`'&lt;br&gt;date: '`r &lt;span style='background-color:#ffff7f'&gt;params&lt;/span&gt;$station`'&lt;br&gt;output:&lt;br&gt;&amp;nbsp;&amp;nbsp;pdf_document:&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;includes:&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;in_header: MABM_report_preamble.tex&lt;br&gt;urlcolor: blue&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;params&lt;/span&gt;:&lt;br&gt;&amp;nbsp;&amp;nbsp;year: 0 # placeholder &lt;br&gt;&amp;nbsp;&amp;nbsp;station: placeholder&lt;br&gt;&amp;nbsp;&amp;nbsp;stn_start_yr: 0 # placeholder&lt;br&gt;&amp;nbsp;&amp;nbsp;route_path: placeholder&lt;br&gt;&amp;nbsp;&amp;nbsp;survey_path: placeholder&lt;br&gt;&amp;nbsp;&amp;nbsp;bat_path: placeholder&lt;br&gt;&amp;nbsp;&amp;nbsp;spp_path: placeholder&lt;br&gt;&amp;nbsp;&amp;nbsp;out_dir: placeholder&lt;br&gt;&amp;nbsp;&amp;nbsp;goog_API_key: placeholder&lt;br&gt;---&lt;/code&gt;
+```{r, echo=FALSE}
+decorate("complex_header", eval=FALSE) %>%
+  flair("params")
+```
 ]
 
 ???
@@ -866,7 +948,7 @@ This is an `**`R Markdown`**` document. You can write inline code like this: 1 +
 
 You can embed an R code chunk like this:
 
-    ```{r eval=TRUE, echo=FALSE}
+    ```{r eval=TRUE, echo=FALSE}`r ''`
     DT::datatable(iris[1:3], 
                   rownames = FALSE,
                   options = list(pageLength = 3))
@@ -876,11 +958,11 @@ You can embed an R code chunk like this:
 
 You can also embed figures, for example:
 
-    ```{r, eval=TRUE, echo=FALSE}
+    ```{r, eval=TRUE, echo=FALSE}`r ''`
     library(leaflet)
 
-    leaflet() %&gt;%
-      addTiles() %&gt;%
+    leaflet() %>%
+      addTiles() %>%
       addMarkers(lng = 174.768, 
                  lat = -36.852, 
                  popup = "The birthplace of R")
@@ -904,7 +986,7 @@ This is an `**`R Markdown`**` document. You can write inline code like this: 1 +
 
 You can embed an R code chunk like this:
 
-    ```{r eval=TRUE, echo=FALSE}
+    ```{r eval=TRUE, echo=FALSE}`r ''`
     DT::datatable(iris[1:3], 
                   rownames = FALSE,
                   options = list(pageLength = 3))
@@ -914,11 +996,11 @@ You can embed an R code chunk like this:
 
 You can also embed figures, for example:
 
-    ```{r, eval=TRUE, echo=FALSE}
+    ```{r, eval=TRUE, echo=FALSE}`r ''`
     library(leaflet)
 
-    leaflet() %&gt;%
-      addTiles() %&gt;%
+    leaflet() %>%
+      addTiles() %>%
       addMarkers(lng = 174.768, 
                  lat = -36.852, 
                  popup = "The birthplace of R")
@@ -930,14 +1012,17 @@ You can also embed figures, for example:
 .pull-right[
 .small[
 #### Some Rmarkdown code
-This is an **R Markdown** document. You can write inline code like this: 1 + 1 = 2.
+This is an **R Markdown** document. You can write inline code like this: 1 + 1 = `r 1+1`.
 
 You can embed an R code chunk like this:
 ]
 
 .smaller[
-<div id="htmlwidget-8cd6f7b745c222f63ded" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8cd6f7b745c222f63ded">{"x":{"filter":"none","data":[[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4,4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1,6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+```{r, echo=FALSE}
+DT::datatable(iris[1:3], 
+              rownames = FALSE,
+              options = list(pageLength = 3))
+```
 ]
 
 .small[
@@ -945,8 +1030,14 @@ You can embed an R code chunk like this:
 
 You can also embed figures, for example:
 
-<div id="htmlwidget-ffb80ab7ebf0d72e8ba9" style="width:432px;height:144px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ffb80ab7ebf0d72e8ba9">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+```{r pressure, echo=FALSE, fig.width=6, fig.height=2, warning=FALSE}
+library(leaflet)
+
+leaflet() %>%
+  addTiles() %>%
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+
+```
 ]
 ]
 
@@ -957,7 +1048,9 @@ When the file is knitted, the result is a document that includes the text and th
 
 ---
 
-&lt;embed src="images/rmarkdown_report.pdf" width="100%" height="100%" style="display: block; margin: auto;" type="application/pdf" /&gt;
+```{r, echo=FALSE, out.width="100%", out.height="100%"}
+knitr::include_graphics("images/rmarkdown_report.pdf")
+```
 
 
 ???
@@ -980,7 +1073,7 @@ background-position: 90% 50%
 background-size: 40%
 # Web applications 
 
-&lt;br&gt;
+<br>
 .pull-left[
 .large[
 - Build interactive web apps from R
@@ -998,9 +1091,9 @@ You can share your data from R using interactive content, such as websites and d
 ---
 class: center, middle, hide-logo
 
-&lt;video controls autoplay width="1200"&gt;
-  &lt;source src="images/collar_viewer.mp4" type="video/mp4"&gt;
-&lt;/video&gt;
+<video controls autoplay width="1200">
+  <source src="images/collar_viewer.mp4" type="video/mp4">
+</video>
 
 
 ???
@@ -1010,7 +1103,9 @@ Here's an example of a Shiny app in action. In this example, the user is pulling
 ---
 class: hide-logo, center, middle
 
-&lt;iframe src="https://vac-lshtm.shinyapps.io/ncov_tracker/?showcase=0" width="1080" height="600px"&gt;&lt;/iframe&gt;
+```{r, echo=FALSE, fig.width=15}
+knitr::include_app("https://vac-lshtm.shinyapps.io/ncov_tracker/", height="600px")
+```
 
 
 ???
@@ -1020,7 +1115,7 @@ Here's another example of a Shiny app. This one was develop to visualize the spr
 ---
 background-image:url("images/cher_data.jpg")
 background-position: 50% 80%
-# <i class="fas  fa-file-archive "></i> Archiving 
+# `r icon::fa("file-archive")` Archiving 
 
 
 ???
@@ -1032,7 +1127,7 @@ Typically the process to do this is to visit a repository website, log in with y
 ---
 background-image:url("images/cher_data.jpg")
 background-position: 50% 80%
-# <i class="fas  fa-file-archive "></i> Archiving 
+# `r icon::fa("file-archive")` Archiving 
 
 .center[![:gen 35%, shadow](images/we_can_do_it_in_r.png)]
 
@@ -1050,7 +1145,10 @@ Because of this barrier, developers have built *custom R packages* that make it 
 ---
 
 # Accessing web services in R 
-&lt;iframe src="https://cran.r-project.org/web/views/WebTechnologies.html" width="1080" height="420px"&gt;&lt;/iframe&gt;
+```{r, echo = FALSE, fig.width=15}
+knitr::include_url("https://cran.r-project.org/web/views/WebTechnologies.html",
+                   height = "420px")
+```
 .right[.smallest[source: https://cran.r-project.org/web/views/WebTechnologies.html]]
 
 
@@ -1105,8 +1203,21 @@ Ok, let's take a look at how you can use an R package to archive data. We will u
 .pull-right[
 Create a record:
 .smaller[
+```{r, echo=FALSE}
+decorate('
+library(sbtools)
 
-&lt;code class ='r hljs remark-code'&gt;library(&lt;span style='background-color:pink'&gt;sbtools&lt;/span&gt;)&lt;br&gt;&lt;br&gt;# Log in&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;authenticate_sb&lt;/span&gt;(username = "username@usgs.gov",&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;password = password)&lt;br&gt;&lt;br&gt;# Create new item (record), by default under "My Items" parent&lt;br&gt;new_item &lt;- &lt;span style='background-color:#ffff7f'&gt;item_create&lt;/span&gt;(title = "new test item")&lt;/code&gt;
+# Log in
+authenticate_sb(username = "username@usgs.gov",
+                password = password)
+
+# Create new item (record), by default under "My Items" parent
+new_item <- item_create(title = "new test item")
+', eval=FALSE) %>%
+  flair("authenticate_sb") %>%
+  flair("item_create") %>%
+  flair("sbtools", background="pink")
+```
 ]
 ]
 
@@ -1130,14 +1241,36 @@ Once logged in, you then create a new record by running the `item_create` functi
 .pull-right[
 Create a record:
 .smaller[
+```{r, echo=FALSE}
+decorate('
+library(sbtools)
 
-&lt;code class ='r hljs remark-code'&gt;library(&lt;span style='background-color:pink'&gt;sbtools&lt;/span&gt;)&lt;br&gt;&lt;br&gt;# Log in&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;authenticate_sb&lt;/span&gt;(username = "username@usgs.gov",&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;password = password)&lt;br&gt;&lt;br&gt;# Create new item (record), by default under "My Items" parent&lt;br&gt;new_item &lt;- &lt;span style='background-color:#ffff7f'&gt;item_create&lt;/span&gt;(title = "new test item")&lt;/code&gt;
+# Log in
+authenticate_sb(username = "username@usgs.gov",
+                password = password)
+
+# Create new item (record), by default under "My Items" parent
+new_item <- item_create(title = "new test item")
+', eval=FALSE) %>%
+  flair("authenticate_sb") %>%
+  flair("item_create") %>%
+  flair("sbtools", background="pink")
+```
 ]
 
 Edit a record:
 .smaller[
+```{r, echo=FALSE}
+decorate('
+# Give the item a new title
+edited_item <-  item_update(new_item, list(title = "new updated item"))
 
-&lt;code class ='r hljs remark-code'&gt;# Give the item a new title&lt;br&gt;edited_item &lt;- &amp;nbsp;&lt;span style='background-color:#ffff7f'&gt;item_update&lt;/span&gt;(new_item, list(title = "new updated item"))&lt;br&gt;&lt;br&gt;# Append data to the item&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;item_append_files&lt;/span&gt;(edited_item, "test.dat")&lt;/code&gt;
+# Append data to the item
+item_append_files(edited_item, "test.dat")
+', eval=FALSE) %>%
+  flair("item_update") %>%
+  flair("item_append_files")
+```
 ]
 ]
 
@@ -1152,19 +1285,15 @@ We can then append data to the record using the `item_append_files` function. In
 
 # ![:scale 5%](images/sciencebase_logo.png) [`sbtools`](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf): Accessing data
 
+```{r, echo=FALSE}
+decorate('
+# Access the record
+test_item <- item_get("572a2a7fe4b0b13d391a0f6c")
 
-&lt;code class ='r hljs remark-code'&gt;# Access the record&lt;br&gt;test_item &lt;- &lt;span style='background-color:#ffff7f'&gt;item_get&lt;/span&gt;("572a2a7fe4b0b13d391a0f6c")&lt;br&gt;&lt;br&gt;# Take a look at the citation&lt;br&gt;test_item&lt;/code&gt;
-
-```
-
-&lt;ScienceBase Item&gt; 
-  Title: Moose population survey: Tetlin National Wildlife Refuge, Game Management Unit 12, eastern Alaska
-  Creator/LastUpdatedBy:      / 
-  Provenance (Created / Updated):  2016-05-04T16:59:43Z / 2016-11-29T21:04:15Z
-  Children: FALSE
-  Item ID: 572a2a7fe4b0b13d391a0f6c
-  Parent ID: 5771b40fe4b07657d1a6bb5e
-
+# Take a look at the citation
+test_item
+', comment = "") %>%
+  flair("item_get")
 ```
 
 
@@ -1176,22 +1305,32 @@ To do this, we can access a record using the `item_get` function and take a look
 
 ---
 
-&lt;style&gt;
+<style>
 .leaflet {
     margin: auto;
 }
-&lt;/style&gt;
+</style>
 
 .small[
+```{r map_moose, include=FALSE, warning=FALSE, fig.height=5, fig.width= 10, fig.align='center'}
+library(leaflet)
+
+# Get study area boundaries
+study_area <- item_get_wfs(test_item)
+
+# Map it
+leaflet() %>%
+  addPolygons(data = study_area@polygons[[1]], 
+              label = "Game Management Unit 12") %>%
+  addTiles()
+```
 
 
-
-
-&lt;code class ='r hljs remark-code'&gt;library&lt;span style='background-color:pink'&gt;(leaflet)&lt;/span&gt;&lt;br&gt;&lt;br&gt;# Get study area boundaries&lt;br&gt;study_area &lt;- &lt;span style='background-color:#ffff7f'&gt;item_get_wfs&lt;/span&gt;(test_item)&lt;br&gt;&lt;br&gt;# Map it&lt;br&gt;leaflet() %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;addPolygons(data = study_area@polygons[[1]], &lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;label = "Game Management Unit 12") %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;addTiles()&lt;/code&gt;
-
-
-<div id="htmlwidget-cafc83e91413a83b38b5" style="width:720px;height:360px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-cafc83e91413a83b38b5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addPolygons","args":[[[[{"lng":[-143.347991534,-143.228078123,-143.199521918,-143.122167375,-143.127109304,-143.198748868,-143.19378802,-143.229359705,-143.135073488,-143.078102266,-143.022414244,-142.99961064,-142.938665511,-142.843148631,-142.747251927,-142.688158016,-142.606909556,-142.591831249,-142.538758172,-142.416502074,-142.513136336,-142.440431435,-142.419714378,-142.139856192,-142.122260562,-142.079156323,-141.92258779,-141.918415775,-141.807245102,-141.742410732,-141.303569208,-141.282765721,-141.243599672,-141.174415326,-141.160249355,-141.079508421,-141.001773206,-140.994491425,-141.122555042,-141.232872959,-141.299849381,-141.388141605,-141.459216617,-141.541904316,-141.621384427,-141.666340145,-141.698119294,-141.68562115,-141.806637894,-141.924937519,-142.036132479,-141.986010868,-141.939892566,-141.990490604,-142.038438439,-142.068433621,-142.027118846,-141.961758042,-142.016839952,-142.049916116,-142.086205609,-142.190932214,-142.237634019,-142.234596278,-142.278523974,-142.276640753,-142.37659465,-142.512840519,-142.614390635,-142.705624508,-142.730105945,-142.847950339,-142.833787131,-142.811967361,-142.863114021,-142.959188601,-143.122713746,-143.283993166,-143.40724688,-143.455367327,-143.476311641,-143.511921879,-143.561225275,-143.64103108,-143.682506652,-143.725921397,-143.79857264,-143.834193846,-143.886227382,-143.979085435,-143.83522869,-143.734763013,-143.647338789,-143.669549739,-143.722476467,-143.714254457,-143.625932159,-143.582772384,-143.547696884,-143.502471311,-143.411813963,-143.38841452,-143.347026732,-143.301357003,-143.274342586,-143.279132863,-143.253884987,-143.243979313,-143.210630609,-143.19251129,-143.163194589,-143.241187738,-143.249712184,-143.317999267,-143.323203966,-143.358665087,-143.364054431,-143.372525819,-143.300558365,-143.240920644,-143.341745994,-143.378612129,-143.412538622,-143.464966854,-143.548860655,-143.503149306,-143.464119952,-143.464630309,-143.528824232,-143.61510396,-143.716758675,-143.646118397,-143.638756282,-143.70155483,-143.777700065,-143.86044888,-143.984989613,-144.046538598,-144.254544831,-144.225165367,-144.253642765,-144.301559405,-144.36816241,-144.465211351,-144.571191338,-144.529242495,-144.455767064,-144.333686004,-144.228967269,-144.092966294,-144.028391194,-144.061331524,-144.137068531,-144.158313061,-144.07957263,-143.978928344,-143.857762328,-143.740326127,-143.748368311,-143.712091459,-143.632585954,-143.653709154,-143.606609546,-143.467727062,-143.347991534],"lat":[63.7616274790001,63.7571575680001,63.7342614510001,63.7146903400001,63.668894019,63.6284448650001,63.5976204350001,63.5637357470001,63.5375116920001,63.5392432680001,63.5227209220001,63.5070318840001,63.5088318050001,63.497059409,63.5106815170001,63.495974652,63.4673455280001,63.4459835710001,63.44378678,63.3846471730001,63.343639443,63.3177921930001,63.2834422450001,63.2518373340001,63.2046232710001,63.2165666870001,63.190964713,63.1507797510001,63.125712972,63.1655757130001,63.1909519420001,63.1272911720001,63.0441622610001,63.036298145,63.0055383420001,63.001459835,63.024515131,61.506026326,61.5129688100001,61.5227397950001,61.5107513470001,61.511642957,61.5218236530001,61.510148121,61.482539036,61.4479293430001,61.4254246660001,61.3930256400001,61.369824592,61.354555707,61.4104825160001,61.455304416,61.479714947,61.504635874,61.525168073,61.5499287100001,61.5760944090001,61.599783002,61.6501588100001,61.675405541,61.674583795,61.732069154,61.7685801910001,61.7888348450001,61.8140133540001,61.8323650710001,61.83834877,61.850661335,61.9016429660001,61.8814334780001,61.855572673,61.835179204,61.8070562190001,61.773966897,61.7171774700001,61.7076220440001,61.7279696370001,61.7442388860001,61.7211886470001,61.7369208900001,61.7619436670001,61.7924853660001,61.8018722750001,61.813991641,61.8360162330001,61.866633279,61.8873552000001,61.9227740540001,61.938690406,61.995083885,61.9747243130001,61.988689364,62.0165049880001,62.0705015730001,62.130935611,62.1987362830001,62.22690751,62.226316963,62.2618906590001,62.277290776,62.2664497910001,62.254531634,62.2601356600001,62.2500367960001,62.269839162,62.289646453,62.3041079880001,62.3399065350001,62.342865536,62.3670206240001,62.404338308,62.406424095,62.4445731260001,62.4617973430001,62.4874572310001,62.517444352,62.5637609760001,62.618160883,62.639066707,62.6465213320001,62.676490346,62.709080768,62.7288283760001,62.7618611290001,62.775214056,62.807096179,62.817727242,62.8451542620001,62.8557921870001,62.8829234580001,62.9102723340001,62.9526627710001,63.001693043,63.01682544,63.051695517,63.0555396390001,63.0573769750001,63.0395419710001,63.0665577820001,63.1190678130001,63.1342032650001,63.1305856130001,63.1672604450001,63.189720042,63.215793192,63.2519489310001,63.2762887920001,63.302940354,63.3088479370001,63.3102552060001,63.3388752870001,63.3697082020001,63.3989751660001,63.4394820480001,63.4720371180001,63.4951432560001,63.4995182150001,63.4924478020001,63.5124705160001,63.5598353490001,63.601049904,63.646614346,63.6832923640001,63.7068998140001,63.7616274790001]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,"Game Management Unit 12",{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"limits":{"lat":[61.354555707,63.7616274790001],"lng":[-144.571191338,-140.994491425]}},"evals":[],"jsHooks":[]}</script>
+```{r, echo=FALSE, warning=FALSE}
+decorate("map_moose") %>%
+  flair("item_get_wfs") %>%
+  flair("(leaflet)", background="pink")
+```
 ]
 
 ???
@@ -1202,7 +1341,7 @@ Finally, once we have accessed a record in ScienceBase, it is pretty straightfor
 ---
 class: center, middle, hide-logo, inverse
 
-.larger[<i class="fab  fa-github "></i> github.com/USFWS/data-mgt-with-r]
+.larger[`r icon::fa("github")` github.com/USFWS/data-mgt-with-r]
 
 
 ???
@@ -1221,173 +1360,3 @@ background-size: cover
 I will now pass it back to Adam, who will demonstate how the concepts and tools that we've covered can be applied to a real-word case study focused on mobile acoustical bat monitoring.
 
 Back to you Adam.
-    </textarea>
-<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
-<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
-<script src="macros/macros.js"></script>
-<script>var slideshow = remark.create({
-"ratio": "16:9",
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false,
-"navigation": {
-"scroll": false
-}
-});
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
-  window.dispatchEvent(new Event('resize'));
-});
-(function(d) {
-  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
-  if (!r) return;
-  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
-  d.head.appendChild(s);
-})(document);
-
-(function(d) {
-  var el = d.getElementsByClassName("remark-slides-area");
-  if (!el) return;
-  var slide, slides = slideshow.getSlides(), els = el[0].children;
-  for (var i = 1; i < slides.length; i++) {
-    slide = slides[i];
-    if (slide.properties.continued === "true" || slide.properties.count === "false") {
-      els[i - 1].className += ' has-continuation';
-    }
-  }
-  var s = d.createElement("style");
-  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
-  d.head.appendChild(s);
-})(document);
-// delete the temporary CSS (for displaying all slides initially) when the user
-// starts to view slides
-(function() {
-  var deleted = false;
-  slideshow.on('beforeShowSlide', function(slide) {
-    if (deleted) return;
-    var sheets = document.styleSheets, node;
-    for (var i = 0; i < sheets.length; i++) {
-      node = sheets[i].ownerNode;
-      if (node.dataset["target"] !== "print-only") continue;
-      node.parentNode.removeChild(node);
-    }
-    deleted = true;
-  });
-})();
-(function() {
-  "use strict"
-  // Replace <script> tags in slides area to make them executable
-  var scripts = document.querySelectorAll(
-    '.remark-slides-area .remark-slide-container script'
-  );
-  if (!scripts.length) return;
-  for (var i = 0; i < scripts.length; i++) {
-    var s = document.createElement('script');
-    var code = document.createTextNode(scripts[i].textContent);
-    s.appendChild(code);
-    var scriptAttrs = scripts[i].attributes;
-    for (var j = 0; j < scriptAttrs.length; j++) {
-      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
-    }
-    scripts[i].parentElement.replaceChild(s, scripts[i]);
-  }
-})();
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
-<style>
-.logo {
-  background-image: url(images/fws-logo.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: absolute;
-  bottom: 0.5em;
-  left: 0.5em;
-  width: 100px;
-  height: 60px;
-  z-index: 0;
-}
-</style>
-
-<script>
-document
-  .querySelectorAll(
-    '.remark-slide-content' +
-    ':not(.title-slide)' +
-    // add additional classes to exclude here, e.g.
-    // ':not(.inverse)' +
-    ':not(.hide-logo)'
-  )
-  .forEach(el => {
-    el.innerHTML += '<div class="logo"></div>';
-  });
-</script>
-
-<style>
-.github {
-  background-image: url(https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149);
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 0em;
-  right: 0em;
-  width: 100px;
-  height: 100px;
-  z-index: 0;
-  
-}
-</style>
-
-<script>
-slideshow._releaseMath = function(el) {
-  var i, text, code, codes = el.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
-      }
-    }
-    i++;
-  }
-};
-slideshow._releaseMath(document);
-</script>
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-(function () {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
-  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
-    script.src  = script.src.replace(/^https?:/, '');
-  document.getElementsByTagName('head')[0].appendChild(script);
-})();
-</script>
-  </body>
-</html>
