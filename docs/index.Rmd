@@ -25,20 +25,15 @@ editor_options:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
                       fig.retina = 3, fig.align = "center")
-
 options(htmltools.dir.version = FALSE)
-library(knitr)
-library(icon)
-library(tidyverse)
-library(crayon)
-library(flair)
-library(sbtools)
-library(mapview)
-library(kableExtra)
+if (!requireNamespace("pacman")) install.packages("pacman")
+
+# Load all required packages, installing if necessary
+pacman::p_load(knitr, icon, tidyverse, crayon, flair, sbtools, mapview, kableExtra,
+               leaflet, ggplot2, sf, DT, xaringanthemer, styler)
 ```
 
 ```{r xaringan-themer, include=FALSE, eval=TRUE}
-library(xaringanthemer)
 mono_light(code_font_family = "Fira Code",
   code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css",
   base_font_size = "22px",
@@ -635,8 +630,6 @@ decorate("messy2", eval=FALSE) %>%
 The `style_text()` function cleans it up! `r icon::fa("smile-beam", color = "grey")`
 .small[
 ```{r cleaned, include=FALSE, message=FALSE, warning=FALSE, comment=""}
-library(styler)
-
 style_text("p =dat%>%#a comment
 select(refuge ,lat, long) %>%filter(refuge!='kodiak ')%>%
   ggplot(data,aes(x =lat,y= long,group=refuge))%>%  geom_line()#comment without space") 
@@ -864,15 +857,15 @@ class: despaced
 
 - Write modular code
 
+- Include a project README
+
 - Make dependencies explicit
 
 - Record working environment
 
-- Include a project README
+- Follow a style guide
 
 - Version control
-
-- Follow a style guide
 
 ]
 
@@ -1117,6 +1110,37 @@ count: false
 .center[![:scale 80%](images/get_buoy_man.png)]
 
 ---
+
+# Include a README file
+
+- Briefly introduce your project to users before they access the code
+
+### General Structure
+
+1. What your code is/does (with context)
+
+2. Demonstrate how to use your code (install, configure, find help)
+
+3. What your code looks like in action (examples)
+
+4. Other relevant details (license, acknowledgments, working environment)
+
+???
+If you're feeling really ambitious and motivated at this point, you can take commenting to another level and compose a README file for your project. Unlike comments, that are embedded in the code, a README is a separate standalone file for you to introduce the project before your used even gets into the code. Here's an example general structure to follow...
+---
+# Include a README file
+
+### Handy templates available
+
+- e.g., [`usethis::use_readme_rmd`](https://usethis.r-lib.org/reference/use_readme_rmd.html)
+
+### Bonus points: create a [vignette](http://r-pkgs.had.co.nz/vignettes.html)
+
+???
+
+There are some useful templates available from within R or online. The full power of the README is unleashed in a vignette, which is even more in-depth, but I'll leave that discovery to you...
+
+---
 # Make dependencies explicit
 
 ### Package dependencies of code
@@ -1134,6 +1158,12 @@ library(dplyr)
   flair_rx("package|dplyr", background = "#CBB5FF") %>%
   knit_print.with_flair()  
 ```
+
+???
+
+McCrea already went into more depth on the final four documentation "basics", so I'll only reiterate them as we breeze through. 
+
+The first is to urge you to make it explicit in your code what packages need to be loaded for it to function properly. In almost all cases you're going to use functions in R packages outside of base R (the functions installed automatically with R itself). Ao make these dependencies clear, right at the front of your code so it's obvious.
 
 ---
 # Make dependencies explicit
@@ -1157,6 +1187,11 @@ dplyr::mutate()
   knit_print.with_flair()
 ```
 
+???
+
+Following up on that it doesn't hurt to make it explicit where the functions you're using come from...that is, what package (if not base R). This is especially important if you happen to use packages that contain functions with the same name. 
+
+You do this in R with the PACKAGE :: FUNCTION notation. A bit annoying, maybe, but potentially helpful for troubleshooting.
 ---
 
 # Record working environment
@@ -1165,51 +1200,13 @@ dplyr::mutate()
 
 - `sessionInfo()` or `devtools::session_info()`
 
-???
-
-McCrea mention a couple of ways to wrap all your dependencies up into a single
-package prior to sharing to help avoid issues with dealing with different 
-operating systems and R package versions
-
----
-
-# Include a README file
-
-- Briefly introduce your project to users before they access the code
-
-### General Structure
-
-1. What your code is/does (with context)
-
-2. Demonstrate how to use your code (install, configure, find help)
-
-3. What your code looks like in action (examples)
-
-4. Other relevant details (license, acknowledgments, working environment)
-
----
-# Include a README file
-
-### Handy templates available
-
-- e.g., [`usethis::use_readme_rmd`](https://usethis.r-lib.org/reference/use_readme_rmd.html)
-
-### Bonus points: create a [vignette](http://r-pkgs.had.co.nz/vignettes.html)
-
----
-
-# Put documentation under version control
-
-- Stays "synced" with code as it changes
-
-.center[![:scale 60%](images/dangerous.jpg)]
-
+.center[![:gen 90%, shadow](images/sessionInfo.png)]
 
 ???
 
-The same benefits of putting your code under version control (with Git/Github for example)
-apply to the documentation. When code and the documentation change substantially, you
-retain a record of all past versions and can better manage keeping your documentation in step with your code.
+When you finish a project it's also a good practice to record your working environment. Things like differences in operating system and package version differences can something cause issues... 
+
+McCrea mention a couple of ways to wrap all your dependencies up into a single package earlier, which help avoid these issues
 
 ---
 
@@ -1219,12 +1216,20 @@ retain a record of all past versions and can better manage keeping your document
 
 ???
 
-So, thoughtful commenting and informative object naming are the two main ways you can alter the content of your code to better express your intentions and goals. 
+Consider this a friendly reminder to at least read a style guide. 
 
-But there are several other documentation "basics" that help you to better organize your code to make it more readable and easier to troubleshoot. The first of these is straightforward---when you write code, do it with a consistent style. McCrea covered this earlier in the presentation, so consider this a friendly reminder to at least read a style guide. 
+We link several in the repository associated with this presentation. What style you choose matters MUCH less than being consistent. Consistent code style dramatically improves the readability of your code, making your intentions that much easier to follow.
 
-We link several in the repository associated with this presentation. Whatever style you choose, being consistent with it can dramatically improve the readability of your code, making your intentions that much easier to follow.
+---
 
+# Put documentation under version control
+
+.center[![:scale 55%](images/dangerous.jpg)]
+
+
+???
+
+Not much to add here. You're already putting the code under version control... right? You should include the documentation as well.
 
 ---
 class: inverse, center, middle, hide-logo
@@ -1235,7 +1240,7 @@ class: inverse, center, middle, hide-logo
 
 ???
 
-On to data acquisition. In our current context of a code-based workflow, we're not referring to the actual collection of data, say, as a part of field work in a biological monitoring program.(REFERENCE EARLIER WEBINAR RE DIGITATL DATA COLLECTION?) We're referring in this case to the act of retrieving the data that you've toiled to collect and bringing it into R so we can process it, quality control it, visualize it, analyze it, report on it, and share and archive it. 
+In our current context of a code-based workflow, we're not referring to the actual collection of data, say, as a part of field work in a biological monitoring program.(REFERENCE EARLIER WEBINAR RE DIGITATL DATA COLLECTION?) We're referring in this case to the act of retrieving the data that you've toiled to collect and bringing it into R so we can process it, quality control it, visualize it, analyze it, report on it, and share and archive it. 
 
 ---
 
@@ -1285,7 +1290,6 @@ There's no shortage of different flat file formats, and there's pretty much an R
 # [Supported `rio` file formats](https://github.com/leeper/rio#supported-file-formats)
 
 ```{r rio-formats, echo = FALSE}
-library(DT)
 rio_file_types <- rio::import("./data/rio_formats.csv")
 DT::datatable(rio_file_types, options = list(pageLength = 8, dom = 'tip'), rownames = FALSE)
 ```
@@ -1303,7 +1307,6 @@ species <- rio::import("https://motus.org/data/downloads/api-proxy/species")
 ```
 
 ```{r flat-output, echo = FALSE}
-library(knitr); library(kableExtra)
 rio::import("https://motus.org/data/downloads/api-proxy/species") %>% 
   select(english, scientific) %>%
   filter(grepl("Red Knot|Painted Bunting|Ruddy Turnston|Saltmarsh", english, TRUE)) %>%
@@ -1333,7 +1336,7 @@ rio::import("https://motus.org/data/downloads/api-proxy/species") %>%
 
 ???
 
-We won't dwell long on relational databases, but there is flexibility. In general, SQL-based options are well-supported. And with the `dplyr` r package that we'll see again later, there's functionality to perform SQL actions in place prior to pulling the data into memory. Getting data directly from Access is an issue, so the best option there is generally to export flat files from Access and work with those...
+As for relational databases, there is flexibility. In general, SQL-based options are well-supported. And with the `dplyr` r package that we'll see again later, there's functionality to perform SQL actions in place prior to pulling the data into memory. Getting data directly from Access is an issue, so the best option there is generally to export flat files from Access and work with those...
 
 ---
 
@@ -1348,11 +1351,7 @@ We won't dwell long on relational databases, but there is flexibility. In genera
 
 ???
 
-Another useful way for us to access data is though a web API service. Put simply, an API is any interface in which we can use a set of programming functions to access features or data from some application. In a web API, that service sits on the web, and we access via HTTP protocols. 
-
-We expect that data access, storage, and archiving via web APIs will become commonplace. For example, we are starting to see more and more of our biological inventory and monitoring work hosted on services like ArcGIS online
-
-For the purposes of this webinar, there is simply too much to cover, so we'll focus on a couple of points. 
+Another useful way for us to access data is though a web API service. Put simply, this is interface to access features or data from some application or service that sits on the web. And we typically access it with HTTP protocols. Hosting and archiving data behind web APIs is becoming more commonplace... Too much to cover, so we focus on a couple of points. 
 
 FIrst, some web APIs we're likely to find useful have existing dedicated R packages. Services like USGS's ScienceBase (which McCrea will illustrate later), eBird, iNaturalist, FishBase, online biodiversity repositories like GBIF and BISON, as well as ITIS, our taxonomic information system. 
 
@@ -1379,7 +1378,7 @@ count: false
 
 But there are plenty of other APIs we're likely to find useful that don't have existing R packages, and we may be interested in setting up access on our own. Services like AGOL...
 
-THere are a couple of handy packages to help you with passing the necessary HTTP requests, like the `httr` and `crul` packages. Although I'll note the  `crul` package is aimed more at developers than casual users.
+A couple handy R packages exist to help pass HTTP requests, like the `httr` and `crul` packages. `crul` aimed more at developers than casual users.
 
 One complication is that while most web APIs use the same HTTP requests (so most can be accessed using the `httr` package, for example), the format of those requests varies from API to API, and some are more complicated than others. But the rewards for getting it to work can be substantial to a complete code-based workflows. Let's take ArcGIS Online as an example, which the FWS is using increasingly for digital data collection, storage, and archiving of wildlife survey and monitoring data.
 
@@ -1441,9 +1440,6 @@ decorate("pull-rcw") %>%
 
 ---
 ```{r, echo = FALSE}
-# source("~/FWS_Projects/Requests_for_assistance/data-mgt-with-r/code/functions/pull_rcw_cluster_survey.R")
-# rcw_clusters <- pull_rcw_cluster_survey()
-# saveRDS(rcw_cluster, "data/rcw_clusters.rds")
 rcw_clusters <- readRDS("data/rcw_clusters.rds")
 ```
 
@@ -1462,7 +1458,6 @@ rcw_clusters %>%
 ---
 .center[
 ```{r rcw-plot, echo = FALSE, fig.width=15, fig.height=8}
-library(mapview); library(leaflet)
 mapview(rcw_clusters, map.types = "OpenStreetMap")@map %>%
   fitBounds(-93, 30, -78, 36)
 ```
@@ -1476,6 +1471,7 @@ class: inverse, center, middle, hide-logo
 
 
 ???
+One way or the other, we've pulled our data into R. Now it's time to process that raw data into something fit for visualization and analysis. You'll notice I include quality control in this stage...
 
 ---
 # Data processing
@@ -1489,7 +1485,7 @@ class: inverse, center, middle, hide-logo
 
 ???
 
-One way or the other, we've wrangled our data into R. Now it's time to process that raw data into something fit for visualization and analysis. Way more time is spent on these general tasks of data reshaping, manipulation, cleaning, and quality control than you'd probably be comfortable with. But it's a fact of life, and I like to think this is where we start the process of spinning straw into golden thread...
+Data processing is a "catch-all" for tasks lie data reshaping, manipulation, cleaning, and quality control. McCrea and I spend more time on these tasks than you'd probably be comfortable with. But it's a fact of life, and I like to think this is where we start the process of spinning the raw material of our data collection toils into golden thread...
 
 ---
 # Data reshaping
@@ -1525,9 +1521,9 @@ The most convenient way to perform this action in R is with the `pivot_longer` a
 # "Tidy" data
 
 - Not "clean", but organized such that:
-  - each variable has its own column
-  - each observation has its own row
-  - each value has its own cell
+  - each observation gets its own row
+  - each variable gets its own column
+  - each value gets its own cell
   
 .center[[![:gen 80%, shadow](images/tidy.png)](https://r4ds.had.co.nz/tidy-data.html)]
 
@@ -1557,6 +1553,8 @@ Tidy data is our goal as we head towards analysis, though we'll almost certainly
 
 .pull-right[.left[![:gen 80%, shadow](images/tidy-yoda.jpg)]]
 
+???
+Just as data "processing" meant several things, data manipulation and wrangling cover a variety of tasks, from data transformation and creation to wrangling unruly data types like text strings, dates, and times. And we can do all of these kinds of things with base R, without need of additional packages. But we feel there are several packages that make this process more intuitive and consistent, so we'll point out a few of our favorites without getting into the weeds of actually doing any data manipulations.
 ---
 # Data manipulation/wrangling R packages
 
@@ -1572,8 +1570,13 @@ Tidy data is our goal as we head towards analysis, though we'll almost certainly
 
 .pull-right[
 ### Alternative API
-- [`data.table`](https://cran.r-project.org/web/packages/data.table/index.html) (acquisition, pivoting, manipulation)
+- [`data.table`](https://cran.r-project.org/web/packages/data.table/index.html) (pivoting, manipulation)
 ]
+
+???
+The first of these is a constellation of packages called the tidyverse. So the approach with these packages is to create separate packages that handle one or a few of the common data manipulation challenges and focus on them. For example, ...
+
+A alternative approach is the excellent data.table package, which rather capture many of the manipulation tasks you might do in a single package. But the interface is dramatically different from that of the tidyverse packages. I don't think you can go wrong either way, but we'll take the tidyverse path here because it introduces us to what's known as a "piped" workflow, which is worth knowing about. A comparison of a tradition non-piped workflow is probably the easiest way to explain...
 
 ---
 # Piped workflow
@@ -1626,8 +1629,9 @@ mammals <- rio::import("https://ndownloader.figshare.com/files/10717177")
 ```
 
 ???
+So we've decided to include quality control in the data processing section as they often mesh together naturally. 
 
-We think about two approaches to quality control---one is a more passive, ad hoc approach we refer to as data profiling, and the second is a more explicit, active quality control we refer to as assertive programming. 
+We think about two approaches to quality control---one is a more passive, ad hoc approach (data profiling), and the second is more explicit and intentional (assertive programming. )
 
 Data profiling is passive in that it doesn't involve testing any specific aspects of the data, but rather uses informative summaries to help you identify or flag potential issues like questionable data entries, extreme/unlikely values, and patterns of missing data
 
@@ -1648,7 +1652,7 @@ str(mammals)
 
 ???
 
-We'll take the more passive data profiling approach first, illustrating some R functions to help us along. The first two examples are part of base R (not in any special package but part of the core R software)
+We'll start with the more passive data profiling approach first, and in particular a couple of standard base R functions that are good for a first look at your data once it's in R - the structure (str) and summary functions
 
 ---
 ```{r, get-summary, include=FALSE}
@@ -1731,9 +1735,9 @@ mammals %>%
 ![:gen 100%, shadow](images/assertive.jpg)]
 
 ???
-SO that's data profiling. A good approach to take a general pulse check of your data. But in many, if not most cases, we should be very familiar with the data we've collected and are now trying to wrangle. So we should have some pretty strong intuitions or ideas of what the data *should* look like. In those cases, we can go on the quality control offensive, and be more explicit and assertive to detect problematic records as soon as possible in the processing workflow. 
+That handful of functions is a good way to take a general pulse check of your data. But more than likely we're very familiar with the data we've collected. So we should have some pretty strong intuitions or ideas of what the data *should* look like. In those cases, we can go on the quality control offensive, and be more explicit and assertive to detect problematic records as soon as possible in the processing workflow. 
 
-The `assertr` package gives us a suite of functions designed to help us test and verify our intuitions and assumptions about the data. I only illustrate three very simple examples, such as checking that are small mammal weights meet a couple of criteria, or that we recorded sex in a consistent format. But there are many, many more possibilities, so we encourage you to check out the linked vignette
+The `assertr` package gives us a suite of functions designed to help us test and verify our intuitions and assumptions about the data. I only illustrate three very simple examples, such as checking that are small mammal weights meet a couple of criteria, or that we recorded sex in a consistent format. But there are many, many more possibilities, so we encourage you to check out the linked vignette.
 
 ---
 # Exploratory data analysis
@@ -1787,7 +1791,6 @@ There are alternative visualization tools in R, but we appreciate the flexibilit
 .center[![:genv 500px, shadow](images/sav.png)]
 
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE}
-library(sf); library(ggplot2)
 sav_pts <- readRDS("./data/sav_obs.rds")
 sav_model_fit <- readRDS("./data/gridded_sav.rds")
 LM <- readRDS("./data/LM.rds")
@@ -2046,6 +2049,7 @@ count: false
 class: inverse, center, middle, hide-logo
 
 # Analyze
+![](images/life_cycles-data_analyze.png)
 
 ???
 
@@ -2810,8 +2814,10 @@ Back to you Adam.
 
 ???
 
-With the cooperation of the computer and internet gods, let's have a brief look at a case study that hopefully illustrates some of the perks of a code-based workflow. Our example is a regional mobile acoustical bat monitoring project in my home regions of 2 and 4, with a little bit of participation in adjacent regions. We lovingly call the program "MABM". In a nutshell, we have 60+ field stations (mostly NWRs) that operate one or more driving transects during the summer to log acoustic detections of bats. About 40 of those stations participate each year. This involves the data acquisition from acoustic recorders and a GPS device attached to the vehicles as they drive their ~ 20 mile long transects. That raw acoustic data is then passed by one of our regional ecologists through a bat call classification software. Here's what that software output looks like - an Excel file that you'll notice is not tidy at all. This data needs cross-referenced with the GPS locational data, stored in another untidy text file. At this point, we've not been able to incorporate anything up to this point in the data life cycle into a code-based workflow. But now we hit a couple of very important bottlenecks in the efficiency of our workflow.
+Let's have a brief look at a case study that hopefully illustrates some of the perks of a code-based workflow. Our example is a regional mobile acoustical bat monitoring project in my home regions of 2 and 4, with a little bit of participation in adjacent regions. We lovingly call the program "MABM". In a nutshell, we have 60+ field stations (mostly NWRs) that operate one or more driving transects during the summer to log acoustic detections of bats. About 40 of those stations participate each year. This involves the data acquisition from acoustic recorders and a GPS device attached to the vehicles as they drive their ~ 20 mile long transects. That raw acoustic data is then passed by one of our regional ecologists through a bat call classification software. Here's what that software output looks like - an Excel file that you'll notice is not tidy at all. This data needs cross-referenced with the GPS locational data, stored in another untidy text file. And up to this point in the data lifecycle, we've not managed to escape the traditional, manual workflow. The ecologist does all the work to this point manually. But now we hit a couple of very important bottlenecks in the efficiency of our workflow.
 
-First, those untidy classification data and GPS data need tidied, linked so that the bat calls are georeferenced, and parsed such that we can import them smoothly into the relational database for the project. Currently, that's a Microsoft Access database, but we'll soon be transitioning to AGOL because Access. In any case, that process is a time-eater if you have to do it manually, not to mention documenting how to do it... Once we successfully import the data into our database, the second bottleneck is turning around annual reports of that year's bat detections, with context of their previous work at that station, for each of the 40 or so stations.
+First, those untidy classification data and GPS data need tidied, linked so that the bat calls are georeferenced, and parsed such that we can import them smoothly into the relational database for the project. Currently, that's a Microsoft Access database, but we'll soon be transitioning to AGOL because Access. In any case, that process is a time-eater if you have to do it manually, not to mention documenting how to do it... 
+
+Once we successfully import the data into our database, the second bottleneck is turning around annual reports of that year's bat detections, with context of their previous work at that station, for each of the 40 or so stations.
 
 So we've chosen to move these bottlenecks into a code-based workflow by creating an R package for each bottleneck. Let me give you a brief demo of what that looks like.

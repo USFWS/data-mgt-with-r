@@ -1,5 +1,0 @@
-Directory Contents
--------------------
-
-function.R
-	A template for a function in R used for a refuge I&M project.
