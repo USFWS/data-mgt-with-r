@@ -35,27 +35,29 @@ library(flair)
 library(sbtools)
 ```
 
-```{r xaringan-themer, include=FALSE, eval=FALSE}
+```{r xaringan-themer, include=FALSE, eval=TRUE}
 library(xaringanthemer)
-mono_light(
-  code_font_family = "Fira Code",
-  code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css"
+mono_light(code_font_family = "Fira Code",
+  code_font_url    = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css",
+  base_font_size = "22px",
+  outfile = "css/xaringan-themer.css"
 )
 ```
-
 
 class: hide-logo, center, middle, inverse
 # ![:scale 9%](images/Rlogo.svg) Tools for a Code-based Data Workflow
 
+<br>
+
 .pull-left[
-`McCrea Cobb`  
+.large[McCrea Cobb]  
 `r icon::fa("envelope")` mccrea_cobb@fws.gov  
 `r icon::fa("phone")` 907-786-3403  
 `r icon::fa("github")` mccrea.cobb  
 ]
 
 .pull-right[
-`Adam D. Smith`  
+.large[Adam D. Smith]  
 `r icon::fa("envelope")` adam_d_smith@fws.gov  
 `r icon::fa("phone")` 706-425-2197  
 `r icon::fa("github")` adamdsmith  
@@ -63,15 +65,15 @@ class: hide-logo, center, middle, inverse
 
 <br>
 
-`r icon::fa("github")` usfws.github.io/data-mgt-with-r/
+`r icon::fa("github")` usfws.github.io/data-mgt-with-r
 
 
 ???
-Hello and welcome to R Tools for a Code-based Data Workflow. 
+Hello and welcome to "R Tools for a Code-based Data Workflow"! 
 
-My name is McCrea Cobb. I work as a biometrician in the Inventory and Monitoring Program within the National Wildlife Refuge Sytem, and I am located in Anchorage, Alaska. I am co-presenting with Adam Smith, who is quantitative ecologist with the I&M program based in Athens, Georgia.
+As mentioned, my name is McCrea Cobb. I am a biometrician for the Inventory and Monitoring Program within the National Wildlife Refuge Sytem, and I am located in Anchorage, Alaska. I am co-presenting with Adam Smith, who is quantitative ecologist with the I&M program based in Athens, Georgia.
 
-You can find our presentation slides at the link at the bottom.
+At the bottom of this slide, you can find a link to our GitHub repository that contains this presentation and more R resources.
 
 
 ---
@@ -80,58 +82,69 @@ class: inverse, center, middle, hide-logo
 
 
 ???
-I'll start out by providing a brief outline of what we will be covering today.
+Ok, what will we be covering today?
 
 
 ---
-class: inverse, center, middle, hide-logo
+class: inverse, center, hide-logo
+
+<br>
+<br>
+<br>
+<br>
+
 # Outline
 
-.left[.pull-right-70[
 #### Review the data life cycle and data workflow
-]
-]
 
 
 ???
-First, we will review some of the concepts introduced earlier today by Jared and Maren. We will provide a cursory review of the data and project life cycles and how these models fit into scientific data workflows. We will compare what we're calling the "traditional" workflow that typically involves manually manipulating data with "point and clicks" using propritary software to a code-based data workflow in R.
+First, we will **review** the data and project life cycles introduced earlier today by Jared and Maren and then discuss how these models fit into a scientific data workflows. We will **compare** what we're calling the **traditional** workflow that involves manually manipulating data using propritary software, to a **code-based** data workflow using R, a programming language for statistical computing and graphics.
 
 
 ---
-class: inverse, center, middle, hide-logo
-# Outline
+class: inverse, center, hide-logo
 
-.left[.pull-right-70[
+<br>
+<br>
+<br>
+<br>
+
+# Outline
 
 <span style="color:gray">Review the data life cycle and data workflow</span>
 
 #### Present tools in ![:scale 3%](images/Rlogo.svg) for efficiently and effectively working with data along the life cycle
-]
-]
+
+
 
 
 ???
-Next, we will use steps of a data life cycle, from Planning to Archiving, as a guide to  present tools and tips for developing a data workflow in R, a programming language for statistical computing and graphics.
+Next, we will follow the steps of a data life cycle, from Planning to Archiving, as a guide to **introduce** tools and tips for developing a data workflow in R.
 
 
 ---
-class: inverse, center, middle, hide-logo
+class: inverse, center, hide-logo
+
+<br>
+<br>
+<br>
+<br>
+
 # Outline
 
-.left[.pull-right-70[
 <span style="color:gray">Review the data life cycle and data workflow</span>
 
-<span style="color:gray">Present some tools in ![:scale 3%](images/Rlogo.svg) for efficiently and effectively working with data along the life cycle</span>
+<span style="color:gray">Present some tools in ![:scale 3%](images/Rlogo.svg) for efficiently and effectively  working with data along the life cycle</span>
 
-#### Demonstrate a data workflow in ![:scale 3%](images/Rlogo.svg) using an example project
-]
-]
+#### Demonstrate a data workflow in ![:scale 3%](images/Rlogo.svg) with a case study
+
 
 
 ???
-Finally, we will demonstrate of how these tools and concepts can be applied to real-world data, using a FWS survey case study focused on mobile acoustical bat monitoring from southeastern US.
+Finally, we will **demonstrate** how these tools can be applied to real-world data, with a FWS case study focused on mobile acoustical bat monitoring.
 
-Our focus is limited to scientific data, but the tools and tips that we cover apply to a wide range of data.
+Our focus today is on **scientific data** but the tools and tips that we cover apply to a wide range of data.
 
 
 ---
@@ -140,15 +153,11 @@ background-size: contain
 class: hide-logo
 
 ???
-Before starting though, we wanted to include a disclaimer. It can be frustrating trying to learn a new language like R. Much like learning to draw well, you cannot learn R in a hour and a half. If we tried to do this, it might come around like this image. 
+Before starting though, we should include a **disclaimer**. It can be **frustrating** trying to learn a new language like R. Much like learning to draw well, you cannot learn R in a hour and a half. If we tried to do this today, it might come across like **this**. 
 
--So, with our limited time, we decided to focus on the application of R to a data work. This webinar is not an "Introduction to R" or a "How to get your data into R" or "Learn the Tidyverse".
+**Be warned** that this webinar is not an "Introduction to R" or a "How to get your data into R" or "Learn the Tidyverse". We have included links in the slides to additional resources and we encourage you to visit our github site where there are many more additional resources listed. If you are interested in learning R, there are many courses that cover these materials, from online courses from DataCamp or in-person courses through NCTC courses (CSP1004 Data Wrangling in R)
 
-- Our take home message is simply: It is possible to use a scripting languaging like R to complete a scientific data workflow that largely mirrors the data life cycle. Taking this approach has many advantages: including, it is efficient, reproducible, and less error prone than a point and click data workflow.
-
-  - If you are interested in learning R, there are many courses that cover these materials, from online courses from DataCamp or in-person courses through NCTC courses (CSP1004 Data Wrangling in R)
-  
-  - We have included links in the slides to additional resources and we encourage you to visit our github site where there are many more additional resources listed.
+Our **message** is simply: it is possible to use a scripting languaging like R to complete a scientific data workflow that largely mirrors the data life cycle. We believe that this approach is often more efficient and reproducible, and less error prone than the traditional point and click approach to managing data.
 
 
 ---
@@ -158,8 +167,9 @@ Before starting though, we wanted to include a disclaimer. It can be frustrating
 
 
 ???
-- As I mentioned, we will follow the project and data life cycles that Jared and Maren introduced in the previous webinar on data management as our guide for introducing R tools. 
-- As you can see here, both the data and project life cycles start with a **Planning** step, and so we will start with recommended actions that we think should be considered during the planning step and cover some associated tools in R.
+As I mentioned, the project and data life cycles that Jared and Maren introduced in the previous webinar on data management will be our guide for introducing R tools. 
+
+As you can see here, both the data and project life cycles start with a **Planning** step, and so we will start with recommended actions that we think should be considered during the planning step, and cover some associated tools in R.
 
 
 ---
@@ -169,7 +179,7 @@ class: hide-logo
 
 
 ???
-- After that, we will progress through th rest of the data life cycle: starting with the Acquire step, and moving through the Process, Analyze, Share and Achive steps. We will also cover documenting in R.
+After that, we will progress through th rest of the data life cycle: starting with the Acquire step, and moving through the Process, Analyze, Share and Achive steps. We will also cover documenting in R.
 
 
 ---
@@ -178,7 +188,7 @@ class: hide-logo
 
 
 ???
-Ok. So how are these steps typically accomplished? Let's first walk through the traditional point and click data workflow that is probably familiar to everybody here.
+Ok. So how are these steps typically accomplished? Let's first walk through the traditional data workflow that is probably familiar to everybody here.
 
 
 ---
@@ -200,7 +210,7 @@ class: hide-logo
 
 
 ???
-The first step is to acquire these data. This is generally done by digitizing paper data into Excel,  Access or ArcGIS, and downloading data from a repository by navigating to a webpage in Chrome and clicking on button. 
+The first step is to acquire these data. This is generally done by digitizing paper data into Excel, Access or ArcGIS; and downloading data from a repository by navigating to their webpage in your browser. 
 
 
 ---
@@ -211,7 +221,7 @@ class: hide-logo
 
 
 ???
-Next, these data are processed and quality-checked using these same software. Occasionally, people might load data into R, process the data in R and then export the clean dataset back as a csv, giving it a new name like "data_clean" for version control and to differentiate it from the raw data.
+Next, these data are processed and quality-checked using these same software. Occasionally, data might be imported into R for processing, and then exported as the clean dataset with a new name like "data_clean.csv" for version control and to differentiate it from the raw data.
 
 
 ---
@@ -222,18 +232,7 @@ class: hide-logo
 
 
 ???
-The third step is data analysis. For spatial data, this step is often done in ArcGIS. For exploratory data analysis of non-spatial data, this might be a accomplished using Excel or Access. More complex analyses might require the user to convert the data to a csv, load it into R, run from models, and write CSV table of results. 
-
-
----
-background-image: url(images/traditional_workflow_5.png)
-background-size: 90%
-class: hide-logo
-# `r icon::fa("times", color = "red")` Traditional data workflow
-
-
-???
-Reporting these results requires the user to write summary text in a Word document or in Powerpoint slides. ArcGIS, Excel, and R are generally used to create figures that are often saved as JPGs. 
+Data are then analyzed using a suite of software. For spatial data, this step is often done in ArcGIS. For exploratory data analysis of non-spatial data, this might be a accomplished using Excel or Access. More complex analyses might require the user to convert the data to a csv, load it into R, run from models, and write CSV tables of results. 
 
 
 ---
@@ -244,43 +243,44 @@ class: hide-logo
 
 
 ???
-Finally, to complete the report or presentation slides, the user is required to manually copy and paste the JPG figures into Word or Powerpoint.
+Producing a report and presentation of these results requires the user to write text in a Word or Powerpoint files. Then, ArcGIS, Excel, Powerpoint, and R are used to create figures and tables that are often saved as JPG files.
+
+To merge the text with the figures and tables, the user is required to manually copy and paste the images into the Word or Powerpoint document.
 
 
 ---
 class: center, middle, hide-logo
-
-![](images/criteria_short.png)
-
+background-image: url("images/workflow_criteria.png")
+background-size: contain
 
 ???
-How do we evaluate whether this is a "good" data workflow?
-
-To do this, we need criteria from which to measure success. You can probably imagine a long list of these, but for this webinar, we'll focus on these six.
-
-A good data workflow should maximize the criteria listed here. 
-
-Let's evaluate the traditional data workflow using these criteria. 
+So is this is a "good" data workflow? To evaluate this, we need criteria from which to measure success. Luckily, we have some criteria that Jared and Maren introduced earlier today. Let's evaluate the traditional data workflow using these criteria. 
  
-- First, is it is reproducible? Not really. If someone else were attempting to reproduce this effort, they might not know which data were used to generate the figures and tables and they are even less likely to be able to replicate all the steps in the workflow. 
+- First, is it is reproducible? Not really. If someone else were attempting to reproduce this effort, they might not know which data were used to generate the figures and tables, and without that, they are unlikely to be able to consistently produce the same output. 
 
-- Is it replicable by the person that completed the workflow? Unlikely. The person that completed the workflow might have trouble replicating the steps for the next year's annual report.
+- Is it replicable? Unlikely. Even the person that completed the workflow might have trouble replicating the same steps for the next year's annual report.
 
-- Is it efficient? Perhaps for a single one-off project, but not for any long-term data collection effort. Almost all these steps have to be repeated to reproduce the results with new data.
+- Is it documented? Perhaps if there was a complete record of all the steps, but it is unlikely. I can tell you that never did that.
 
-- Is it standardized? No, even small details like the sizes of figures is likely differ between analyses.
+- Is it efficient? No, it is heavily relient on manual repetive tasks. Humans are much slower than computers. 
 
-- Is it scalable. No. Every time that new data are generated or the original data change, then the workflow breaks and needs to be restarted, sometimes from scratch. 
+- Is it robust to error? Not really. Each manual step introduced the potential for human-caused errors. Any potential software updates compound this problem.
+
+- Is it scalable? No. Every time that new data are generated or the original data change, then the workflow breaks and needs to be restarted, often from the Acquire step. 
     
     
 ---
 class: center, middle, hide-logo
+background-image: url("images/workflow_criteria.png")
+background-size: contain
 
-![](images/criteria_short_xed.png)
+![](images/x_out.png)
 
 
 ???
-boo..
+So based on these criteria, this workflow does not appear to do well.
+
+Ok, so is there a better way??
 
 
 ---
@@ -290,8 +290,9 @@ class: hide-logo
 
 
 ???
-- What we need is a seamless workflow like this, where the data go from acquiring (i.e. hand) to process (and archiving).
-- Your code should be the source of your products (report, etc). 
+- What we need is a seamless and integated workflow like this guy's breakfast, where data effortlessly move from hand to mouth.
+
+I think you know where I'm going with this...
 
 
 ---
@@ -300,7 +301,7 @@ class: hide-logo
 
 
 ???
-So how does this compare to a code-based workflow?
+This is where R comes in. Let's take a look at a code-based workflow in R.
 
 
 ---
@@ -311,7 +312,7 @@ class: hide-logo
 
 
 ???
-The input data are often the same, although eliminating paper datasheets can eliminates transcription error and, as Adam will touch on later, allows us to acquire data in R directly through ArcGIS Online's API.
+To start, the input data are often the same, although eliminating paper datasheets can eliminate transcription error and, as we will touch on later, allows us to acquire data in R directly through web services.
 
 
 ---
@@ -322,7 +323,7 @@ class: hide-logo
 
 
 ???
-As we will show, R can directly import data from a variety of sources. This is now easier than ever thanks to a number of R package that include flexible data import functions, including spatial data.
+As we will show, R can directly import data from a variety of sources. This is now easier than ever thanks to a number of R package that provide flexible data import functions, including functions for spatial data.
 
 
 ---
@@ -333,7 +334,11 @@ class: hide-logo
 
 
 ???
-R offers a number of tools for quality control, including both passive data profiling and active assertive programming approaches. More to come on that. Where R starts to really shin tidying up mess data and there are a whole suite of packages called the "tidyverse" that address this step.
+R offers a number of tools for quality control, including both passive data profiling and active assertive programming approaches. 
+
+More to come on that. 
+
+Where R starts to really shine is tidying up messy data, and there are a whole suite of packages called the "tidyverse" that address this need.
 
 
 ---
@@ -344,7 +349,7 @@ class: hide-logo
 
 
 ???
-R was originally developed as a statistical software and there are now too many packages to even start listing that allow for a ever growing number of analytical approaches.
+R was originally developed as a statistical software, and there are now too many packages to even start listing, which allow for an ever growing number of analytical approaches.
 
 
 ---
@@ -355,7 +360,7 @@ class: hide-logo
 
 
 ???
-Maybe less known is the ability to generate reports using a mixture of text and R code. Recently, a number of packages have been developed to address this need that we will touch on.
+Maybe less known is the ability to generate reports using a mixture of text and R code. Let me repeat that: **you can now produce reports and presentations from R** without needing Word or Powerpoint. Recently, a number of packages have been developed to address this need that we will touch on.
 
 
 ---
@@ -366,7 +371,7 @@ class: hide-logo
 
 
 ???
-These code-based reports can be output in number of file format, including html, PDF and Word documents. Even more importantly, it is possible to archive these data and data products back to repositories from R, thereby closing the data life cycle loop. 
+These code-based reports can be saved in variety of file format; including html, PDF and Word files. Even more importantly, it is possible to archive these data and data products back to repositories from R, thereby pleasing your data managers and **closing the data life cycle loop**. 
 
 
 ---
@@ -377,34 +382,48 @@ class: hide-logo
 
 
 ???
-Last but not least, by coding these steps all within an R environment, it is possible to wrap up these steps into a reusable R package. 
+Last but not least, by coding these steps all within an R environment, it is possible to wrap up these steps into a reusable R package that that is fully documented. 
 
 
 ---
 background-image: url(images/Rlogo.svg)
-class: hide-logo, middle, right
+class: hide-logo, middle
 background-size: 40%
-background-position: 10% 50%
+background-position: 80% 50%
 
-![:scale 50%](images/rstudio_logo.png)
+.pull-left[
+.large[
+.left[
+- Free
+
+- Flexible
+
+- Nice integrated development environment (RStudio)
+
+- Large and active community of users
+  - Over 15,000 packages
+]
+]
+]
 
 
 ???
-This presentation focuses on R and RStudio, which is a integrated development environment (IDE) for R to develop and share work.
+This presentation obviously focused on R and RStudio, which is a integrated development environment (IDE) for R to develop and share work.
 
-- Why R?
-  - Free for everybody
-  - Relatively easy to learn (compared to other programming languages)
-  - Powerful
-  - Flexible
-    - statistical analyses
-    - graphics
-    - reporting
-  - Nice free integrated development environment (RStudio)
-  - Popular (2 millions users)
-      - Active community of users
-      - package development - currently over 15,000 packages
-  - GitHub integration
+But why R? Here's a few reasons:
+
+R is:
+- Free
+- Relatively easy to learn (compared to other programming languages)
+- Flexible and allows for:
+  - statistical analyses
+  - graphics
+  - reporting
+- Has a nice integrated development environment (RStudio) that integrates well with GitHub
+- Popular (2+ millions users)
+    - Active community of users
+    -  Users have created over 15,000 packages that provide functions for just about any task that you can think ofp
+- GitHub integration
 
 
 ---
@@ -415,7 +434,7 @@ class: center, middle, inverse
 
 
 ???
-Ok. Let's get with the first step: Planning 
+Ok. Let's get started with the first step: Planning 
 
 
 ---
@@ -426,17 +445,15 @@ Ok. Let's get with the first step: Planning
 .pull-left[
 Provides consistent relative directory paths for your scripts
 
-- R packages provide functions to create a standard file directory:
-    - [`MakeProject::MakeProject()`](https://cran.r-project.org/web/packages/makeProject/index.html)
-    - [`rrtools::use_analysis()`](https://www.rdocumentation.org/packages/rrtools/versions/0.1.0)
-    - [`refugetools::create.dir()`](https://github.com/USFWS/refugetools)
-    - [`prodigenr::setup_project()`](https://cran.r-project.org/web/packages/prodigenr/readme/README.html)
+R packages provide functions to create a standard file directory:
 
-  
+- [`MakeProject::MakeProject()`](https://cran.r-project.org/web/packages/makeProject/index.html)
+- [`rrtools::use_analysis()`](https://www.rdocumentation.org/packages/rrtools/versions/0.1.0)
+- [`refugetools::create.dir()`](https://github.com/USFWS/refugetools)
+- [`prodigenr::setup_project()`](https://cran.r-project.org/web/packages/prodigenr/readme/README.html)
 ]
 
-.pull-right[
-An example directory structure:
+.pull-right[.tiny[
 ```{r, eval=FALSE}
 project_name/
   admin/
@@ -458,21 +475,19 @@ project_name/
     reports/
 ```
 ]
+]
 
 
 ???
-There are many decision that need to be made when starting project involving data. Perhaps one of the first is how to organize your work. While not necessarily a data management issue, having a standardized project directory has advantages when using a code-based workflow.
+There are many decision that need to be made when starting a project that involves data. One of the first of these is how to organize your work. While not necessarily a data management issue, having a standardized project directory has advantages when using a code-based workflow.
 
-- Project-oriented workflows are self-contained workflows enabling reproducibility and replicability. Ideally a collaborator or the next biologists should be able to run the entire project without changing any code or files. File paths should be workstation-independent. 
+Project-oriented workflows are self-contained workflows enabling reproducibility. Ideally a collaborator or the next biologists should be able to rerun a project without changing any code or files. File paths should be workstation-independent. 
 
-- R has options for enabling self-contained workflows in their coding environments, and RStudio projects allow for analyses to be contained in a single working directory that can be given to a collaborator and run without changing file directory paths. 
+R has options for enabling project-oriented workflows in their coding environments, and RStudio projects allow for analyses to be contained in a single working directory that can be given to a collaborator and run without changing file directory paths. 
 
-- The figure on the right shows an example of a working directory file structure. Notice that all data produced by the project are stored in a folder called data. Centralizing data like this makes the file paths in R consistent, and it also makes it easier to 
+The figure on the right shows an example of a working directory file structure. Notice that data produced by the project are stored in a folder called data. Centralizing data like this makes the file paths in R consistent, and it also makes it straightforward when it comes to documenting and archiving these data. Additionally, all R code are stored in a `code` folder. Therefore the relative paths between the code and the data is consistent. Using this standardized approach allows you to more easily reuse code that rely on relative paths.
 
-- There are tools in R that produce a standardized directory structure. We don't have time today to go into detail about each of these, but there are links here to learn more about them.
-    - Examples: 
-        - MakeProject package
-        - SppDistMonProj:: dir_create()
+There are tools in R that can produce a standardized directory structure. Unfortunately, we don't have time today to explore these, but I've included links here to resources where you can learn more about them.
 
 
 ---
@@ -484,10 +499,10 @@ There are many decision that need to be made when starting project involving dat
 - Call files what they are
 - Keep names short
 - Avoid spaces and $pec!@l characters
-- If dates are used, use YYYYMMDD
-- Decide on a standard
+- ISO 8601 for dates
 
-Allows you to programmatically filter files:
+Programmically filter files:
+.tiny[
 ```{r, eval=FALSE}
 # Exclude files with 2016 or 2017 in their names
 f <- list.files(path = "./filepath", 
@@ -497,6 +512,7 @@ f <- list.files(path = "./filepath",
 dat <- lapply(f, read.csv)
 ```
 ]
+]
 
 .pull-right[
 ![Allison Horst](https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/other-stats-artwork/coding_cases.png)
@@ -504,14 +520,14 @@ dat <- lapply(f, read.csv)
 
 
 ???
-Data managers might tell you that it doesn't matter what you name your files, as long as they are full documented and archived. Although descriptive file names might be required for data management, there are advantages to having a standardized file naming convention for R project management. Descriptive file names are an important part of organizing, sharing, and keeping track of data files.
+You might hear your data manager tell you that it **doesn't matter** what you name your files, as long as they are full documented and securely archived. This is true. Although descriptive file names might not be **required** for data management, there are **advantages** to having a standardized file naming convention for R project management. Descriptive file names are an important part of **organizing, sharing, and keeping track** of data files.
 
-Some general guidance includes: call files what they are, keep file names short, avoid spaces and special characters (which might not play well with some software), use a standard for dates such as ISO 8601. 
+Generally, you should strive to call files what they are, keep file names short, avoid spaces and special characters (which might not play well with some software), and use a standard for dates such as ISO 8601. 
 
-Deciding on a standard and using it for everything is a good approach. The figure on the right shows a few common naming standards, such as camel case and snake case.
+Settling on a standard and sticking to it for your work is good practice. The figure on the right shows a few common naming standards, such as camel case and snake case.
 
-Sticking to a standard allows you to do things in R that would be difficult otherwise, such as programmically filter files. For example, the code at the bottom imports a list of data files but excluded those containing 2016 or 2017.  
-
+Sticking to a standard allows you to do things in R that would be difficult otherwise, such as programmically filtering files, as shown at the bottom left. The code imports a list of data files but excluded those containing 2016 or 2017. Without standardized file names, these types of functions would be more challenging.
+ 
 
 ---
 # Organizing an ![:scale 7%](images/Rlogo.svg) project 
@@ -529,9 +545,7 @@ Sticking to a standard allows you to do things in R that would be difficult othe
   - [Advanced R style guide](http://adv-r.had.co.nz/Style.html)
   - [Google's R style guide](https://google.github.io/styleguide/Rguide.html)
 
-- Helpful R packages:
-  - [`styler`](https://www.tidyverse.org/blog/2017/12/styler-1.0.0/) 
-  - [`lintr`](https://cran.r-project.org/web/packages/lintr/index.html)
+- Helpful R packages: [`styler`](https://www.tidyverse.org/blog/2017/12/styler-1.0.0/) and [`lintr`](https://cran.r-project.org/web/packages/lintr/index.html)
 ]
 
 .pull-right[
@@ -548,13 +562,13 @@ if(readability()) {
 
 ???
 
-In addition deciding on a standardized file naming convention during the planning step, we should think about settling on a consistent coding syntax, such as object names, spacing, long lines, assignments, comments. Again, this is not a requirement for good data management and you can manage without it, but it sure makes things easier to read. Do it for your future self and anyone else that has to read through your code.
+In addition to deciding on a standardized file naming convention, we use the planning stage to settle on a **consistent coding syntax**. Again, this is not a requirement for good data management, and you can probably go through life without it, but it **sure makes things easier to read**. Do it for your **future self** and anyone else who has to suffer through your code!
 
-A good starting place is to consult a style guide. There are a number of them out there, but I list a few of the more popular ones for R. 
+If you are newer to R, we recommend consulting a **style guide**. There are a number of them out there, and I list a few of the more popular ones for R here. 
 
-If you are past the planning stage and are struggling to make sense of ugly code, there are an R package called `styler` that has functions to read through and clean up code to a standard of your chosing. Another package called `lintr` will perform on the fly checking to confirm that you are conforming to the style guide. Links to more information are included here.
+If you are **past the planning stage** and are struggling to make sense of ugly code, you're in luck! There is an R package called `styler` that has functions to read through and clean up code to a standard of your choosing. Another package called `lintr` will perform on the fly checking to confirm that you are conforming to the style guide. Links to more information about these packages are included here.
 
-I'll talk about in more detail on the next slide. 
+Let's take a closer look at the `styler` package. 
  
  
 ---
@@ -581,10 +595,12 @@ decorate("messy2", eval=FALSE) %>%
   flair("comment without space", color = "blue")
 ```
 ]
+.center[![:scale 60%](images/messy_code.jpg)]
 ]
 
 
 ???
+Here we see some **messy** code. The line spacing is irregular, there are equals signs for assignments, and there are excessively long lines that make it difficult to follow what the function is doing. What a mess!
 
 
 ---
@@ -638,15 +654,17 @@ decorate("cleaned", eval=TRUE) %>%
 ]
 
 ???
+After loading the `styler` package, we can run the `style_text` function to clean things up. The code at the bottom right now includes the commonly used **left arrow** for assignment, consistent spacing, and each of the piped functions are on their own lines. Much better!
+
+I should note that `styler` also includes a Rstudio Add-in that allows you to use a drop down menu to access these functions as well.
 
 
 ---
-# `r icon::fa("people-carry")` Project portability
+# `r icon::fa("people-carry")` Project dependencies
 
+### [Maintaining dependencies can be frustrating!](https://en.wikipedia.org/wiki/Dependency_hell)
 
 .pull-left-30[
-Maintaining dependencies can be frustrating!
-
 An R project should be: 
 
 1. **Isolated**
@@ -655,46 +673,41 @@ An R project should be:
 
 There are R tools to help with this:
 - [`packrat`](https://rstudio.github.io/packrat/) package
-- `rocker` package
+- [`rocker` package](https://www.rocker-project.org/)
 ]
 
 .pull-right-70[
-![:scale 100%](images/package-hell.png)
+![:gen 100%, shadow](images/package-hell.png)
 ]
 
 
 ???
-Ideally, a data project should be isolated, portable and reproducible.
+Let's talk about about dependencies.. Ideally, a data project should totally independent, meaning that it is **isolated, portable and reproducible**. By addressing potential sources of dependencies during the planning step, you will save your future self and the next biologists a lot of heartache later on. 
 
-To be isolated mean that: 
-  - Installing a new or updated package for one project won’t break your other projects, and vice versa. That’s because packrat gives each project its own private package library.
+By **"isolated"**, I mean that installing a new or updated package for one project won’t break other projects, and vice versa. 
 
-To be portable means that: 
-  - it should be easy to transport your projects from one computer to another, even across different platforms. Packrat makes it easy to install the packages your project depends on.
+**Portability** refers to the ease of transporting projects from one computer to another, even across different platforms. 
 
-To be reproducible means that:
-  - It is clear to everyone which software versions are required to successfully rerun code. When new versions come out, they might not be backward compatible. Certain functions might no longer be available. Packrat records the exact package versions you depend on, and ensures those exact versions are the ones that get installed wherever you go.
+To be **reproducible** means that it is clear to everybody which software versions are required to successfully rerun code. When new versions come out, they might not be backward compatible and certain functions might no longer be available. 
 
-- Available tools:
-  - packrat
-  - rocker
-    - Docker is a program that allows to manipulate (launch and stop) multiple operating systems (called containers) on your machine (your machine will be called the host).
-    - you can use older versions of a package for a specific task, while still keeping the package on your machine up-to-date.
+There are a couple of R packages that address project dependency. One is called `packrat`, and I will cover that one in more detail here in a minute. 
+
+Another is called `rocker`, which interfaces R with **Docker**. Docker is a program that allows you to launch multiple virtual operating environments (called **containers**) on your machine. By doing this, you can **run older versions of a package** for a specific task, while still keeping the package on your machine up-to-date.
 
 
 ---
-# ![:scale 8%](images/packrat_logo.png)
+# ![:scale 5%](images/packrat_logo.png) `Packrat`
 
 .pull-left[
-Option 1: Add to a new project
+**Option 1**: Add to a new project
 
-![](images/packrat_rstudio.PNG)
+![:gen 100%, shadow](images/packrat_rstudio.PNG)
 ]
 
 .pull-right[
-Option 2: Add to an existing project
+**Option 2**: Add to an existing project
 
-.small[
+.tiny[
 ```{r packrat1, include=FALSE, eval=FALSE}
 # Install packrat
 install.packages('packrat')
@@ -710,7 +723,7 @@ decorate("packrat1", eval=FALSE) %>%
 ```
 ]
 
-.small[
+.tiny[
 ```{r packrat2, include=FALSE, eval=FALSE}
 # Install required packages
 install.packages('tidyverse')
@@ -727,6 +740,11 @@ decorate("packrat2", eval=FALSE) %>%
 ]
 
 ???
+Packrat is an R package that allows you to store your package dependencies in your working directory, instead of relying on your personal R library that is generally buried elsewhere on your computer. Therefore, when you share your project, you are also sharing all the required packages that your project depends on. This makes your project isolated and portable. Packrat also records the exact package versions you depend on, and therefore ensures those exact versions are the ones that get installed wherever you go.
+
+There are two ways to start using packrat. If you are in the planning stage and just starting a new project, and are using RStudio (sorry eMac fans), it is as simple as checking the box at the bottom of the window to "Use packrat with this project". 
+
+Alternatively, if you want to add packrat to an existing project, you need to install and load packrat, and then run the `init` function, as shown on the right. To add a package to packrat, you install the package as your normally would, but instead it installs into your working directory. You can then save your changes using the `snapshot` function.
 
 
 ---
@@ -743,23 +761,25 @@ background-position: 95% 70%
 ]
 ]
 
+
 ???
-Version control is the processes and tools designed to keep track of multiple different versions of data, including data products. It can be as simple as renaming the updated files to as complex as a distributed version control system like Git. Whatever the level of complexity, it is important to consider what version control system that a project will be using during the *planning stage*.  
+Version control is the processes and tools designed to keep track of multiple different versions of data, including data products. It can be as **simple** as renaming the updated files to as **complex** as a distributed version control system like Git. Whatever the level of complexity, it is **important** to consider what version control system that a project will be using during the *planning stage* of your project.  
+
 
 ---
 # `r icon::fa("code-branch")` Version control 
 
 .pull-left[
-- Benefits of a version control system
+- Benefits of GitHub
     - Collaboration
     - Storing versions
     - Restoring versions
     - Understanding what happened
-    - Backup
+    - Backup files
 
-- RStudio makes version control with Git and GitHub easier. 
+- RStudio makes version control with Git and GitHub easier
 
-- References
+- Check out:
   - Resources to learn git [(link)](https://try.github.io/)
   - Using git from RStudio [(link)](https://nceas.github.io/oss-lessons/version-control/4-getting-started-with-git-in-RStudio.html)
   - GitHub and R: An Intro for FWS Biologists [(link)](https://mccrea-cobb.github.io/r-github-presentation/#1)
@@ -773,21 +793,9 @@ Version control is the processes and tools designed to keep track of multiple di
 
 
 ???
+You are welcome to use whatever version control system work best for you. That said, there are a number of advantages to using a distributed version control system like Git in combination with the associated website called GitHub. I've listed some of them here. 
 
-
----
-class: center, middle, hide-logo
-
-<video controls autoplay width="1200">
-  <source src="images/clone_repo.mp4" type="video/mp4">
-</video>
-
-???
-- Version control is.. 
-- You should consider how you will be managing the version history of your work during the planning stage.
-- Git is a popular version control software and GitHub is a companion website.
-  - Allows for collaboration as well.
-- GitHub is popular with R users because it interfaces with package development
+If you are using RStudio, using Git and GitHub is relatively straightforward. Unfortunately, I don't have time to run through the steps, but I've included some references to get you started. One of these is a presentation that I recently gave to the Great Lakes R Working Group that introduced Git and GitHub for FWS biologists.
 
 
 ---
@@ -797,6 +805,8 @@ class: inverse, center, middle, hide-logo
 ![](images/life_cycles-data_documenting.png)
 
 ???
+Ok. I will now turn it over to Adam, who will cover the Documenting, Processing and Analyzing steps.
+
 
 Before we dig into data acquisition, processing, and analysis, we need to have 
 "THE TALK". Yep, we need to talk about documentation. 
@@ -810,7 +820,10 @@ class: center, middle, inverse, hide-logo
 
 
 ???
-Last but not least, I was cover the sharing and archiving steps of the data life cycle.
+Ok. We're on the final stretch folks! 
+
+Last but not least, I will cover the sharing and archiving steps of the data life cycle.
+
 
 ---
 class: center, middle, hide-logo
@@ -819,19 +832,19 @@ background-size: contain
 
 
 ???
-Or in other words, I will attempt to report about reporting...
+Or, in other words, I will attempt to **report about reporting**...
 
 
 ---
 background-image: url("images/rmarkdown_logo.png")
-background-position: 85% 50%
-background-size: 40%
+background-position: 90% 60%
+background-size: 30%
+
 # Literate programming
 
-.pull-left-70[
-.large[You can generate reports directly  
-from RStudio!]
+.large[You can generate reports *directly from R!*]
 
+.pull-left-70[
 **Allows for:**
 - Code to be directly inserted into document
 - Multiple outputs
@@ -842,11 +855,11 @@ from RStudio!]
 
 
 ???
-As I mentioned earlier, scientific writing and coding were traditionally separate activities. For example, a scientist who wants to use code to generate a figure for her report would have the code for generating that figure in one file and the document itself in another. 
+As I touched on earlier, scientific writing and coding were traditionally separate activities. As such, a scientist who wanted to use code to generate a figure for her report would have the code for generating that figure in **one** file, and the document itself in **another**. This presents a challenge for **reproducibility**, and keeping track of where each piece of data came from and whether it's up-to-date. 
 
-This is a challenge for reproducibility and keeping track of where each piece of data came from and whether it's up-to-date. “Literate programming” provides an alternative approach, whereby code and text are interleaved within a single file, which can be processed by software to produce documents with the output of the code (e.g. figures, tables, and summary statistics) automatically interwoven with the document’s body text. A common literate programming file format in R is call RMarkdown
+**“Literate programming”** provides an alternative approach, whereby code and text are interspersed within a single file. This file can be processed by software to produce documents with the output of the code (e.g. figures, tables, and summary statistics) automatically interwoven with the document’s body text. The most common literate programming file format in R is call RMarkdown.
 
-Unlike cumbersome word processing applications, text written in Markdown can be easily shared between computers, mobile phones, and people. It’s quickly becoming the writing standard for academics and scientists. This approach has several advantages. For one, the code output of a literate programming document is by definition guaranteed to be consistent with the code in the document’s source. At the same time, literate programming can make it easier to develop analyses by reducing the separation between writing and coding.
+Unlike cumbersome word processing applications, text written in Markdown can be easily shared between computers, mobile phones, and people. It’s quickly becoming the writing standard for academics and scientists. This approach has several additional advantages. For one, the code output of a literate programming document is by definition guaranteed to be consistent with the code in the document’s source. At the same time, literate programming can make it easier to develop analyses by reducing the separation between writing and coding.
 
 
 ---
@@ -856,7 +869,11 @@ background-size: contain
 
 
 ???
-How does it work? Well, unless you really want to get into the weeds...given our time constrainst today, let's just say that it's like magic! As shown here, you start by adding text and what's called "chunks" of code to an Rmarkdown document. You then what's called "knit" the file by running the `knit` function or clicking the `knit` button in RMarkdown. Magic happens and you can celebrate the percieved wizardy. A document is produced in the file format of your choosing, generally html, Word, or PDF.
+That's all well and good, but how does it work? 
+
+Well, unless you really want to get into the weeds...given our time constrainst today, let's just say that it's works like magic! 
+
+As shown here, an Rmarkdown document is created by adding text and what's called "chunks" of code. You then run the **`knit`** function on the file. Magic happens and you can celebrate the percieved wizardy. A document is output in the file format that you specified, which is generally an html, Word, or PDF file.
 
 
 ---
@@ -873,7 +890,7 @@ output: pdf_document
 
 
 ???
-So what does an RMarkdown file contain? There are two required sections: a header and the main body. As shown here, a simple header (written in YAML- Yet Another Markup Language) generally contains some metadata and the desired file output. 
+Ok ok. Let's get under the hood a little bit more. So what does an RMarkdown file contain? There are two required sections: a header and the main body. As shown here, a simple header (written in YAML- Yet Another Markup Language) generally contains some metadata and the desired file output. 
 
 
 ---
@@ -917,12 +934,12 @@ decorate("complex_header", eval=FALSE) %>%
 ]
 
 ???
-Header can get more complex as the document gets more customized. This one includes input parameters (`params`) that allow the user to customize the content of the report based on their input values. In this report, the user select the year of data and refuge station on which to generate a report.
+Headers can get more complex as the documents gets more customized. For example, this one includes input parameters **(`params`)** that allow the user to customize the content of the report based on their input values. In this report, the user can select the year of data and refuge station on which to generate a report.
 
 
 ---
 .pull-left[
-.small[
+.tiny[
 `####` Some Rmarkdown code
 
 This is an `**`R Markdown`**` document. You can write inline code like this: 1 + 1 = `` `r
@@ -960,7 +977,7 @@ The meat of the report happens in the main body of an RMarkdown document. As I m
 
 ---
 .pull-left[
-.small[
+.tiny[
 `####` Some Rmarkdown code
 
 This is an `**`R Markdown`**` document. You can write inline code like this: 1 + 1 = `` `r
@@ -1036,17 +1053,17 @@ knitr::include_graphics("images/rmarkdown_report.pdf")
 
 
 ???
-Here's an example of an RMarkdown PDF report that is automatically generated every week to summarize GPS collar data for quality control. As data regularly upload from the collars to the satellites to servers, the tables and figures in the report are also updated.
+Here's an example of an RMarkdown PDF report that is automatically generated to summarize GPS collar data for quality control. As data regularly upload from the collars to the satellites to servers, the tables and figures in the report are also updated. In-line code also updated summary statistics in the body of the document. The report is over 500 pages and, if done manually, would take a lot of time. Using R, we can update this report simply by rerun a function.
 
 
 ---
 # ![:scale 5%](images/xaringan_logo.png) Presentations 
 
-.center[![:scale 80%](images/rmarkdown_presentation.png)]
+.center[![:gen 80%, shadow](images/rmarkdown_presentation.png)]
 
 ???
 As mentioned earlier, Rmarkdown documents can be rendered into multiple different formats.
-You can even create presentations, such as the one that you are looking at right now!
+You can even create presentations, such as the one that you are looking at right now! The slides you are looking at now were created using the xaringan package, that allows for additional css customization.
 
 
 ---
@@ -1067,11 +1084,7 @@ background-size: 40%
 ]
 
 ???
-You can also generate interactive content from R, such as websites and dashboards. The Shiny package allows for these, which can also be imbedded into Rmarkdown outputs.
-
-Shiny is an R package that provides a framework for building interactive applications using R, without HTML, CSS, or JavaScript knowledge.
-
-You can host standalone apps as webpages, or embed them in rmarkdown documents
+You can share your data from R using interactive content, such as websites and dashboards. The Shiny package allows for these. Shiny is an R package that provides a framework for building interactive applications using R, without needing to know much about HTML, CSS, or JavaScript. You can host standalone Shiny apps as webpages, or you can also embed them in RMarkdown documents.
 
 
 ---
@@ -1083,19 +1096,20 @@ class: center, middle, hide-logo
 
 
 ???
-Here's an example of a shiny app in action. In this example, the user pulls the shiny app from GitHub and runs it locally. After providing data, the app maps GPS collar data, in this case from lynx in Alaska. The user can than select a subset of GPS collars, create home ranges, and do thing like measure the diameter of the home range.
+Here's an example of a Shiny app in action. In this example, the user is pulling the Shiny app from GitHub and running it locally. After being provided data, the app maps GPS collar data, in this case from lynx in Alaska. The user can than select a subset of GPS collars based on age and sex, create home ranges, and do other thing that you could typically do in a GIS like measure distances.
 
 
 ---
+class: hide-logo, center, middle
 
-
-```{r, echo=FALSE}
-knitr::include_app("https://vac-lshtm.shinyapps.io/ncov_tracker/?_ga=2.142693877.1775727125.1591996474-181506872.1532128536)", height="600px")
+```{r, echo=FALSE, fig.width=15}
+knitr::include_app("https://vac-lshtm.shinyapps.io/ncov_tracker/", height="600px")
 ```
 
 
-
 ???
+Here's another example of a Shiny app. This one was develop to visualize the spread of COVID19 globally. The app acquires data from Johns Hopkins data repository, which are updated daily. Shiny apps like this allow you to interact with the data to address your question.
+
 
 ---
 background-image:url("images/cher_data.jpg")
@@ -1104,9 +1118,9 @@ background-position: 50% 80%
 
 
 ???
-Ok, now for the final and arguably the most important step that is often overlooked in the data life cycle: archiving. For the typical scientific data project, this should the raw data and the code required to reproduce the results.
+Ok, now for the final and arguably the most important step that is often overlooked in the data life cycle: archiving. For a typical FWS data project, this step usually entails uploading your raw data, the code required to reproduce your results, and your data products to a secure repository.
 
-Typically the process to do this is to visit a repository website. log in with your credentials, create a new records, and then manually upload data and metadata to that record. This is the right thing to do, but isn't it a pain!
+Typically the process to do this is to visit a repository website, log in with your credentials, create a new record, and then manually upload data and metadata to that record. We all know that this is the right thing to do, but isn't it a pain! Wouldn't it be nice to be able to do this using some additional lines of code?
 
 
 ---
@@ -1118,107 +1132,157 @@ background-position: 50% 80%
 
 
 ???
-Our take-home message is: it's possible to do all of this programmically in R!
+Well, I'm here to tell you that **it is possible** to do all of this programmically in R!
 
-Just as Adam discussed about R's ability to *access* data from remote repositories, the opposite is also true; R code can also be used to *save* your data and products to a remote secure repository.
+Just as Adam discussed about R's ability to *acquire* data from remote repositories, the opposite is also true; R code can also be used to *archive* your data and products to a remote secure repository.
 
-- Although it is *possible* to use web services to get, put and delete data in a remote repository, this is often *not straightforward*. - For example, instead of manually opening ServCat and saving your reports to as a product in a ServCat record, it is *possible* to use R code to save results to ServCat. Emphasis on "possible".
+I will admit though that although it is *possible* to use web services to get, put and delete data in a remote repository, this is often *not as straightforward* as some of the others steps that we've covers today. For many repository, this involves using R to interact with web services. If your not familiar with the terms "REST" and "API", you might be in for a wild ride! We will not be covering these topics today.
 
-To aid in this process, *custom R packages* have been built to access and archive scientific data repositories, such as ScienceBase. These make it *much easier* to use the repositories web services.
-
-Archiving data from R is still an active area of development, and unless there is an existing package, it is not for the faint of heart. If you are interested, I encourage you to reach out to your data managers and ServCat managers to look into this more option for your repository of interest.
-
-Today I was cover an example of an R package called `sbtools` that was developed for interfacing R with data services from ScienceBase, the USGS data repository.
+Because of this barrier, developers have built *custom R packages* that make it much easier to transfer data to and from scientific data repositories.
 
 
 ---
+
+# Accessing web services in R 
 ```{r, echo = FALSE, fig.width=15}
 knitr::include_url("https://cran.r-project.org/web/views/WebTechnologies.html",
-                   height = "600px")
+                   height = "420px")
 ```
+.right[.smallest[source: https://cran.r-project.org/web/views/WebTechnologies.html]]
 
 
 ???
-Here's a list of R packages that assist with interfacing with web services. As you can see, there are many resources, everything from web scrapping packages to accessing data from Facebook and your fitBit watch.
+Here's a list of R packages that assist with interfacing with web services. As you can see, there are many resources, everything from web scrapping packages to accessing data from Facebook and your fitBit watch. Again, feel free to revisit this list to learn more about whether there is a package for interacting with your repository of interest.
+
+
+---
+class: center, middle
+
+[![:scale 50%](images/zenodo_logo.png)](https://github.com/karthik/zenodo) 
+[![:scale 50%](images/figshare_logo.png)](https://github.com/ropensci/rfigshare)
+
+???
+There are many R package that include functions to **acquire** data from repositories. Unfortunately though, there are much fewer R packages that include functions to **archive** data. 
+
+Some of the more notable for which R packages can **fully interface** with repositories are:
+
+**Zenodo**. Zenodo is an open repository for scientific data based at CERN in Swizerland. A nice bonus is that Zenodo also mints DOIs. Their API allows for uploading, searching and downloading files. The R package is also named `zenodo`. 
+
+**FigShare**. FigShare is online open-access repository where researchers can preserve and share their research outputs; including figures, datasets, images, and videos. The R package that interfaces with FigShare is called, not too surprisingly, `rfigshare`.
+
+Clicking on these images will direct you to more information about these packages.
+
+
 
 ---
 # ![:scale 5%](images/sciencebase_logo.png) [`sbtools`](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf) 
 
 .pull-left[
-The tool to allow complete access to the USGS ScienceBase API from R. It supports the creation, editing and access of data/metadata:
+- Allows complete access to the USGS ScienceBase API from R. 
+- Supports the creation, editing and access of data/metadata:
 
-.small[
-```{r, echo=FALSE}
-decorate('
-library(sbtools)
-
-# Create new item (record), by default under "My Items" parent
-new_item <- item_create(title = "new test item")
-', eval=FALSE) %>%
-  flair("item_create") %>%
-  flair("sbtools", background="pink")
-```
+![:gen 100%, shadow](images/sciencebase.PNG)
 ]
+
+
+???
+Ok, let's take a look at how you can use an R package to archive data. We will use the `sbtools` package as our example. `sbtools` enables access to data functionality provided by ScienceBase, the USGS's data repository. More specifically, the package provides R functions to manage metadata and data files, to search the catalog for datasets, and to view and modify data in formats familiar to R users.
+
+
+---
+# ![:scale 5%](images/sciencebase_logo.png) [`sbtools`](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf) 
+
+.pull-left[
+- Allows complete access to the USGS ScienceBase API from R. 
+- Supports the creation, editing and access of data/metadata:
+
+![:gen 100%, shadow](images/sciencebase.PNG)
 ]
 
 .pull-right[
-![](images/sciencebase.PNG)
+Create a record:
+.smaller[
+```{r, echo=FALSE}
+decorate('
+library(sbtools)
+
+# Log in
+authenticate_sb(username = "username@usgs.gov",
+                password = password)
+
+# Create new item (record), by default under "My Items" parent
+new_item <- item_create(title = "new test item")
+', eval=FALSE) %>%
+  flair("authenticate_sb") %>%
+  flair("item_create") %>%
+  flair("sbtools", background="pink")
+```
+]
 ]
 
 
 ???
-`sbtools` enables direct access to the advanced online data functionality provided by ScienceBase, the U.S. Geological Survey’s online scientific data storage platform.
-- Provides scripted R access to ScienceBase to manage metadata and data files, to search the catalog of datasets, and to view and modify data in formats familiar to R users.
+To get started, you first install and load the `sbtools` package. To create a new record in ScienceBase, you first need to log-in as an authenticated user. You do this with the `authenticate_sb` function.
+
+Once logged in, you then create a new record by running the `item_create` function, highlighted here. In this example, we creating a new record called `new test item` and assigning it as an object in R called `new_item`.
 
 
 ---
 # ![:scale 5%](images/sciencebase_logo.png) [`sbtools`](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf) 
 
 .pull-left[
-The tool to allow complete access to the USGS ScienceBase API from R. It supports the creation, editing and access of data/metadata:
+- Allows complete access to the USGS ScienceBase API from R. 
+- Supports the creation, editing and access of data/metadata:
 
-.small[
+![:gen 100%, shadow](images/sciencebase.PNG)
+]
+
+.pull-right[
+Create a record:
+.smaller[
 ```{r, echo=FALSE}
 decorate('
 library(sbtools)
 
+# Log in
+authenticate_sb(username = "username@usgs.gov",
+                password = password)
+
 # Create new item (record), by default under "My Items" parent
 new_item <- item_create(title = "new test item")
 ', eval=FALSE) %>%
+  flair("authenticate_sb") %>%
   flair("item_create") %>%
   flair("sbtools", background="pink")
 ```
 ]
 
-Once an item is created, an authenticated user can edit the metadata or attach data files to that item:
-
-.small[
+Edit a record:
+.smaller[
 ```{r, echo=FALSE}
 decorate('
 # Give the item a new title
 edited_item <-  item_update(new_item, list(title = "new updated item"))
 
 # Append data to the item
-item_list_files(new_item)
+item_append_files(edited_item, "test.dat")
 ', eval=FALSE) %>%
   flair("item_update") %>%
-  flair("item_list_files")
+  flair("item_append_files")
 ```
 ]
 ]
 
-.pull-right[
-![](images/sciencebase.PNG)
-]
-
 
 ???
-`sbtools` enables direct access to the advanced online data functionality provided by ScienceBase, the U.S. Geological Survey’s online scientific data storage platform.
-- Provides scripted R access to ScienceBase to manage metadata and data files, to search the catalog of datasets, and to view and modify data in formats familiar to R users.
+We can update the metadata associated with the record using the `item_update` function.
+
+We can then append data to the record using the `item_append_files` function. In this example, we are archiving a file called `test.dat`.
 
 
 ---
-# ![:scale 5%](images/sciencebase_logo.png) [`sbtools`](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf) - Accessing data
+
+# ![:scale 5%](images/sciencebase_logo.png) [`sbtools`](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf): Accessing data
 
 ```{r, echo=FALSE}
 decorate('
@@ -1233,6 +1297,9 @@ test_item
 
 
 ???
+Ok. So that's the quick and dirty overview on how to archive data in ScienceBase from R. To complete the data life cycle loop, let's look at how the package can then be used to access data. 
+
+To do this, we can access a record using the `item_get` function and take a look at what's in it. In this example, our record contains metadata about a moose survey at Tetlin Refuge in Alaska.
 
 
 ---
@@ -1253,20 +1320,33 @@ study_area <- item_get_wfs(test_item)
 # Map it
 leaflet() %>%
   addPolygons(data = study_area@polygons[[1]], 
-              label = study_area$PopupInfo) %>%
+              label = "Game Management Unit 12") %>%
   addTiles()
 ```
 
 
 ```{r, echo=FALSE, warning=FALSE}
 decorate("map_moose") %>%
-  flair("%>%", background="pink") %>%
   flair("item_get_wfs") %>%
-  flair("leaflet")
+  flair("(leaflet)", background="pink")
 ```
 ]
 
 ???
+Finally, once we have accessed a record in ScienceBase, it is pretty straightforward to take a look at the data. In this example, I was interested in looking the spatial extent of the survey. The `item_get_wfs` function allows us to download a spatial data layer using ScienceBase's Web Feature Service. I can then view the resulting spatial polygon dataframe using R's `leaflet` package. From this, we can see that the study area encompasses a large area in eastern Alaska that extends beyond the boundary of Tetlin Refuge. It is in fact the boundary of a state game management unit.
+
+
+
+---
+class: center, middle, hide-logo, inverse
+
+.larger[`r icon::fa("github")` github.com/USFWS/data-mgt-with-r]
+
+
+???
+Ok. That concludes our presentation on R tools for a code-based workflow! We hope that we were successful in demonstrating that features and packages in R allow for a contained data workflow that closely follows a data life cycle model. 
+
+Of course, we barely scratched the surface! For more information, check out the many links in our slides that can be found on our GitHub repository. The site also include some bonus content!
 
 
 ---
@@ -1276,15 +1356,6 @@ background-size: cover
 
 
 ???
-Time for the demo.
+I will now pass it back to Adam, who will demonstate how the concepts and tools that we've covered can be applied to a real-word case study focused on mobile acoustical bat monitoring.
 
-
----
-# Case study: Mobile Acoustical Bat Monitoring
-
-- 86 survey routes at 63 FWS field stations (~ 40 participate annually)
-- Data life cycle bottlenecks
-  - process bat software output for entry into relational database
-  - annual reports for each participating station
-
-.center[![:gen 38%, shadow](images/MABM_route_centroids_bw.png)]
+Back to you Adam.
