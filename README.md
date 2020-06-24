@@ -14,21 +14,6 @@ After a brief review of the advantages of a code-based workflow for ecological s
 June 24, 2020 (3:00-4:30 EST)
 
 
-## Resources (Links)
-
-**Introduction to R**
-
-- [An Introduction to R book](https://intro2r.com/)
-
-
-**Resources for Teaching R**  
-
-- [DataCamp's tidyverse course](https://learn.datacamp.com/courses/working-with-data-in-the-tidyverse)
-- [learnr package](https://rstudio.github.io/learnr/)
-- [RStudio teaching resources](https://education.rstudio.com/teach/materials/)
-- [Data Wrangling, Exploration and Analysis with R "STAT 545"](https://stat545.com/)
-
-
 # Resources (Links)
 
 **Introduction to R**
