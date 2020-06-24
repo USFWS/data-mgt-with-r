@@ -134,17 +134,18 @@ class: despaced
 
 - Name objects informatively
 
-- Follow a style guide
+- Write modular code
 
 - Make dependencies explicit
-
-- Write modular code
 
 - Record working environment
 
 - Include a project README
 
 - Version control
+
+- Follow a style guide
+
 ]
 
 
@@ -289,61 +290,6 @@ On the left...
 
 ---
 
-# Follow (or at least read) a style guide
-
-.center[[![:gen 75%, shadow](images/xkcd-code_quality.png)](https://xkcd.com/1513/)]
-
-???
-
-So, thoughtful commenting and informative object naming are the two main ways you can alter the content of your code to better express your intentions and goals. 
-
-But there are several other documentation "basics" that help you to better organize your code to make it more readable and easier to troubleshoot. The first of these is straightforward---when you write code, do it with a consistent style. McCrea covered this earlier in the presentation, so consider this a friendly reminder to at least read a style guide. 
-
-We link several in the repository associated with this presentation. Whatever style you choose, being consistent with it can dramatically improve the readability of your code, making your intentions that much easier to follow.
-
----
-# Make dependencies explicit
-
-### Package dependencies of code
-
-- Load required packages at beginning of script
-
-```{r load-packages, echo=FALSE, tidy=FALSE}
-decorate('
-# General usage
-library(package)
-
-# Example
-library(dplyr)
-', eval = FALSE) %>%
-  flair_rx("package|dplyr", background = "#CBB5FF") %>%
-  knit_print.with_flair()  
-```
-
----
-# Make dependencies explicit
-
-### Function dependencies (package source)
-
-- Identify the package source of used functions
-- Avoids conflicts when multiple packages share function names 
-
-```{r explicit-dependency, echo=FALSE, tidy=FALSE}
-decorate('
-# General usage
-package::function()
-
-# Examples
-rio::import()
-dplyr::mutate()
-', eval = FALSE) %>%
-  flair_rx("package|rio|dplyr", background = "#CBB5FF") %>%
-  flair_rx("function|import|mutate", background = "#FFDFD1") %>% 
-  knit_print.with_flair()
-```
-
----
-
 # Modularize your code
 
 - Separate scripts for separate tasks
@@ -361,7 +307,7 @@ source("code/05_generate_report.R")
 
 ???
 
-It's much easier to navigate through code that has been divided into multiple scripts that perform a focused, specific purpose. This is compared to, say, generating a single script that sequentially proceeds through much of the data management lifecycle. Even the best documentation in the world isn't going to make such a script digestible or easy to navigate.
+Even the best commenting and object naming in the world isn't going to make it eash to reading through a single, epic script that proceeds all the way from data import to report generation. It's much easier to navigate through code that has been divided into multiple scripts that perform a focused, specific purpose. This is compared to, say, generating a single script that sequentially proceeds through much of the data management lifecycle. 
 
 In R, we can execute the code, or load the functionality of the code, in these separate, modular scripts with the `source` function.
 
@@ -392,9 +338,9 @@ decorate("functions") %>%
 
 ???
 
-Regardless of whether we modularize our code, repeating code (or very nearly repeating code) is a common occurrence. Often we want to perform similar actions, make similar data transformations, generate similar plots, or repeat analyses. Well, in the spirit of avoiding long scripts, and breaking your code up into more manageable, modular chunks, consider turning those sections of repetitive code into functions.
+Regardless of whether we modularize our code, there are almost certainly going to be repetitive sections of code. Often we want to perform similar actions, make similar data transformations, generate similar plots, or repeat analyses. Well, in the spirit of avoiding long scripts, and breaking your code up into more manageable, modular chunks, consider turning those sections of repetitive code into functions.
 
-In R, the general structure of functions look like...
+A function is simply a chunk of code that can accept inputs and returns to us a output. We call the inputs arguments. And in R, the general structure of functions look like...
 
 ---
 count: false
@@ -445,6 +391,47 @@ count: false
 .center[![:scale 80%](images/get_buoy_man.png)]
 
 ---
+# Make dependencies explicit
+
+### Package dependencies of code
+
+- Load required packages at beginning of script
+
+```{r load-packages, echo=FALSE, tidy=FALSE}
+decorate('
+# General usage
+library(package)
+
+# Example
+library(dplyr)
+', eval = FALSE) %>%
+  flair_rx("package|dplyr", background = "#CBB5FF") %>%
+  knit_print.with_flair()  
+```
+
+---
+# Make dependencies explicit
+
+### Function dependencies (package source)
+
+- Identify the package source of used functions
+- Avoids conflicts when multiple packages share function names 
+
+```{r explicit-dependency, echo=FALSE, tidy=FALSE}
+decorate('
+# General usage
+package::function()
+
+# Examples
+rio::import()
+dplyr::mutate()
+', eval = FALSE) %>%
+  flair_rx("package|rio|dplyr", background = "#CBB5FF") %>%
+  flair_rx("function|import|mutate", background = "#FFDFD1") %>% 
+  knit_print.with_flair()
+```
+
+---
 
 # Record working environment
 
@@ -463,11 +450,6 @@ operating systems and R package versions
 # Include a README file
 
 - Briefly introduce your project to users before they access the code
-
-.center[![:scale 60%](images/morpheus.jpg)]
-
----
-# Include a README file
 
 ### General Structure
 
@@ -502,6 +484,21 @@ operating systems and R package versions
 The same benefits of putting your code under version control (with Git/Github for example)
 apply to the documentation. When code and the documentation change substantially, you
 retain a record of all past versions and can better manage keeping your documentation in step with your code.
+
+---
+
+# Follow (or at least read) a style guide
+
+.center[[![:gen 75%, shadow](images/xkcd-code_quality.png)](https://xkcd.com/1513/)]
+
+???
+
+So, thoughtful commenting and informative object naming are the two main ways you can alter the content of your code to better express your intentions and goals. 
+
+But there are several other documentation "basics" that help you to better organize your code to make it more readable and easier to troubleshoot. The first of these is straightforward---when you write code, do it with a consistent style. McCrea covered this earlier in the presentation, so consider this a friendly reminder to at least read a style guide. 
+
+We link several in the repository associated with this presentation. Whatever style you choose, being consistent with it can dramatically improve the readability of your code, making your intentions that much easier to follow.
+
 
 ---
 class: inverse, center, middle, hide-logo
@@ -552,6 +549,10 @@ We simply don't have time to tackle these in depth, so we'll focus on a handy R 
 ]
 
 .pull-right-40[.left[![:scale 50%](images/rio-logo.png)]]
+
+???
+
+There's no shortage of different flat file formats, and there's pretty much an R package to get any flat file into R. But rather than bewilder you with those different packages, we focus on a single package that attempts to import and export the vast majority of them. The rio package does this by making some pretty reasonable assumptions about how you want the data, and then using the appropriate R package behind the scenes to get your data in and out of R.
 
 ---
 
@@ -996,7 +997,7 @@ mammals %>%
 
 # Confirm expected format of sex variable
 mammals %>% 
-  assertr::assert(assertr::in_set(c("M", "F")))
+  assertr::assert(assertr::in_set(c("M", "F")), sex)
 ```
 ]
 
