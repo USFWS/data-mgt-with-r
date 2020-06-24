@@ -1,22 +1,41 @@
 # R tools for a code-based data workflow
 
+[Link to presentation slides](https://usfws.github.io/data-mgt-with-r/)
+
 ## Description  
 After a brief review of the advantages of a code-based workflow for ecological survey data, we introduce participants to some useful tools available via the R programming language for moving data along the data life cycle. We suggest some accessible tools in R for each step of the life cycle, and conclude with a walk through of how the functionality available in R can increase the reliability, efficiency, and transparency of scientific data management.
+
 
 ## Presenters    
 - [McCrea Cobb](mailto:mccrea_cobb@fws.gov) and [Adam Smith](mailto:d_smith@fws.gov)
 
+
 ## When
 June 24, 2020 (3:00-4:30 EST)
 
-## Location  
-[Webinar link](https://usfws.github.io/data-mgt-with-r/)
 
 ## Resources (Links)
 
 **Introduction to R**
 
 - [An Introduction to R book](https://intro2r.com/)
+
+
+**Resources for Teaching R**  
+
+- [DataCamp's tidyverse course](https://learn.datacamp.com/courses/working-with-data-in-the-tidyverse)
+- [learnr package](https://rstudio.github.io/learnr/)
+- [RStudio teaching resources](https://education.rstudio.com/teach/materials/)
+- [Data Wrangling, Exploration and Analysis with R "STAT 545"](https://stat545.com/)
+
+
+# Resources (Links)
+
+**Introduction to R**
+
+- [An Introduction to R book](https://intro2r.com/)
+- [R for Excel Users](https://rstudio-conf-2020.github.io/r-for-excel/)
+
 
 **Resources for Teaching R**  
 
@@ -32,6 +51,11 @@ June 24, 2020 (3:00-4:30 EST)
 - [What they forgot to teach you about R](https://rstats.wtf/)
 - [R cheatsheets](https://rstudio.com/resources/cheatsheets/)
 - [Project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
+
+
+**Style Guides**
+- [Tidyverse style guide](https://style.tidyverse.org/)
+- [DataNovia R style guide](https://www.datanovia.com/en/blog/r-coding-style-best-practices/)
 
 
 **R Packages**
@@ -55,6 +79,7 @@ June 24, 2020 (3:00-4:30 EST)
 
 
 **Project Directory Templates**
+
 - [MakeProject package](https://cran.r-project.org/web/packages/makeProject/index.html)
 - [rrtools package](https://github.com/benmarwick/rrtools)
 - [prodigenr package](https://cran.r-project.org/web/packages/prodigenr/readme/README.html)
@@ -63,6 +88,11 @@ June 24, 2020 (3:00-4:30 EST)
 **General Coding Best Practices**
 
 - [What's in a name? The concepts and language of replication and reproducibility](https://thomasleeper.com/2015/05/open-science-language/)
+- [Best practices for scientific computing](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745)
+- [Good enough practices in scientific computing](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
+- [Ten simple rules for documenting scientific software](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006561)
+- [Art of README](https://github.com/noffle/art-of-readme#bonus-exemplars) - see examples and checklist
+- [Introduction to `roxygen2` vignette](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
 
 
 **Version Control**  

@@ -34,6 +34,7 @@ library(crayon)
 library(flair)
 library(sbtools)
 library(mapview)
+library(kableExtra)
 ```
 
 ```{r xaringan-themer, include=FALSE, eval=TRUE}
