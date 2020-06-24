@@ -209,11 +209,9 @@ x <- 2 # This is also a comment
 But if you want to be the star student, or at least not hate yourself later, a better approach is to provide thoughtful comments throughout the code that informs the reader, *succintly*, of your intentions. This isn't play-by-play. We don't need to rehash "what" we're doing with the code ("loading in my data"), or "how" the code is doing it ("looping over individuals"), but rather "why" we wrote any particular piece of code. What is that code intending to accomplish?
 
 ---
-class: despaced
 
 # Comment code as you write it
 
-<br>
 **LESS HELPFUL**
 
 ```{r echo = TRUE, eval = FALSE}
