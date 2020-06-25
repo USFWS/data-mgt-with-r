@@ -88,7 +88,6 @@ June 24, 2020 (3:00-4:30 EST)
 - [Packaging your reproducible analysis](https://thomasleeper.com/2016/11/analysis-as-package/)
 - [R packages](http://r-pkgs.had.co.nz/)
 - [Packaging data analytical work reproducibly using R (and friends)](https://peerj.com/preprints/3192.pdf)
-- [R Docker tutorial](https://ropenscilabs.github.io/r-docker-tutorial/)
 
 **Project management**
 
@@ -101,6 +100,7 @@ June 24, 2020 (3:00-4:30 EST)
 - [Organizing files for data analysis](https://github.com/AndersenLab/IBiS-Bootcamp/wiki/Organizing-files-for-data-analysis)
 - [A meaningful file structure for R projects](https://www.r-bloggers.com/a-meaningful-file-structure-for-r-projects/)
 - [An introduction to Docker for R users](https://colinfay.me/docker-r-reproducibility/)
+- [R Docker tutorial](https://ropenscilabs.github.io/r-docker-tutorial/)
 
 
 **Project Directory Templates**
