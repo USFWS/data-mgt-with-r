@@ -23,7 +23,8 @@ After a brief review of the advantages of a code-based workflow for ecological s
 June 24, 2020 (3:00-4:30 EST)
 
 ## Location  
-[Webinar link]()
+- [DOI Talent](https://doitalent.ibc.doi.gov/mod/facetoface/view.php?id=23143)
+- [Webinar slides](https://usfws.github.io/data-mgt-with-r/) (use arrow keys to advance)
 
 ## Additional resources
 [GitHub repository](https://github.com/USFWS/data-mgt-with-r)
@@ -65,6 +66,8 @@ June 24, 2020 (3:00-4:30 EST)
 - [learnr package](https://rstudio.github.io/learnr/)
 - [RStudio teaching resources](https://education.rstudio.com/teach/materials/)
 - [Data Wrangling, Exploration and Analysis with R "STAT 545"](https://stat545.com/)
+- [Learn the tidyverse](https://www.tidyverse.org/learn/)
+- [Geocomputation with R](https://geocompr.robinlovelace.net/)
 
 
 **R Resources**
@@ -85,7 +88,7 @@ June 24, 2020 (3:00-4:30 EST)
 - [Packaging your reproducible analysis](https://thomasleeper.com/2016/11/analysis-as-package/)
 - [R packages](http://r-pkgs.had.co.nz/)
 - [Packaging data analytical work reproducibly using R (and friends)](https://peerj.com/preprints/3192.pdf)
-
+- [R Docker tutorial](https://ropenscilabs.github.io/r-docker-tutorial/)
 
 **Project management**
 
@@ -119,7 +122,6 @@ June 24, 2020 (3:00-4:30 EST)
 **Version Control**  
 
 - [Happy Git with R](https://happygitwithr.com/)
-
 
 **Other**
 
