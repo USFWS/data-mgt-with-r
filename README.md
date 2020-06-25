@@ -28,6 +28,8 @@ June 24, 2020 (3:00-4:30 EST)
 - [learnr package](https://rstudio.github.io/learnr/)
 - [RStudio teaching resources](https://education.rstudio.com/teach/materials/)
 - [Data Wrangling, Exploration and Analysis with R "STAT 545"](https://stat545.com/)
+- [Learn the tidyverse](https://www.tidyverse.org/learn/)
+- [Geocomputation with R](https://geocompr.robinlovelace.net/)
 
 
 **R Resources**
@@ -61,6 +63,7 @@ June 24, 2020 (3:00-4:30 EST)
 - [Organizing files for data analysis](https://github.com/AndersenLab/IBiS-Bootcamp/wiki/Organizing-files-for-data-analysis)
 - [A meaningful file structure for R projects](https://www.r-bloggers.com/a-meaningful-file-structure-for-r-projects/)
 - [An introduction to Docker for R users](https://colinfay.me/docker-r-reproducibility/)
+- [R Docker tutorial](https://ropenscilabs.github.io/r-docker-tutorial/)
 
 
 **Project Directory Templates**
