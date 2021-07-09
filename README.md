@@ -7,7 +7,7 @@ After a brief review of the advantages of a code-based workflow for ecological s
 
 
 ## Presenters    
-- [McCrea Cobb](mailto:mccrea_cobb@fws.gov) and [Adam Smith](mailto:d_smith@fws.gov)
+- [McCrea Cobb](mailto:mccrea_cobb@fws.gov) and [Adam Smith](mailto:adam_d_smith@fws.gov)
 
 
 ## When
